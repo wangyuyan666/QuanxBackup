@@ -18,24 +18,24 @@ jobs:
       - name: Clone QxScript Repository
         run: |
           git clone --depth=1 https://github.com/xiaomaoJT/QxScript xiaomaoJT_QxScript
+          rm -rf "QxScript(xiaomaoJT)"
           mkdir -p "QxScript(xiaomaoJT)"
-          rm -rf "QxScript(xiaomaoJT)/*"
           mv xiaomaoJT_QxScript/* "QxScript(xiaomaoJT)/"
           rm -rf xiaomaoJT_QxScript
 
       - name: Clone ios_rule_script Repository
         run: |
           git clone --depth=1 https://github.com/blackmatrix7/ios_rule_script blackmatrix7_ios_rule_script
+          rm -rf "ios_rule_script(blackmatrix7)"
           mkdir -p "ios_rule_script(blackmatrix7)"
-          rm -rf "ios_rule_script(blackmatrix7)/*"
           mv blackmatrix7_ios_rule_script/* "ios_rule_script(blackmatrix7)/"
           rm -rf blackmatrix7_ios_rule_script
 
       - name: Clone ios_rule_script Repository
         run: |
           git clone --depth=1 https://github.com/NobyDa/Script NobyDa_Script
+          rm -rf "Script(NobyDa)"
           mkdir -p "Script(NobyDa)"
-          rm -rf "Script(NobyDa)/*"
           mv NobyDa_Script/* "Script(NobyDa)/"
           rm -rf NobyDa_Script    
 
