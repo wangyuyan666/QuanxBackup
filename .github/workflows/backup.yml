@@ -19,18 +19,11 @@ jobs:
 
       - name: Clone QxScript Repository
         run: |
+          pwd
           git clone --depth=1 https://github.com/xiaomaoJT/QxScript QxScript
           rm -rf QxScript/.git  # 删除 git 文件夹以避免冲突
           mv QxScript/* .
           rm -rf QxScript  # 清理临时文件夹
-          pwd
-
-      - name: Clone ios_rule_script Repository
-        run: |
-          git clone --depth=1 https://github.com/blackmatrix7/ios_rule_script ios_rule_script
-          rm -rf ios_rule_script/.git  # 删除 git 文件夹以避免冲突
-          mv ios_rule_script/* .
-          rm -rf ios_rule_script  # 清理临时文件夹
           pwd
 
       - name: Commit and Push Changes
