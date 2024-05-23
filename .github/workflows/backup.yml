@@ -55,7 +55,7 @@ jobs:
             git add backup-timestamp.txt
             git commit -m "$(date +'%Y-%m-%d %H:%M:%S')"
           else
-            git commit -m "$(date +'%Y-%m-%d %H:%M:%S')"
+            git commit -m "Automated backup $(date +'%Y-%m-%d %H:%M:%S')"
           fi
           git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/wangyuyan666/QuanxBackup.git
           git push origin main
