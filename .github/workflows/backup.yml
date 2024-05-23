@@ -23,12 +23,6 @@ jobs:
           git clone --depth=1 https://github.com/xiaomaoJT/QxScript
           rm -rf QxScript/.git # 删除 git 文件夹以避免冲突
 
-      - name: Clone ios_rule_script Repository
-        run: |
-          rm -rf ios_rule_script
-          git clone --depth=1 https://github.com/blackmatrix7/ios_rule_script
-          rm -rf ios_rule_script/.git  # 删除 git 文件夹以避免冲突
-
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
