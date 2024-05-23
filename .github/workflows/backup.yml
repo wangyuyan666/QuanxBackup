@@ -7,6 +7,10 @@ jobs:
   backup:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout target backup repository
+        uses: actions/checkout@v2
+        with:
+          path: target
       - name: Checkout source repository QxScript
         uses: actions/checkout@v2
         with:
@@ -17,22 +21,21 @@ jobs:
         with:
           repository: blackmatrix7/ios_rule_script
           path: source-ios_rule_script
-      - name: Checkout target backup repository
-        uses: actions/checkout@v2
-        with:
-          path: target
-          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Copy QxScript to target directory
-        run: cp -r source-QxScript/. target/QxScript/
+        run: |
+          mkdir -p target/QxScript
+          cp -r source-QxScript/. target/QxScript/
       - name: Copy ios_rule_script to target directory
-        run: cp -r source-ios_rule_script/. target/ios_rule_script/
-      - name: Commit and Push changes
+        run: |
+          mkdir -p target/ios_rule_script
+          cp -r source-ios_rule_script/. target/ios_rule_script/
+      - name: Commit and push changes
         run: |
           cd target
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
-          git commit -m "Automated backup"
+          git commit -m 'Automated backup'
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
