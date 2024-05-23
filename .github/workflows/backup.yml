@@ -2,7 +2,7 @@ name: Backup Repositories
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天凌晨执行一次
+    - cron: '0 */2 * * *'  
   workflow_dispatch:
   
 jobs:
@@ -13,18 +13,17 @@ jobs:
       - name: Checkout Backup Repository
         uses: actions/checkout@v3
         with:
-          repository: wangyuyan666/QuanxBackup
           token: ${{ secrets.GH_TOKEN }}
-          persist-credentials: false
 
       - name: Clone QxScript Repository
         run: |
-          pwd
+          rm -rf QxScript
           git clone --depth=1 https://github.com/xiaomaoJT/QxScript QxScript
-          rm -rf QxScript/.git  # 删除 git 文件夹以避免冲突
-          mv QxScript/* .
-          rm -rf QxScript  # 清理临时文件夹
-          pwd
+
+      - name: Clone ios_rule_script Repository
+        run: |
+          rm -rf ios_rule_script
+          git clone --depth=1 https://github.com/blackmatrix7/ios_rule_script ios_rule_script
 
       - name: Commit and Push Changes
         env:
