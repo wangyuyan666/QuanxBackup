@@ -17,13 +17,17 @@ jobs:
 
       - name: Clone QxScript Repository
         run: |
-          rm -rf QxScript
           git clone --depth=1 https://github.com/xiaomaoJT/QxScript QxScript
+          mkdir -p QxScriptBackup
+          mv QxScript/* QxScript/
+          rm -rf QxScript  # 清理临时文件夹
 
       - name: Clone ios_rule_script Repository
         run: |
-          rm -rf ios_rule_script
           git clone --depth=1 https://github.com/blackmatrix7/ios_rule_script ios_rule_script
+          mkdir -p ios_rule_scriptBackup
+          mv ios_rule_script/* ios_rule_script/
+          rm -rf ios_rule_script  # 清理临时文件夹
 
       - name: Commit and Push Changes
         env:
