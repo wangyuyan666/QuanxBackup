@@ -1,34 +1,37 @@
-name: Backup Repositories
-
+name: Backup
 on:
   schedule:
-    - cron: '0 */2 * * *'  
+    - cron: '0 0 * * *'  # 每天凌晨运行一次，可以根据需要调整此时间表达式
   workflow_dispatch:
-  
 jobs:
   backup:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout Backup Repository
-        uses: actions/checkout@v3
+      - name: Checkout source repository QxScript
+        uses: actions/checkout@v2
         with:
-          repository: wangyuyan666/QuanxBackup
+          repository: xiaomaoJT/QxScript  
+          path: source-QxScript
+      - name: Checkout source repository ios_rule_script
+        uses: actions/checkout@v2
+        with:
+          repository: blackmatrix7/ios_rule_script  
+          path: source-ios_rule_script
+      - name: Copy QxScript to backup directory
+        run: cp -r source-QxScript/. backup/QxScript/
+      - name: Copy ios_rule_script to backup directory
+        run: cp -r source-ios_rule_script/. backup/ios_rule_script/
+      - name: Checkout backup repository
+        uses: actions/checkout@v2
+        with:
+          repository: wangyuyan666/QuanxBackup  
           token: ${{ secrets.GH_TOKEN }}
-          persist-credentials: false
-
-      - name: Clone QxScript Repository
+          path: backup
+      - name: Commit and push changes
         run: |
-          rm -rf QxScript  
-          git clone --depth=1 https://github.com/xiaomaoJT/QxScript
-          rm -rf QxScript/.git # 删除 git 文件夹以避免冲突
-
-      - name: Commit and Push Changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          cd backup
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
-          git commit -m "Automated backup $(date +'%Y-%m-%d %H:%M:%S')"
+          git commit -m "Automated backup: $(date +'%Y-%m-%d %H:%M:%S')"
           git push origin main
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
