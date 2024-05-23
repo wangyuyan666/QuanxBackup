@@ -1,7 +1,7 @@
-name: Backup Multiple Open Source Projects
+name: Backup Automatically
 on:
   schedule:
-    - cron: '0 */2 * * *'  # 每天凌晨运行一次，可以根据需要调整此时间表达式
+    - cron: '0 */2 * * *'
   workflow_dispatch:
 jobs:
   backup:
@@ -20,18 +20,19 @@ jobs:
       - name: Checkout target backup repository
         uses: actions/checkout@v2
         with:
-          repository: wangyuyan666/QuanxBackup
-          path: backup
-          token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub 自动生成的令牌
-      - name: Copy QxScript to backup directory
-        run: cp -r source-QxScript/. backup/QxScript/
-      - name: Copy ios_rule_script to backup directory
-        run: cp -r source-ios_rule_script/. backup/ios_rule_script/
-      - name: Commit and push changes
+          path: target
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Copy QxScript to target directory
+        run: cp -r source-QxScript/. target/QxScript/
+      - name: Copy ios_rule_script to target directory
+        run: cp -r source-ios_rule_script/. target/ios_rule_script/
+      - name: Commit and Push changes
         run: |
-          cd backup
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          cd target
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
           git add .
-          git commit -m "Automated backup $(date +'%Y-%m-%d %H:%M:%S')"
+          git commit -m "Automated backup"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
