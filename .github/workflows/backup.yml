@@ -1,37 +1,44 @@
-name: Backup
+name: Backup Repositories
+
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天凌晨运行一次，可以根据需要调整此时间表达式
+    - cron: '0 0 * * *'  # 每天凌晨执行一次
   workflow_dispatch:
+  
 jobs:
   backup:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout source repository QxScript
-        uses: actions/checkout@v2
+      - name: Checkout Backup Repository
+        uses: actions/checkout@v3
         with:
-          repository: xiaomaoJT/QxScript  
-          path: source-QxScript
-      - name: Checkout source repository ios_rule_script
-        uses: actions/checkout@v2
-        with:
-          repository: blackmatrix7/ios_rule_script  
-          path: source-ios_rule_script
-      - name: Copy QxScript to backup directory
-        run: cp -r source-QxScript/. backup/QxScript/
-      - name: Copy ios_rule_script to backup directory
-        run: cp -r source-ios_rule_script/. backup/ios_rule_script/
-      - name: Checkout backup repository
-        uses: actions/checkout@v2
-        with:
-          repository: wangyuyan666/QuanxBackup  
+          repository: wangyuyan666/QuanxBackup
           token: ${{ secrets.GH_TOKEN }}
-          path: backup
-      - name: Commit and push changes
+          persist-credentials: false
+
+      - name: Clone QxScript Repository
         run: |
-          cd backup
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git clone --depth=1 https://github.com/xiaomaoJT/QxScript QxScript
+          rm -rf QxScript/.git  # 删除 git 文件夹以避免冲突
+          mv QxScript/* .
+          rm -rf QxScript  # 清理临时文件夹
+          pwd
+
+      - name: Clone ios_rule_script Repository
+        run: |
+          git clone --depth=1 https://github.com/blackmatrix7/ios_rule_script ios_rule_script
+          rm -rf ios_rule_script/.git  # 删除 git 文件夹以避免冲突
+          mv ios_rule_script/* .
+          rm -rf ios_rule_script  # 清理临时文件夹
+          pwd
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Automated backup: $(date +'%Y-%m-%d %H:%M:%S')"
+          git commit -m "Automated backup $(date +'%Y-%m-%d %H:%M:%S')"
           git push origin main
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
