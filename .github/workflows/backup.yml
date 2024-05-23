@@ -46,6 +46,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Automated backup $(date +'%Y-%m-%d %H:%M:%S')"
+          git commit -m "$(date +'%Y-%m-%d %H:%M:%S')"
           git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/wangyuyan666/QuanxBackup.git
           git push origin main
