@@ -48,4 +48,4 @@ jobs:
           git add .
           git commit -m "$(date +'%Y-%m-%d %H:%M:%S')"
           git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/wangyuyan666/QuanxBackup.git
-          git push origin main
+          git push --force origin main
