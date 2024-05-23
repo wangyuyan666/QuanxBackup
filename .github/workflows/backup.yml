@@ -27,6 +27,8 @@ jobs:
           pwd
 
       - name: Commit and Push Changes
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -34,5 +36,3 @@ jobs:
           git commit -m "Automated backup $(date +'%Y-%m-%d %H:%M:%S')"
           git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/wangyuyan666/QuanxBackup.git
           git push origin main
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
