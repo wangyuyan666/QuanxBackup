@@ -38,4 +38,4 @@ jobs:
           git commit -m 'Automated backup'
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.Github_Access }}
