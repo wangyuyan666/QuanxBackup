@@ -78,7 +78,6 @@ jobs:
           mkdir -p "QuantumultX-Rewrite(deezertidal)"
           mv deezertidal_QuantumultX_Rewrite/* "QuantumultX-Rewrite(deezertidal)/"
           rm -rf deezertidal_QuantumultX_Rewrite    
-          
 
       - name: Clone TributePaulWalker_Profiles
         run: |
@@ -87,6 +86,14 @@ jobs:
           mkdir -p "Profiles(TributePaulWalker)"
           mv TributePaulWalker_Profiles/* "Profiles(TributePaulWalker)/"
           rm -rf TributePaulWalker_Profiles
+          
+      - name: Clone zxfccmm4_Surge
+        run: |
+          git clone --depth=1 https://github.com/zxfccmm4/Surge zxfccmm4_Surge
+          rm -rf "Surge(zxfccmm4)"
+          mkdir -p "Surge(zxfccmm4)"
+          mv zxfccmm4_Surge/* "Surge(zxfccmm4)/"
+          rm -rf zxfccmm4_Surge     
 
       - name: Update timestamp
         run: echo "Backup run at $(date)" > backup-timestamp.txt
