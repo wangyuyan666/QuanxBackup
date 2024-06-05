@@ -109,7 +109,47 @@ jobs:
           rm -rf "Quantumult-X(89996462)"
           mkdir -p "Quantumult-X(89996462)"
           mv 89996462_Quantumult/* "Quantumult-X(89996462)/"
-          rm -rf 89996462_Quantumult         
+          rm -rf 89996462_Quantumult    
+
+      - name: Clone ddgksf2013_ddgksf2013
+        run: |
+          git clone --depth=1 https://github.com/ddgksf2013/ddgksf2013 ddgksf2013_ddgksf2013
+          rm -rf "ddgksf2013(ddgksf2013)"
+          mkdir -p "ddgksf2013(ddgksf2013)"
+          mv ddgksf2013_ddgksf2013/* "ddgksf2013(ddgksf2013)/"
+          rm -rf ddgksf2013_ddgksf2013     
+          
+      - name: Clone ddgksf2013_Profile
+        run: |
+          git clone --depth=1 https://github.com/ddgksf2013/Profile ddgksf2013_Profile
+          rm -rf "Profile(ddgksf2013)"
+          mkdir -p "Profile(ddgksf2013)"
+          mv ddgksf2013_Profile/* "Profile(ddgksf2013)/"
+          rm -rf ddgksf2013_Profile     
+          
+      - name: Clone ddgksf2013_Rewrite
+        run: |
+          git clone --depth=1 https://github.com/ddgksf2013/Rewrite ddgksf2013_Rewrite
+          rm -rf "Rewrite(ddgksf2013)"
+          mkdir -p "Rewrite(ddgksf2013)"
+          mv ddgksf2013_Rewrite/* "Rewrite(ddgksf2013)/"
+          rm -rf ddgksf2013_Rewrite     
+
+      - name: Clone ddgksf2013_Filter
+        run: |
+          git clone --depth=1 https://github.com/ddgksf2013/Filter ddgksf2013_Filter
+          rm -rf "Filter(ddgksf2013)"
+          mkdir -p "Filter(ddgksf2013)"
+          mv ddgksf2013_Filter/* "Filter(ddgksf2013)/"
+          rm -rf ddgksf2013_Filter     
+          
+      - name: Clone ddgksf2013_Scripts
+        run: |
+          git clone --depth=1 https://github.com/ddgksf2013/Scripts ddgksf2013_Scripts
+          rm -rf "Scripts(ddgksf2013)"
+          mkdir -p "Scripts(ddgksf2013)"
+          mv ddgksf2013_Scripts/* "Scripts(ddgksf2013)/"
+          rm -rf ddgksf2013_Scripts     
 
       - name: Update timestamp
         run: echo "Backup run at $(date)" > backup-timestamp.txt
