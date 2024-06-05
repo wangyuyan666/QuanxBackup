@@ -13,16 +13,6 @@ always-real-ip = %APPEND% *.msftconnecttest.com, *.msftncsi.com, *.srv.nintendo.
 # > VIF Excluded Routes
 # tun-excluded-routes = %APPEND% 239.255.255.250/32
 
-[Host]
-# 本地 DNS 映射
-# Apple
-apple.com = server:223.5.5.5
-*icloud.com = server:223.5.5.5
-*icloud.com.cn = server:223.5.5.5
-*testflight.apple.com = server:8.8.4.4
-*.apple.com = server:https://doh.dns.apple.com/dns-query
-*.itunes.com = server:https://doh.dns.apple.com/dns-query
-
 [URL Rewrite]
 # Redirect HTTP to HTTPS
 ^https?:\/\/(www.)?taobao\.com\/ https://taobao.com/ 302
@@ -100,8 +90,8 @@ apple.com = server:223.5.5.5
 ^http:\/\/(www.)?aicoin\.cn\/$ https://www.aicoin.com/ 302
 
 [Script]
-bstar_login = type=http-request,pattern=^https?:\/\/passport\.biliintl\.com\/x\/intl\/passport-login\/(sms\/send|reg\/sms|oauth2\/access_token|login\/sms),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Rewrite/bstar.js,script-update-interval=0
-bstar_play = type=http-request,pattern=^https?:\/\/app\.biliintl\.com\/(intl\/gateway\/v\d\/app\/data\/report\/heartbeat\/mobile|x\/(history|reply)/v\d/add),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Rewrite/bstar.js,script-update-interval=0
+bstar_login = type=http-request,pattern=^https?:\/\/passport\.biliintl\.com\/x\/intl\/passport-login\/(sms\/send|reg\/sms|oauth2\/access_token|login\/sms),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Script/bstar.js,script-update-interval=0
+bstar_play = type=http-request,pattern=^https?:\/\/app\.biliintl\.com\/(intl\/gateway\/v\d\/app\/data\/report\/heartbeat\/mobile|x\/(history|reply)/v\d/add),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Script/bstar.js,script-update-interval=0
 
 [MITM]
 hostname = %APPEND% www.google.cn,www.firefox.com.cn,api.*.abema-tv.com,app.biliintl.com,passport.biliintl.com
