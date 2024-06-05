@@ -102,6 +102,14 @@ jobs:
           mkdir -p "rule_for_quantumultX(zqzess)"
           mv zqzess_rule_for_quantumultX/* "rule_for_quantumultX(zqzess)/"
           rm -rf zqzess_rule_for_quantumultX         
+          
+      - name: Clone 89996462_Quantumult
+        run: |
+          git clone --depth=1 https://github.com/89996462/Quantumult-X 89996462_Quantumult
+          rm -rf "Quantumult-X(89996462)"
+          mkdir -p "Quantumult-X(89996462)"
+          mv 89996462_Quantumult/* "Quantumult-X(89996462)/"
+          rm -rf 89996462_Quantumult         
 
       - name: Update timestamp
         run: echo "Backup run at $(date)" > backup-timestamp.txt
