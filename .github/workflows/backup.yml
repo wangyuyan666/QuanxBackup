@@ -151,6 +151,14 @@ jobs:
           mv ddgksf2013_Scripts/* "Scripts(ddgksf2013)/"
           rm -rf ddgksf2013_Scripts     
 
+      - name: Clone Yu9191_Rewrite
+        run: |
+          git clone --depth=1 https://github.com/Yu9191/Rewrite Yu9191_Rewrite
+          rm -rf "Rewrite(Yu9191)"
+          mkdir -p "Rewrite(Yu9191)"
+          mv Yu9191_Rewrite/* "Rewrite(Yu9191)/"
+          rm -rf Yu9191_Rewrite     
+
       - name: Update timestamp
         run: echo "Backup run at $(date)" > backup-timestamp.txt
         
