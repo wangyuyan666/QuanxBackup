@@ -76,7 +76,7 @@ if (!body.Data) {
             console.log('无需处理');
         }
     } else if (url.includes("v1/client/getconf") && method === postMethod) {
-        console.log('起点-getconf');
+        console.log('起点-client/getconf');
         // 精选 和 发现 中间的活动配置
         if (!body.Data.ActivityPopup?.Data) {
             console.log(`body:${$response.body}`);
@@ -92,7 +92,10 @@ if (!body.Data) {
         } else {
             console.log(`无需修改WolfEye:${body.Data.WolfEye}`);
         }
-
+        if(body.Data.CloudSetting?.TeenShowFreq === '1'){
+            body.Data.CloudSetting.TeenShowFreq = '0';
+            console.log('去除青少年模式弹框');
+        }
         // QDReader://Bookshelf 书架右下角悬浮活动
         if (body.Data.ActivityIcon?.Type !== 0) {
             console.log(`body:${$response.body}`);
