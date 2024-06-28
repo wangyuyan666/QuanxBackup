@@ -159,6 +159,22 @@ jobs:
           mv Yu9191_Rewrite/* "Rewrite(Yu9191)/"
           rm -rf Yu9191_Rewrite     
 
+      - name: Clone Marol62926_Quantumultx
+        run: |
+          git clone --depth=1 https://github.com/Marol62926/Quantumultx Marol62926_Quantumultx
+          rm -rf "Quantumultx(Marol62926)"
+          mkdir -p "Quantumultx(Marol62926)"
+          mv Marol62926_Quantumultx/* "Quantumultx(Marol62926)/"
+          rm -rf Marol62926_Quantumultx
+
+      - name: Clone Marol62926_MarScrpt
+        run: |
+          git clone --depth=1 https://github.com/Marol62926/MarScrpt Marol62926_MarScrpt
+          rm -rf "MarScrpt(Marol62926)"
+          mkdir -p "MarScrpt(Marol62926)"
+          mv Marol62926_MarScrpt/* "MarScrpt(Marol62926)/"
+          rm -rf Marol62926_MarScrpt
+
       - name: Update timestamp
         run: echo "Backup run at $(date)" > backup-timestamp.txt
         
