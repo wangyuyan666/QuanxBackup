@@ -1,6 +1,6 @@
 const $ = new Env("GOGOGOGO");
 let url = $request.url, headers = $request.headers;
-const m3u8Regex = /https:\/\/\S+\.m3u8\?token=[^&]+&c=https:\/\/\S+/;
+const m3u8Regex = /https:\/\/[^ ]+\.m3u8\?token=[^&]+&c=https:\/\/[^ ]+/;
 let matchedUrl = url.match(m3u8Regex);
 if (matchedUrl && matchedUrl.length > 0) {
     matchedUrl = matchedUrl[0];
