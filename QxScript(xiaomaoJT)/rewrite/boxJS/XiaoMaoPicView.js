@@ -1,10 +1,10 @@
 /**************************
  *  * @Author: XiaoMao
- * @LastMod: 2024-07-23
+ * @LastMod: 2024-07-24
  *
  * 
 
-\每\日\随\机\图\片\（\二\次\元\+\1\8\）
+\每\日\随\机\图\片\（\风\景\｜\二\次\元\｜\福\利\姬\）\
 
 仅供学习参考，请于下载后24小时内删除
 
@@ -143,28 +143,54 @@ let option = {
     `https://api.vvhan.com/api/wallpaper/${picTypeList[picType].value}?type=json`
   ),
 };
-$.get(option, (err, resp, response) => {
-  if (response) {
-    let obj = JSON.parse(response);
-    if (obj.url) {
-      let picture = obj.url.replace(".webp", ".png");
-      $.notify(
-        "🖼️多元图片推送",
-        "",
-        "图片类型:" + picTypeList[picType].label,
-        picture
-      );
+const getImgUrl = () => {
+  $.get(option, (err, resp, response) => {
+    if (response) {
+      let obj = JSON.parse(response);
+      if (obj.url) {
+        let picture = obj.url.replace(".webp", ".png").replace(".jpg", ".png");
+        checkImgExists(picture)
+          .then(() => {
+            $.notify(
+              "🖼️多元图片推送",
+              "",
+              "图片类型:" + picTypeList[picType].label,
+              picture
+            );
+            $.log("图片地址:" + picture);
+            $done({});
+          })
+          .catch(() => {
+            getImgUrl();
+          });
+      }
+    } else {
+      getError();
     }
-  } else {
-    $.notify(
-      "XiaoMao提示",
-      "",
-      "本次图片获取失败!",
-      "https://i.pixiv.re/img-original/img/2022/10/14/00/15/07/101911915_p1.jpg"
-    );
-  }
-});
-
-setTimeout(() => {
+  });
+};
+const checkImgExists = (imgUrl) => {
+  return new Promise(function (resolve, reject) {
+    var ImgObj = new Image();
+    ImgObj.src = imgUrl;
+    ImgObj.onload = function (res) {
+      resolve(res);
+    };
+    ImgObj.onerror = function (err) {
+      reject(err);
+    };
+  });
+};
+const getError = () => {
+  $.notify(
+    "XiaoMao提示",
+    "",
+    "本次图片获取失败!",
+    "https://i.pixiv.re/img-original/img/2022/10/14/00/15/07/101911915_p1.jpg"
+  );
   $done({});
-}, 3000);
+};
+getImgUrl();
+setTimeout(() => {
+  getError();
+}, 10000);
