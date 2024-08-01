@@ -1,6 +1,6 @@
 /**************************
  *  * @Author: XiaoMao
- * @LastMod: 2024-07-29
+ * @LastMod: 2024-08-01
  *
  * 
 
@@ -452,15 +452,15 @@ function getEmojiByCountry(country) {
   return "🏳️‍🌈" + country;
 }
 function padToSixChineseChars(input) {
-  const targetLength = 7;
+  const targetLength = 6;
   const paddingChar = "　";
   const currentLength = input.length;
   if (currentLength < targetLength) {
     const paddingLength = targetLength - currentLength;
-    const paddedString = "" + paddingChar.repeat(paddingLength);
+    const paddedString = "" + paddingChar.repeat(paddingLength) + " ";
     return paddedString;
   }
-  return "";
+  return " ";
 }
 const $ = new Env("XiaoMaoParisOlympicGames");
 
@@ -481,15 +481,19 @@ $.get(option, (error1, resp1, res) => {
   if (response && response?.tplData?.data?.header) {
     let resHeader = response.tplData.data.header;
     let resTabsList = response.tplData.data.tabsList[0].data.medalList[0];
-    let notifyTitle = "巴黎奥运会";
-    let notifySubtitle = response.tplData.data.shareInfo.abstract;
+    let notifyTitle = "🇫🇷巴黎奥运会";
+    let notifySubtitle = "🏟️" + response.tplData.data.shareInfo.abstract;
 
     let notifyContent =
       `「${getEmojiByCountry(resHeader.rankInfo.country)}」「${
         resHeader.rankInfo.rank
       }」「🥇${resHeader.medalInfo.gold}」「🥈${
         resHeader.medalInfo.silver
-      }」「🥉${resHeader.medalInfo.bronze}」` +
+      }」「🥉${resHeader.medalInfo.bronze}」「🏅${
+        parseInt(resHeader.medalInfo.gold) +
+        parseInt(resHeader.medalInfo.silver) +
+        parseInt(resHeader.medalInfo.bronze)
+      }」` +
       "\n\n" +
       "🎖️2024巴黎奥运会-奖牌榜" +
       "\n\n";
@@ -506,7 +510,9 @@ $.get(option, (error1, resp1, res) => {
           ).padStart(2, " ")}」「🥈${String(el.silver).padStart(
             2,
             " "
-          )}」「🥉${String(el.bronze).padStart(2, " ")}」` +
+          )}」「🥉${String(el.bronze).padStart(2, " ")}」「🏅${String(
+            el.total
+          ).padStart(2, " ")}」` +
           "\n";
       });
     }
