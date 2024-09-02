@@ -13,7 +13,7 @@ import AirQuality from "./class/AirQuality.mjs";
 
 import * as flatbuffers from 'flatbuffers';
 
-const $ = new ENV(" iRingo: 🌤 WeatherKit v1.5.2(4142) response");
+const $ = new ENV(" iRingo: 🌤 WeatherKit v1.5.2(4144) response");
 
 /***************** Processing *****************/
 // 解构URL
@@ -98,8 +98,7 @@ $.log(`⚠ FORMAT: ${FORMAT}`, "");
 													if (body?.airQuality?.pollutants) body.airQuality.pollutants = body.airQuality.pollutants.map((pollutant) => {
 														switch (pollutant.pollutantType) {
 															case "CO": // Fix CO amount from QWeather
-																const mgAmount = AirQuality.ConvertUnit(pollutant.units, 'MILLIGRAMS_PER_CUBIC_METER', pollutant.amount, -1);
-																if (mgAmount < 0.1) pollutant.amount = AirQuality.ConvertUnit('MILLIGRAMS_PER_CUBIC_METER', pollutant.units, pollutant.amount, -1);
+															pollutant.amount = AirQuality.ConvertUnit("MILLIGRAMS_PER_CUBIC_METER", "MICROGRAMS_PER_CUBIC_METER", pollutant.amount, -1);
 																break;
 															default:
 																break;
@@ -202,7 +201,7 @@ function ConvertAirQuality(body, Settings) {
 	};
 	if (airQuality.index) {
 		body.airQuality = { ...body.airQuality, ...airQuality };
-		body.airQuality.metadata.providerName += `\n iRingo (converted from ${body.airQuality.metadata.providerName})`;
+		body.airQuality.metadata.providerName += `\nConverted using ${Settings?.AQI?.Local?.Standard}`;
 	};
 	$.log(`✅ ConvertAirQuality`, "");
 	return body;
