@@ -19410,6 +19410,11 @@ class AirQuality {
                 },
             },
             "EPA_NowCast": {
+                /**
+                 * US AQI standard, not equal to NowCast.
+                 * [EPA 454/B-18-007]{@link https://www.airnow.gov/sites/default/files/2020-05/aqi-technical-assistance-document-sept2018.pdf}
+                 * @type aqiStandard
+                 */
                 "scale": 'EPA_NowCast',
                 "categoryIndex": {
                     "-1": [Number.MIN_VALUE, -1], // INVALID
@@ -19425,19 +19430,25 @@ class AirQuality {
                 "pollutants": {
                     "OZONE_8H": {
                         "units": 'PARTS_PER_MILLION',
-                        "ppxToXGM3": 1.97,
+                        "ppxToXGM3": 1.97, // 48 g/mol
                         "ranges": {
                             "1": [0, 0.054], // GOOD
                             "2": [0.055, 0.070], // MODERATE
                             "3": [0.071, 0.085], // UNHEALTHY_FOR_SENSITIVE
                             "4": [0.086, 0.105], // UNHEALTHY
                             "5": [0.106, 0.200], // VERY_UNHEALTHY
+                            // 8-hour O3 values do not define higher AQI values (≥ 301).
+                            // AQI values of 301 or higher are calculated with 1-hour O3 concentrations.
                         }
                     },
                     "OZONE": {
                         "units": 'PARTS_PER_MILLION',
-                        "ppxToXGM3": 1.97,
+                        "ppxToXGM3": 1.97, // 48 g/mol
                         "ranges": {
+                            // Areas are generally required to report the AQI based on 8-hour O3 values. However,
+                            // there are a small number of areas where an AQI based on 1-hour O3 values would be more precautionary.
+                            // In these cases, in addition to calculating the 8-hour O3 index value,
+                            // the 1-hour O3 value may be calculated, and the maximum of the two values reported.
                             "3": [0.125, 0.164], // UNHEALTHY_FOR_SENSITIVE
                             "4": [0.165, 0.204], // UNHEALTHY
                             "5": [0.205, 0.404], // VERY_UNHEALTHY
@@ -19468,9 +19479,21 @@ class AirQuality {
                             "6": [425, 604], // HAZARDOUS
                         }
                     },
+                    "CO_8H": {
+                        "units": 'PARTS_PER_MILLION',
+                        "ppxToXGM3": 1.14, // 28 g/mol
+                        "ranges": {
+                            "1": [0.0, 4.4], // GOOD
+                            "2": [4.5, 9.4], // MODERATE
+                            "3": [9.5, 12.4], // UNHEALTHY_FOR_SENSITIVE
+                            "4": [12.5, 15.4], // UNHEALTHY
+                            "5": [15.5, 30.4], // VERY_UNHEALTHY
+                            "6": [30.5, 50.4], // HAZARDOUS
+                        }
+                    },
                     "CO": {
                         "units": 'PARTS_PER_MILLION',
-                        "ppxToXGM3": 1.14,
+                        "ppxToXGM3": 1.14, // 28 g/mol
                         "ranges": {
                             "1": [0.0, 4.4], // GOOD
                             "2": [4.5, 9.4], // MODERATE
@@ -19482,12 +19505,14 @@ class AirQuality {
                     },
                     "SO2": {
                         "units": 'PARTS_PER_BILLION',
-                        "ppxToXGM3": 2.62,
+                        "ppxToXGM3": 2.62, // 64 g/mol
                         "ranges": {
                             "1": [0, 35], // GOOD
                             "2": [36, 75], // MODERATE
                             "3": [76, 185], // UNHEALTHY_FOR_SENSITIVE
                             "4": [186, 304], // UNHEALTHY
+                            // 1-hour SO2 values do not define higher AQI values (≥ 200).
+                            // AQI values of 200 or greater are calculated with 24-hour SO2 concentrations.
                         }
                     },
                     "SO2_24H": {
@@ -19498,6 +19523,29 @@ class AirQuality {
                             "6": [605, 1004], // HAZARDOUS
                         }
                     },
+                    // NOT FOR CALCULATION
+                    //
+                    // EPA strengthened the primary standard for SO2 in 2010.
+                    // Because there was not enough health information to inform changing the upper end of the AQI for SO2,
+                    // the upper end continues to use the 24-hour average SO2 concentration.
+                    // The lower end of the AQI uses the daily max 1-hour SO2 concentration.
+                    //
+                    // If you have a daily max 1-hour SO2 concentration below 305 ppb,
+                    // then use the breakpoints in Table 6 to calculate the AQI value.
+                    //
+                    // If you have a 24-hour average SO2 concentration greater than or equal to 305 ppb,
+                    // then use the breakpoints in Table 6 to calculate the AQI value.
+                    // If you have a 24-hour value in this range,
+                    // it will always result in a higher AQI value than a 1-hour value would.
+                    //
+                    // On rare occasions, you could have a day where the daily max 1-hour concentration is at or above 305 ppb
+                    // but when you try to use the 24-hour average to calculate the AQI value,
+                    // you find that the 24-hour concentration is not above 305 ppb.
+                    // If this happens, use 200 for the lower and upper AQI breakpoints (ILo and IHi) in Equation 1
+                    // to calculate the AQI value based on the daily max 1-hour value.
+                    // This effectively fixes the AQI value at 200 exactly,
+                    // which ensures that you get the highest possible AQI value associated with your 1-hour concentration
+                    // on such days.
                     "SO2_MAX_1H": {
                         "units": 'PARTS_PER_BILLION',
                         "ppxToXGM3": -1,
@@ -19508,7 +19556,7 @@ class AirQuality {
                     },
                     "NO2": {
                         "units": 'PARTS_PER_BILLION',
-                        "ppxToXGM3": 1.88,
+                        "ppxToXGM3": 1.88, // 46 g/mol
                         "ranges": {
                             "1": [0, 53], // GOOD
                             "2": [54, 100], // MODERATE
@@ -19521,6 +19569,12 @@ class AirQuality {
                 }
             },
             "WAQI_InstantCast": {
+                /**
+                 * WAQI InstantCast.
+                 * [A Beginner's Guide to Air Quality Instant-Cast and Now-Cast.]{@link https://aqicn.org/faq/2015-03-15/air-quality-nowcast-a-beginners-guide/}
+                 * [Ozone AQI Scale update]{@link https://aqicn.org/faq/2016-08-10/ozone-aqi-scale-update/}
+                 * @type aqiStandard
+                 */
                 "scale": 'EPA_NowCast',
                 "categoryIndex": {
                     "-1": [Number.MIN_VALUE, -1], // INVALID
@@ -20671,7 +20725,7 @@ class ColorfulClouds {
 class QWeather {
     constructor($ = new ENV("QWeather"), options) {
         this.Name = "QWeather";
-        this.Version = "1.0.9";
+        this.Version = "2.0.1";
         $.log(`\n🟧 ${this.Name} v${this.Version}\n`, "");
         this.url = new URL($request.url);
         this.host = "devapi.qweather.com";
@@ -20680,6 +20734,76 @@ class QWeather {
         Object.assign(this, Parameters, options);
         this.$ = $;
     };
+
+    #Config = {
+        "Pollutants": {
+            "co": "CO",
+            "no": "NO",
+            "no2": "NO2",
+            "so2": "SO2",
+            "o3": "OZONE",
+            "nox": "NOX",
+            "pm25": "PM2_5",
+            "pm2p5": "PM2_5",
+            "pm10": "PM10",
+            "other": "NOT_AVAILABLE",
+            "na": "NOT_AVAILABLE"
+        },
+    };
+
+    async AirNow(token = this.token) {
+        this.$.log(`☑️ AirNow`, "");
+        const request = {
+            "url": `https://${this.host}/v7/air/now?location=${this.longitude},${this.latitude}&key=${token}`,
+            "header": this.header,
+        };
+        let airQuality;
+        try {
+            const body = await this.$.fetch(request).then(response => JSON.parse(response?.body ?? "{}"));
+            const timeStamp = Math.round(Date.now() / 1000);
+            switch (body?.code) {
+                case "200":
+                    airQuality = {
+                        "metadata": {
+                            "attributionUrl": body?.fxLink,
+                            "expireTime": timeStamp + 60 * 60,
+                            "language": `${this.language}-${this.country}`,
+                            "latitude": this.latitude,
+                            "longitude": this.longitude,
+                            "providerLogo": providerNameToLogo("和风天气", this.version),
+                            "providerName": "和风天气",
+                            "readTime": timeStamp,
+                            "reportedTime": Math.round(new Date(body?.now?.pubTime).valueOf() / 1000),
+                            "temporarilyUnavailable": false,
+                            "sourceType": "STATION",
+                        },
+                        "categoryIndex": parseInt(body?.now?.level, 10),
+                        "index": parseInt(body?.now?.aqi, 10),
+                        "pollutants": this.#CreatePollutants(body?.now),
+                        "previousDayComparison": "UNKNOWN",
+                        "primaryPollutant": this.#Config.Pollutants[body?.now?.primary] || "NOT_AVAILABLE",
+                        "scale": "HJ6332012"
+                    };
+                    if (body?.refer?.sources?.[0]) airQuality.metadata.providerName += `\n数据源: ${body?.refer?.sources?.[0]}`;
+                    break;
+                case "204":
+                case "400":
+                case "401":
+                case "402":
+                case "403":
+                case "404":
+                case "429":
+                case "500":
+                case undefined:
+                    throw JSON.stringify({ "status": body?.status, "reason": body?.error });
+            };
+        } catch (error) {
+            this.logErr(error);
+        } finally {
+            //this.$.log(`🚧 AirNow airQuality: ${JSON.stringify(airQuality, null, 2)}`, "");
+            this.$.log(`✅ AirNow`, "");
+            return airQuality;
+        }    };
 
     async Minutely(token = this.token) {
         this.$.log(`☑️ Minutely, host: ${this.host}`, "");
@@ -20752,9 +20876,34 @@ class QWeather {
             this.$.log(`✅ Minutely`, "");
             return forecastNextHour;
         }    };
+
+    #CreatePollutants(pollutantsObj = {}) {
+        console.log(`☑️ CreatePollutants`, "");
+        let pollutants = [];
+        for (const [key, value] of Object.entries(pollutantsObj)) {
+            switch (key) {
+                case "co":
+                case "no":
+                case "no2":
+                case "so2":
+                case "o3":
+                case "nox":
+                case "pm25":
+                case "pm2p5":
+                case "pm10":
+                    pollutants.push({
+                        "amount": value ?? -1,
+                        "pollutantType": this.#Config.Pollutants[key],
+                        "units": "MICROGRAMS_PER_CUBIC_METER",
+                    });
+                    break;
+            }        }        //console.log(`🚧 CreatePollutants, pollutants: ${JSON.stringify(pollutants, null, 2)}`, "");
+        console.log(`✅ CreatePollutants`, "");
+        return pollutants;
+    };
 }
 
-const $ = new ENV(" iRingo: 🌤 WeatherKit v1.6.8(4161) response.beta");
+const $ = new ENV(" iRingo: 🌤 WeatherKit v1.7.0(4162) response.beta");
 
 /***************** Processing *****************/
 // 解构URL
@@ -20898,36 +21047,34 @@ $.log(`⚠ FORMAT: ${FORMAT}`, "");
 async function InjectAirQuality(url, body, Settings) {
 	$.log(`☑️ InjectAirQuality`, "");
 	let airQuality;
-	let metadata;
 	switch (Settings?.AQI?.Provider) {
 		case "WeatherKit":
 			break;
 		case "QWeather":
+			const qWeather = new QWeather($, { "url": url, "host": Settings?.API?.QWeather?.Host, "header": Settings?.API?.QWeather?.Header, "token": Settings?.API?.QWeather?.Token });
+			airQuality = await qWeather.AirNow();
 			break;
 		case "ColorfulClouds":
 			const colorfulClouds = new ColorfulClouds($, { "url": url, "header": Settings?.API?.ColorfulClouds?.Header, "token": Settings?.API?.ColorfulClouds?.Token || "Y2FpeXVuX25vdGlmeQ==" });
 			airQuality = await colorfulClouds.RealTime();
-			metadata = airQuality?.metadata;
 			break;
 		case "WAQI":
 		default:
 			const Waqi = new WAQI($, { "url": url, "header": Settings?.API?.WAQI?.Header, "token": Settings?.API?.WAQI?.Token });
 			if (Settings?.API?.WAQI?.Token) {
 				airQuality = await Waqi.AQI2();
-				metadata = airQuality?.metadata;
 			} else {
 				const Nearest = await Waqi.Nearest();
 				const Token = await Waqi.Token(Nearest?.metadata?.stationId);
 				//Caches.WAQI.set(stationId, Token);
 				airQuality = await Waqi.AQI(Nearest?.metadata?.stationId, Token);
-				metadata = { ...Nearest?.metadata, ...airQuality?.metadata };
+				airQuality.metadata = { ...Nearest?.metadata, ...airQuality?.metadata };
 				airQuality = { ...Nearest, ...airQuality };
 			}
 			break;
-	}	if (metadata) {
-		metadata = { ...body?.airQuality?.metadata, ...metadata };
+	}	if (airQuality?.metadata) {
+		airQuality.metadata = { ...body?.airQuality?.metadata, ...airQuality.metadata };
 		body.airQuality = { ...body?.airQuality, ...airQuality };
-		body.airQuality.metadata = metadata;
 		if (!body?.airQuality?.pollutants) body.airQuality.pollutants = [];
 		$.log(`🚧 body.airQuality: ${JSON.stringify(body?.airQuality, null, 2)}`, "");
 	}	$.log(`✅ InjectAirQuality`, "");
@@ -20955,7 +21102,6 @@ function ConvertAirQuality(body, Settings) {
 async function InjectForecastNextHour(url, body, Settings) {
 	$.log(`☑️ InjectForecastNextHour`, "");
 	let forecastNextHour;
-	let metadata;
 	switch (Settings?.NextHour?.Provider) {
 		case "WeatherKit":
 			break;
@@ -20968,11 +21114,9 @@ async function InjectForecastNextHour(url, body, Settings) {
 			const colorfulClouds = new ColorfulClouds($, { "url": url, "header": Settings?.API?.ColorfulClouds?.Header, "token": Settings?.API?.ColorfulClouds?.Token || "Y2FpeXVuX25vdGlmeQ==" });
 			forecastNextHour = await colorfulClouds.Minutely();
 			break;
-	}	metadata = forecastNextHour?.metadata;
-	if (metadata) {
-		metadata = { ...body?.forecastNextHour?.metadata, ...metadata };
+	}	if (forecastNextHour?.metadata) {
+		forecastNextHour.metadata = { ...body?.forecastNextHour?.metadata, ...forecastNextHour.metadata };
 		body.forecastNextHour = { ...body?.forecastNextHour, ...forecastNextHour };
-		body.forecastNextHour.metadata = metadata;
 		$.log(`🚧 body.forecastNextHour: ${JSON.stringify(body?.forecastNextHour, null, 2)}`, "");
 	}	$.log(`✅ InjectForecastNextHour`, "");
 	return body;
