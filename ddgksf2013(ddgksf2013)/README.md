@@ -7,7 +7,7 @@
 [![](https://img.shields.io/github/followers/ddgksf2013?label=follow&style=social)](https://github.com/ddgksf2013)
 
 
-## 墨魚手記（[赞助](https://qr.alipay.com/fkx14452pqgkxzbji4tscd2 "感谢打赏")）[Update on 2024-09-05](https://github.com/ddgksf2013/Rewrite/blob/master/README.md)  
+## 墨魚手記（[赞助](https://qr.alipay.com/fkx14452pqgkxzbji4tscd2 "感谢打赏")）[Update on 2024-09-12](https://github.com/ddgksf2013/Rewrite/blob/master/README.md)  
 ### Tg 通知頻道 👉🏻[Cuttlefishの自留地](https://t.me/ddgksf2021)👈🏻  
 ![Visitor Count](https://profile-counter.glitch.me/ddgksf2013/count.svg)  
 
@@ -118,7 +118,7 @@
 		<td > 16 </td> <td > 高德地图去广告[卸载重装] </td> <td ><a href="https://github.com/ddgksf2013/Rewrite/raw/master/AdBlock/Amap.conf"><em>Amap.conf</em></a></td><td>ddgksf2013</td>  
     </tr>
 	<tr>
-		<td > 17 </td> <td > 网易云去广告 </td> <td ><a href="https://github.com/ddgksf2013/Rewrite/raw/master/AdBlock/NeteaseAds.conf"><em>Netease.conf</em></a></td><td>ddgksf2013</td>  
+		<td > 17 </td> <td > <strong>网易云去广告</strong> </td> <td ><a href="https://github.com/ddgksf2013/Rewrite/raw/master/AdBlock/NeteaseAds.conf"><em>Netease.conf</em></a></td><td>ddgksf2013</td>  
     </tr>
 	<tr>
 		<td > 18 </td> <td > 菜鸟裹裹去广告 </td> <td ><a href="https://github.com/ddgksf2013/Rewrite/raw/master/AdBlock/Cainiao.conf"><em>Cainiao.conf</em></a></td><td>ddgksf2013</td>  
@@ -142,7 +142,7 @@
 		<td > 24 </td> <td > 皮皮虾净化及去水印 </td> <td ><a href="https://gist.githubusercontent.com/ddgksf2013/bb1dadbd32f67c68772caebcc70b0a33/raw/pipixia.adblock.js"><em>pipixia.adblock.js</em></a></td><td>Liquor030</td>  
     </tr>
 	<tr>
-		<td > 25 </td> <td > 什么值得买 </td> <td ><a href="https://github.com/ddgksf2013/Rewrite/raw/master/AdBlock/SmzdmAds.conf"><em>smzdmAds.conf</em></a></td><td>blackmatrix7</td>  
+		<td > 25 </td> <td > 什么值得买 </td> <td ><a href="https://github.com/ddgksf2013/Rewrite/raw/master/AdBlock/SmzdmAds.conf"><em>smzdmAds.conf</em></a></td><td>blackmatrix7<br>ddgksf2013</td>  
     </tr>
 			<tr>
 		<td > 26 </td> <td > 微信阅读精简 </td> <td ><a href="https://raw.githubusercontent.com/Maasea/sgmodule/master/WeRead.sgmodule"><em>WeRead.sgmodule</em></a></td><td>Maasea</td>  
@@ -157,7 +157,7 @@
 		<td colspan="5">  </td>
     </tr>
 	<tr>
-		<td rowspan="11"><strong>应用增强</strong></td>
+		<td rowspan="12"><strong>应用增强</strong></td>
 		<td > 1 </td> <td > <s>B站自动换区</s>[不适用新版] </td> <td ><s><a href="https://github.com/ddgksf2013/Rewrite/raw/master/Function/BilibiliAutoRegion.conf"><em>BilibiliAutoRegion.conf</em></a></s></td><td>Nobyda</td>
     </tr>
 	<tr>
@@ -189,6 +189,9 @@
     </tr>
 			<tr>
 		<td > 11 </td> <td > VVebo修复用户时间线 </td> <td ><a href="https://raw.githubusercontent.com/bin64/Scripts/main/QuantumultX/vvebo.js"><em>vvebo.js</em></a></td><td>suiyuran</td>  
+    </tr>
+			<tr>
+		<td > 12 </td> <td > IOS解锁天气服务 </td> <td ><a href="https://raw.githubusercontent.com/VirgilClyne/iRingo/main/snippet/WeatherKit.snippet"><em>WeatherKit.snippet</em></a></td><td>VirgilClyne</td>  
     </tr>
 	<tr>
 		<td colspan="5">  </td>
