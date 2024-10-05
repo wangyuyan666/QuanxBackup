@@ -22,24 +22,6 @@ export default [
 		plugins: [json(), commonjs(), nodeResolve()]
 	},
 	{
-		input: 'src/Siri.request.beta.js',
-		output: {
-			file: 'js/Siri.request.beta.js',
-			//format: 'es',
-			banner: "/* README: https://github.com/VirgilClyne/iRingo */\nconsole.log(' iRingo: ⭕ Siri β Request')",
-		},
-		plugins: [json(), commonjs(), nodeResolve()]
-	},
-	{
-		input: 'src/Siri.response.beta.js',
-		output: {
-			file: 'js/Siri.response.beta.js',
-			//format: 'es',
-			banner: "/* README: https://github.com/VirgilClyne/iRingo */\nconsole.log(' iRingo: ⭕ Siri β Response')",
-		},
-		plugins: [json(), commonjs(), nodeResolve()]
-	},
-	{
 		input: 'src/TestFlight.request.beta.js',
 		output: {
 			file: 'js/TestFlight.request.beta.js',
@@ -54,24 +36,6 @@ export default [
 			file: 'js/TestFlight.response.beta.js',
 			//format: 'es',
 			banner: "/* README: https://github.com/VirgilClyne/iRingo */\nconsole.log(' iRingo: ✈ TestFlight β Response')",
-		},
-		plugins: [json(), commonjs(), nodeResolve()]
-	},
-	{
-		input: 'src/TV.request.beta.js',
-		output: {
-			file: 'js/TV.request.beta.js',
-			//format: 'es',
-			banner: "/* README: https://github.com/VirgilClyne/iRingo */\nconsole.log(' iRingo: 📺 TV β Request')",
-		},
-		plugins: [json(), commonjs(), nodeResolve()]
-	},
-	{
-		input: 'src/TV.response.beta.js',
-		output: {
-			file: 'js/TV.response.beta.js',
-			//format: 'es',
-			banner: "/* README: https://github.com/VirgilClyne/iRingo */\nconsole.log(' iRingo: 📺 TV β Response')",
 		},
 		plugins: [json(), commonjs(), nodeResolve()]
 	},
