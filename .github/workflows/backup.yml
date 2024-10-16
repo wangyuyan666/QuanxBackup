@@ -182,6 +182,14 @@ jobs:
           mkdir -p "wool_scripts(fmz200)"
           mv fmz200_wool_scripts/* "wool_scripts(fmz200)/"
           rm -rf fmz200_wool_scripts     
+          
+      - name: Clone Repcz_Tool
+        run: |
+          git clone --depth=1 https://github.com/Repcz/Tool Repcz_Tool
+          rm -rf "Tool(Repcz)"
+          mkdir -p "Tool(Repcz)"
+          mv Repcz_Tool/* "Tool(Repcz)/"
+          rm -rf Repcz_Tool     
 
       - name: Update timestamp
         run: echo "Backup run at $(date)" > backup-timestamp.txt
