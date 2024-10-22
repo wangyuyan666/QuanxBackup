@@ -1,10 +1,43 @@
 // ==UserScript==
 // @name         Adblock4limbo.[github]
 // @namespace    https://github.com/limbopro/Adblock4limbo/raw/main/Adguard/Adblock4limbo.user.js
-// @version      0.4.10.20
+// @version      0.4.10.22
 // @license      CC BY-NC-SA 4.0
-// @description  毒奶去网页广告计划用户脚本；1.新增页面右下角导航；2.通过 JavaScript 移除特定网站网页广告 —— Pornhub/搜索引擎（Bing/Google）广告及内容农场结果清除/低端影视（可避免PC端10秒广告倒计时）/欧乐影院/独播库/ibvio/Javbus/Supjav/Jable（包含M3U8文件提取）/MissAv（禁止离开激活窗口视频自动暂停播放）/禁漫天堂/紳士漫畫/hitomi/91porn/等视频网站上的视频广告和图片广告，保持界面清爽干净无打扰！其他：优化PC端未登录状态访问知乎浏览体验（动态移除登录窗口/永远不会跳转至首页登录页面）；
+// @description  毒奶去网页广告计划用户脚本 For Quantumult X & Surge & Shadowrocket & Loon & Stash & 油猴 ；1.新增页面右下角导航；2.通过 JavaScript 移除特定网站网页广告 —— 搜索引擎（Bing/Google）广告及内容农场结果清除/低端影视/欧乐影院/哔滴影视/Pornhub/Javbus/Supjav/Jable/MissAv/91porn/hitomi/紳士漫畫/禁漫天堂/等视频&ACG&小说&漫画网站上的弹窗广告&视频广告&Gif图片广告等，保持网页清爽干净无打扰！ P.S. 欢迎提交issue  
 // @author       limbopro
+
+/**
+ * ---------------------------
+ * 毒奶去网页广告计划
+ * Author: limbopro
+ * 使用教程：https://limbopro.com/archives/12904.html
+ * 联系博主：https://t.me/limboprobot
+ * 电报群组：https://t.me/Adblock4limbo
+ * FAQ：https://t.me/Adblock4limbo/21 常见问题与回答
+ * Github：https://github.com/limbopro/Adblock4limbo
+ * ---------------------------
+ */
+
+/* 新增反馈&导航按钮
+
+// 【导航】使用指南（PC/Mac）
+/// 按教程安装好油猴脚本
+/// 访问任意网站（绝大多数网站）
+/// 1.1 当页面右下角【导航按钮】消失后，1秒内连续按2次 ESC键 可唤出【导航页面】；
+/// 1.2 当页面右下角出现【导航按钮】时，此时只需再按一次 ESC键 可唤出【导航页面】；
+/// 1.3 当处于导航页面时，按ESC键 或点击空白处 可退出【导航页面】；
+/// 1.4 当处于导航页面时，按G键 或 空格键 可快速唤出【搜索框】，可快速进行搜索操作（同时会退出导航页面）；
+/// 1.5 当处于导航页面时，按C键 可快速唤出【网页聊天】框，可快速提建议或反馈问题；
+
+// 【导航】使用指南（iOS）
+/// 按教程配置好相应重写/去广告分流
+/// 访问【目前在维护的网站目录】里的（绝大多数）网站
+/// 1.1 当页面右下角导航按钮消失后，点击页面右侧1/3空白处即可唤出【导航按钮】；
+/// 1.2 当页面右下角出现导航按钮时，点击按钮即可唤出【导航页面】；
+/// 1.3 上下滑动页面亦可唤出【导航按钮】；
+*/
+
+// @match        https://*/*
 // @match        https://ddrk.me/*
 // @match        https://ddys.tv/*
 // @match        https://ddys.pro/*
@@ -120,8 +153,6 @@
 // @match        https://m.diyibanzhu.me/*
 // @match        https://www.javlibrary.com/*
 // @match        https://rouman5.com/*
-// @exclude      https://limbopro.com/*
-// @exclude      https://limbopro.com/*
 // @exclude      https://venus-av.com/*
 // @exclude      https://developer.mozilla.org/
 // @exclude      https://www.youtube.com/*
@@ -131,29 +162,6 @@
 // @run-at       document-end
 // @grant        none
 // ==/UserScript==
-
-/**
- * ---------------------------
- * 毒奶去网页广告计划
- * Author: limbopro
- * 完全使用手册：https://limbopro.com/archives/12904.html
- * 联系博主：https://t.me/limboprobot
- * 电报群组：https://t.me/Adblock4limbo
- * FAQ：https://t.me/Adblock4limbo/21 常见问题与回答
- * Github：https://github.com/limbopro/Adblock4limbo
- * ---------------------------
- */
-
-/* 新增反馈&导航按钮
-
-// 油猴脚本用户导航页使用指南（PC/Mac）
-/// 1.1 当页面右下角导航按钮消失后，1秒内连续按 2次 ESC 键可唤出导航页面；
-/// 1.2 当页面右下角出现导航按钮时，此时只需按一次ESC键可唤出导航页面；
-/// 1.3 当处于导航页面时，按ESC可退出导航详情页；
-/// 1.4 当处于导航页面时，按G键或空格键 可快速唤出搜索框，可快速进行搜索操作（同时会退出导航页面）；
-/// 1.5 当处于导航页面时，按C键 可快速唤出网页聊天框，可快速提建议或反馈问题；
-
-*/
 
 /**
  * 为网页增加导航按钮，将位于页面右下角呈现；
@@ -500,7 +508,7 @@ function adsDomain_switch(x) { // 匹配参数值 执行相应函数
         case 'ddys':
             //css_adsRemove(imax.css.ddrk);
             css_adsRemove(imax.css.ddrk2);
-            
+
             //selector_adsRemove("#sajdhfbjwhe,#kasjbgih,#fkasjgf,img[src*='bcebos']", 0)
 
             var divx = document.createElement('div');
@@ -586,8 +594,8 @@ function adsDomain_switch(x) { // 匹配参数值 执行相应函数
             hrefAttribute_set();
 
             if (document.querySelectorAll('li[data-increase]')[1] !== null) {
-    document.querySelectorAll('li[data-increase]')[1].click()
-}
+                document.querySelectorAll('li[data-increase]')[1].click()
+            }
 
             var url = document.location.href;
             if (url == "https://www.bdys10.com/" || url == "https://www.bdys03.com/") {
@@ -677,7 +685,7 @@ function adsDomain_switch(x) { // 匹配参数值 执行相应函数
             // nothing to do.
             break;
         case 'iyf':
-        css_adsRemove(imax.css.iyf);
+            css_adsRemove(imax.css.iyf);
             break;
 
         case 'cnys':
@@ -707,8 +715,6 @@ function adsDomain_switch(x) { // 匹配参数值 执行相应函数
                 }, 7500)
             }
 
-
-
             //document.querySelectorAll('iframe')[2].contentWindow.document.querySelectorAll('body')[0].querySelectorAll('#ADtip')[0].style = 'display:none';
 
             break;
@@ -733,8 +739,52 @@ function adsDomain_switch(x) { // 匹配参数值 执行相应函数
             break;
 
         case 'javbus':
-            third_party_fileX("script", "https://update.sleazyfork.org/scripts/25781/JAV%E8%80%81%E5%8F%B8%E6%9C%BA.user.js", "head")
             css_adsRemove(imax.css.javbus, 0, "javbus");
+
+            function javbus() { // 在番号详情页追加在线预览链接
+
+                let father = document.querySelector('div.col-md-3.info')
+                let code = window.location.pathname.replace('/', '')
+
+                let url = window.location.href
+                let regx = /[a-zA-Z]{3,5}\-\d{3,5}/i
+
+                if (url.search(regx) !== -1) {
+
+                    let p = document.createElement('p')
+                    p.style = 'word-break:break-all;font-size:14px;line-height:25px;'
+                    father.insertBefore(p, father.childNodes[2])
+
+                    let span = document.createElement('span')
+                    span.className = 'header'
+                    span.textContent = '在线预览：'
+                    p.appendChild(span)
+
+                    function siteAdd(siteName, url, codeSlect) {
+                        let a = document.createElement('a')
+                        let lable = document.createElement('label')
+                        lable.style = 'font-weight:inherit;display:inline-block;max-width:100%;margin-right:10px;'
+                        a.href = url + codeSlect
+                        a.textContent = siteName
+                        a.target = '_blank'
+                        a.style = 'color:rgb(8 0 204);'
+                        lable.appendChild(a)
+                        p.appendChild(lable)
+                    }
+
+                    siteAdd('MissAV', 'https://missav.com/search', '/' + code)
+                    siteAdd('Jable', 'https://jable.tv/search', '/' + code + '/')
+                    siteAdd('Supjav', 'https://supjav.com/?s=', code)
+                    siteAdd('谷歌搜索🔍', 'https://www.google.com/search?q=', code)
+                    console.log('已生成在线预览链接🔗')
+
+                } else {
+                    console.log('当前网站不不匹配')
+                }
+            }
+
+            javbus()
+
             break;
         case "4hu":
             css_adsRemove(imax.css._4hu);
@@ -899,46 +949,52 @@ function adsDomain_switch(x) { // 匹配参数值 执行相应函数
                 }, 1500)
             }
 
+            function javLibrary() { // 在番号详情页追加在线预览链接
 
-            xqy();
-            function xqy() {
-                setTimeout(() => { // 番号详情页添加番号搜索等操作
-                    javlibrary();
-                    if (document.querySelector('tr td.text')) {
-                        var code = document.querySelector('tr td.text').textContent;
-                        ele_dynamicAppend("#video_id > table > tbody", "onclick", "复制番号", "margin-left: 5px; margin-top: 5px; position: static; font-size: smaller !important; background: #2563eb !important; margin-right: 5px;" + "padding: 6px 6px 6px 6px; display: inline-block; color: white;z-index: 114154 !important; border-right: 6px solid #38a3fd !important; border-left: #292f33 !important; border-top: #292f33 !important; border-bottom: #292f33 !important; background: #2563eb; border-radius: 0px 0px 0px 0px; font-weight: 800 !important; text-align: right !important;", "", "javlibraryx", 3, "button")
-                        ele_dynamicAppend("#video_id > table > tbody", "target", "搜索番号", "margin-left: 5px; margin-top: 5px; position: static; font-size: smaller !important; background: #2563eb !important; margin-right: 5px;" + "padding: 6px 6px 6px 6px; display: inline-block; color: white;z-index: 114154 !important; border-right: 6px solid #38a3fd !important; border-left: #292f33 !important; border-top: #292f33 !important; border-bottom: #292f33 !important; background: #2563eb; border-radius: 0px 0px 0px 0px; font-weight: 800 !important; text-align: right !important;", "", "javlibrarysearch", 4, "a")
-                        ele_dynamicAppend("#video_id > table > tbody", "onclick", "", "", "", "copy", 2, "input");
-                        document.getElementById('copy').value = code;
-                        document.getElementById('javlibraryx').addEventListener('click', () => {
-                            copyText("copy", "javlibraryx", "复制番号")
-                        })
+                let father = document.querySelector('div#video_info')
 
-                        // 为番号搜索添加素材
+                //let code = window.location.pathname.replace('/', '')
+                let code = document.querySelectorAll('td.text')[0].textContent
 
-                        document.querySelector("#javlibrarysearch").addEventListener('click', () => {
-                            if (document.querySelector("#searchbyGoogle") || null === document.querySelector("#searchbyGoogle")) {
-                                open_googlesearch_iframe();
-                            }
-                        })
+                let url = window.location.href
+                //let regx = /[a-zA-Z]{3,5}\-\d{3,5}/i
+                let regx = /www\.javlibrary\.com\/cn\/\?v\=jav/i
 
-                        if ((/\b(gsc.tab)\b/i.test(document.location.href.toLowerCase()))) {
-                            var jav_url = document.location.href.toLowerCase();
-                            var regexp_jav = /(.*)(#gsc.*)/;
-                            var jav_url_right = jav_url.replace(regexp_jav, '$1' + "#gsc.tab=0&gsc.q=" + code + "&gsc.sort=");
-                            document.querySelector('#javlibrarysearch').href = jav_url_right;
-                            document.querySelector('#javlibrarysearch').target = '_self'
-                            console.log(jav_url_right)
-                        } else {
-                            var jav_url = document.location.href.toLowerCase();
-                            var jav_url_right = jav_url + "#gsc.tab=0&gsc.q=" + code + "&gsc.sort=";
-                            document.querySelector('#javlibrarysearch').href = jav_url_right;
-                            document.querySelector('#javlibrarysearch').target = '_self'
-                            console.log(jav_url_right)
-                        }
+                if (url.search(regx) !== -1) {
+
+                    let p = document.createElement('table')
+                    p.style = 'word-break:break-all;font-size:14px;line-height:25px;'
+                    father.insertBefore(p, father.childNodes[2])
+
+                    let span = document.createElement('td')
+                    span.className = 'header'
+                    span.textContent = '在线预览：'
+                    p.appendChild(span)
+
+                    function siteAdd(siteName, url, codeSlect) {
+                        let a = document.createElement('a')
+                        let lable = document.createElement('label')
+                        lable.style = 'font-weight:inherit;display:inline-block;max-width:100%;margin-right:10px;'
+                        a.href = url + codeSlect
+                        a.textContent = siteName
+                        a.target = '_blank'
+                        a.style = 'color:rgb(8 0 204);'
+                        lable.appendChild(a)
+                        p.appendChild(lable)
                     }
-                }, 1000)
+
+                    siteAdd('MissAV', 'https://missav.com/search', '/' + code)
+                    siteAdd('Jable', 'https://jable.tv/search', '/' + code + '/')
+                    siteAdd('Supjav', 'https://supjav.com/?s=', code)
+                    siteAdd('谷歌搜索🔍', 'https://www.google.com/search?q=', code)
+                    console.log('已生成在线预览链接🔗')
+
+                } else {
+                    console.log('当前网站不不匹配')
+                }
             }
+
+            javLibrary()
 
         case 'douban':
             if (document.querySelectorAll('a.Ims1t')[0]) {
