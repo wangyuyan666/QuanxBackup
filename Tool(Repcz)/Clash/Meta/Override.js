@@ -2,7 +2,7 @@
 //
 // Clash Verge Rev (Version ≥ 17.2) & Mihomo-Party (Version ≥ 1.5.10)
 //
-// 最后更新时间: 2024-11-17 20:45
+// 最后更新时间: 2024-11-24 21:50
 
 // 规则集通用配置
 const ruleProviderCommon = {
@@ -52,10 +52,10 @@ function main(config) {
   // 覆盖 geodata 配置
   config["geodata-mode"] = true;
   config["geox-url"] = {
-    "geoip": "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat",
+    "geoip": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip.dat",
     "geosite": "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat",
-    "mmdb": "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb",
-    "asn": "https://mirror.ghproxy.com/https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+    "mmdb": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb",
+    "asn": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb"
   };
 
   // 覆盖 sniffer 配置
@@ -166,6 +166,14 @@ function main(config) {
     },
     {
       ...groupBaseOption,
+      "name": "Spotify",
+      "type": "select",
+      "include-all": true,
+      "proxies": ["手动切换", "香港节点", "美国节点", "狮城节点", "日本节点", "台湾节点", "DIRECT"],
+      "icon": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png"
+    },
+    {
+      ...groupBaseOption,
       "name": "兜底分流",
       "type": "select",
       "proxies": ["手动切换", "香港节点", "美国节点", "狮城节点", "日本节点", "台湾节点", "DIRECT"],
@@ -221,12 +229,6 @@ function main(config) {
 
   // 覆盖规则集
   config["rule-providers"] = {
-    "AD": {
-      ...ruleProviderCommon,
-      "behavior": "classical",
-      "url": "https://github.com/Repcz/Tool/raw/X/Clash/Rules/Reject.list",
-      "path": "./rules/AD.list"
-    },
     "Apple": {
       ...ruleProviderCommon,
       "behavior": "classical",
@@ -360,7 +362,7 @@ function main(config) {
     "RULE-SET,Steam,游戏平台",
     "RULE-SET,Epic,游戏平台",
     "RULE-SET,Emby,Emby",
-    "RULE-SET,Spotify,国际媒体",
+    "RULE-SET,Spotify,Spotify",
     "RULE-SET,Bahamut,国际媒体",
     "RULE-SET,Netflix,国际媒体",
     "RULE-SET,Disney,国际媒体",
