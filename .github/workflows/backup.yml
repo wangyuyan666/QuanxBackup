@@ -190,7 +190,15 @@ jobs:
           mkdir -p "Tool(Repcz)"
           mv Repcz_Tool/* "Tool(Repcz)/"
           rm -rf Repcz_Tool     
-
+          
+      - name: Clone chxm1023_Rewrite
+        run: |
+          git clone --depth=1 https://github.com/chxm1023/Rewrite chxm1023_Rewrite
+          rm -rf "Rewrite(chxm1023)"
+          mkdir -p "Rewrite(chxm1023)"
+          mv chxm1023_Rewrite/* "Rewrite(chxm1023)/"
+          rm -rf chxm1023_Rewrite     
+          
       - name: Update timestamp
         run: echo "Backup run at $(date)" > backup-timestamp.txt
         
