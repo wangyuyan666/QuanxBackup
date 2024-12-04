@@ -198,6 +198,14 @@ jobs:
           mkdir -p "Rewrite(chxm1023)"
           mv chxm1023_Rewrite/* "Rewrite(chxm1023)/"
           rm -rf chxm1023_Rewrite     
+
+      - name: Clone GeQ1an_Rules
+        run: |
+          git clone --depth=1 -b master https://github.com/GeQ1an/Rules GeQ1an_Rules
+          rm -rf "Rules(GeQ1an)"
+          mkdir -p "RRules(GeQ1an)"
+          mv GeQ1an_Rules/* "Rules(GeQ1an)/"
+          rm -rf GeQ1an_Rules   
           
       - name: Update timestamp
         run: echo "Backup run at $(date)" > backup-timestamp.txt
