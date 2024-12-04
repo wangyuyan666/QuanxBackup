@@ -203,7 +203,7 @@ jobs:
         run: |
           git clone --depth=1 -b master https://github.com/GeQ1an/Rules GeQ1an_Rules
           rm -rf "Rules(GeQ1an)"
-          mkdir -p "RRules(GeQ1an)"
+          mkdir -p "Rules(GeQ1an)"
           mv GeQ1an_Rules/* "Rules(GeQ1an)/"
           rm -rf GeQ1an_Rules   
           
