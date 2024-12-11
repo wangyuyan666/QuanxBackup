@@ -1,5 +1,5 @@
 # 规则名称: CDN
-# 规则统计: 2784
+# 规则统计: 2787
 
 domain_set:
   - 0x0.st
@@ -337,6 +337,7 @@ domain_set:
   - cdn.axieinfinity.com
   - cdn.babylonjs.com
   - cdn.bfe.dev
+  - cdn.bigcloud.click
   - cdn.birdie.so
   - cdn.branch.io
   - cdn.britannica.com
@@ -1464,6 +1465,7 @@ domain_set:
   - safebrowsing.google.com
   - safebrowsing.googleapis.com
   - sandpack-cdn-staging.blazingly.io
+  - sandpack-cdn-v2.codesandbox.io
   - sbl.onfastspring.com
   - scdn.clerk.com
   - scontent.whatsapp.net
@@ -2014,6 +2016,7 @@ domain_suffix_set:
   - bfzypic.com
   - bigcontent.io
   - bitbucket.io
+  - bitgetimg.com
   - blackbaudcdn.net
   - bleepstatic.com
   - blob.core.windows.net
