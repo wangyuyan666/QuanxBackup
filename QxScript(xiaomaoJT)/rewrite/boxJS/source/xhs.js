@@ -27,10 +27,14 @@ let typeObj = {
 };
 let HighType = 1;
 let BerserkMode = 0;
-let MaskWords = []
+let MaskWords = [];
 $.read("HighType") ? (HighType = $.read("HighType")) : "";
 $.read("BerserkMode") ? (BerserkMode = $.read("BerserkMode")) : "";
-$.read("MaskWords") ? (MaskWords = $.read("HighType").split(',')) : "";
+$.read("MaskWords")
+  ? (MaskWords = $.read("HighType")
+      .split(",")
+      .filter((item) => item !== ""))
+  : "";
 
 // 去广告
 if (url.includes("/v1/note/imagefeed") || url.includes("/v2/note/feed")) {
@@ -220,9 +224,11 @@ if (url.includes("/v1/note/imagefeed") || url.includes("/v2/note/feed")) {
           }
 
           if (
-            !(
-              item?.type == "video" &&
-              !(MaskWords?.some(item => item?.title?.includes(item)))
+            !MaskWords?.some(
+              (ele) =>
+                item?.display_title?.includes(ele) ||
+                item?.title?.includes(ele) ||
+                item?.user?.nickname?.includes(ele)
             )
           ) {
             return {
