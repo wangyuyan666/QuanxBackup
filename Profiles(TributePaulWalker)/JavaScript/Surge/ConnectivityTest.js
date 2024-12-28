@@ -13,12 +13,12 @@ Surge:
 let $ = {
 Baidu:'https://www.baidu.com',
 Google:'https://www.google.com/generate_204',
-Youtube:'https://www.youtube.com/',
-Github:'https://www.github.com'
+Github:'https://www.github.com',
+Youtube:'https://www.youtube.com/'
 }
 
 !(async () => {
-await Promise.all([http('Baidu'),http('Google'),http('Youtube'),http('Github')]).then((x)=>{
+await Promise.all([http('Baidu'),http('Google'),http('Github'),http('Youtube')]).then((x)=>{
 	$done({
     title: '网络延迟',
     content: x.join('\n'),
