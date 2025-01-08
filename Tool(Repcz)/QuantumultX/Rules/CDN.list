@@ -1,5 +1,5 @@
 # 规则名称: CDN
-# 规则统计: 2955
+# 规则统计: 2959
 
 HOST,0x0.st,CDN
 HOST,3dna.nationbuilder.com,CDN
@@ -359,6 +359,7 @@ HOST,cdn.branch.io,CDN
 HOST,cdn.britannica.com,CDN
 HOST,cdn.bsky.social,CDN
 HOST,cdn.builder.io,CDN
+HOST,cdn.bullwhip.cloud,CDN
 HOST,cdn.buymeacoffee.com,CDN
 HOST,cdn.c1.amplience.net,CDN
 HOST,cdn.calibermind.com,CDN
@@ -1148,6 +1149,7 @@ HOST,js.memberful.com,CDN
 HOST,js.navattic.com,CDN
 HOST,js.partnerstack.com,CDN
 HOST,js.pusher.com,CDN
+HOST,js.puter.com,CDN
 HOST,js.qualified.com,CDN
 HOST,js.recurly.com,CDN
 HOST,js.short.io,CDN
@@ -1921,6 +1923,7 @@ HOST,ton.local.twitter.com,CDN
 HOST,tools-static.wmflabs.org,CDN
 HOST,topbar-static.piano.io,CDN
 HOST,torrindex.net,CDN
+HOST,tracking.inflection.io,CDN
 HOST,truth.bahamut.com.tw,CDN
 HOST,tuf-repo-cdn.sigstore.dev,CDN
 HOST,tuf-repo.github.com,CDN
@@ -2818,6 +2821,7 @@ HOST-SUFFIX,trustless-gateway.link,CDN
 HOST-SUFFIX,ttcache.com,CDN
 HOST-SUFFIX,ttl.sh,CDN
 HOST-SUFFIX,ttwstatic.com,CDN
+HOST-SUFFIX,tunnels.api.visualstudio.com,CDN
 HOST-SUFFIX,turboimg.net,CDN
 HOST-SUFFIX,twimg.com,CDN
 HOST-SUFFIX,typedoc.org,CDN
