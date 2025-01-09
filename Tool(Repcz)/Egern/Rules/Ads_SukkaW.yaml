@@ -1,5 +1,5 @@
 # 规则名称: Ads_SukkaW
-# 规则统计: 112352
+# 规则统计: 112359
 
 no_resolve: true
 domain_set:
@@ -10564,6 +10564,7 @@ domain_suffix_set:
   - analytics-gw.games.wanmei.com
   - analytics-hub.3plearning.com
   - analytics-ingestion-production.tubitv.com
+  - analytics-ingestion-v3.main-production-custom.production.k8s.tubi.io
   - analytics-ingestion.pbpms.de
   - analytics-ingestion.production-public.tubi.io
   - analytics-ingress-global.bitmovin.com
@@ -14974,7 +14975,6 @@ domain_suffix_set:
   - b.itravel.southwest.com
   - b.iwanna.southwest.com
   - b.kakoysegodnyaprazdnik.ru
-  - b.karte.io
   - b.koodomobile.com
   - b.kouke5.com
   - b.law.com
@@ -20755,6 +20755,7 @@ domain_suffix_set:
   - chulhawakened.com
   - chullohagrode.com
   - chultoux.com
+  - chumealq.com
   - chumpaufte.xyz
   - chumsaft.com
   - chunkycactus.com
@@ -22232,6 +22233,7 @@ domain_suffix_set:
   - collector.sspinc.io
   - collector.superwall.me
   - collector.szlcsc.com
+  - collector.t-idr.com
   - collector.taoxh.life
   - collector.tescocompare.com
   - collector.trendmd.com
@@ -32354,6 +32356,7 @@ domain_suffix_set:
   - dynamitedata.com
   - dynamosbakongo.shop
   - dynatrace-managed.com
+  - dynatrace.att.com
   - dynpaa.com
   - dynserv.org
   - dynspt.com
@@ -34799,6 +34802,7 @@ domain_suffix_set:
   - erbiscusysexbu.info
   - ercamj.motogp.com
   - ercoeteasacom.com
+  - ercoils.com
   - erdeallyighab.com
   - erdecisesgeorg.info
   - erdoscs.com
@@ -66417,6 +66421,7 @@ domain_suffix_set:
   - o68c.sfr.fr
   - o6b8iq9faurknd3p.k45z7tagm.com
   - o8.hyatt.com
+  - o8s.icu
   - o8zoz.icu
   - o911o.com
   - oaajylbosyndpjl.com
@@ -73385,6 +73390,7 @@ domain_suffix_set:
   - publicityclerks.com
   - publiclyphasecategory.com
   - publicsofa.com
+  - publictelemetry.tophat.com
   - publicunloadbags.com
   - publift.com
   - publipagos.com
@@ -89815,7 +89821,6 @@ domain_suffix_set:
   - static.insideradverts.com
   - static.intellectscoop.com
   - static.jampp.com
-  - static.karte.io
   - static.kellartv.com
   - static.konnectads.com
   - static.kremsondigital.com
@@ -102125,6 +102130,7 @@ domain_suffix_set:
   - twistyscash.com
   - twitob.com
   - twittad.com
+  - twitter.sx
   - twitterfollowers.site
   - twiz.wizaly.co.uk
   - twiz.wizaly.fr
@@ -110393,6 +110399,7 @@ domain_suffix_set:
   - xx3691b.com
   - xxaks01080sspao.xyz
   - xxaks01081sspao.xyz
+  - xxaks01091sspao.xyz
   - xxccdshj.com
   - xxcuhe.footway.pl
   - xxdfexbwv.top

@@ -1,5 +1,5 @@
 # 规则名称: Ads_SukkaW
-# 规则统计: 112357
+# 规则统计: 112364
 
 DOMAIN,2016.sina.cn
 DOMAIN,9ibbcq2d.sina.cn
@@ -10561,6 +10561,7 @@ DOMAIN-SUFFIX,analytics-gateway.delta.dp.lightricks.com
 DOMAIN-SUFFIX,analytics-gw.games.wanmei.com
 DOMAIN-SUFFIX,analytics-hub.3plearning.com
 DOMAIN-SUFFIX,analytics-ingestion-production.tubitv.com
+DOMAIN-SUFFIX,analytics-ingestion-v3.main-production-custom.production.k8s.tubi.io
 DOMAIN-SUFFIX,analytics-ingestion.pbpms.de
 DOMAIN-SUFFIX,analytics-ingestion.production-public.tubi.io
 DOMAIN-SUFFIX,analytics-ingress-global.bitmovin.com
@@ -14971,7 +14972,6 @@ DOMAIN-SUFFIX,b.iheart.southwest.com
 DOMAIN-SUFFIX,b.itravel.southwest.com
 DOMAIN-SUFFIX,b.iwanna.southwest.com
 DOMAIN-SUFFIX,b.kakoysegodnyaprazdnik.ru
-DOMAIN-SUFFIX,b.karte.io
 DOMAIN-SUFFIX,b.koodomobile.com
 DOMAIN-SUFFIX,b.kouke5.com
 DOMAIN-SUFFIX,b.law.com
@@ -20752,6 +20752,7 @@ DOMAIN-SUFFIX,chui.tristes.mfisswger.com
 DOMAIN-SUFFIX,chulhawakened.com
 DOMAIN-SUFFIX,chullohagrode.com
 DOMAIN-SUFFIX,chultoux.com
+DOMAIN-SUFFIX,chumealq.com
 DOMAIN-SUFFIX,chumpaufte.xyz
 DOMAIN-SUFFIX,chumsaft.com
 DOMAIN-SUFFIX,chunkycactus.com
@@ -22229,6 +22230,7 @@ DOMAIN-SUFFIX,collector.shorte.st
 DOMAIN-SUFFIX,collector.sspinc.io
 DOMAIN-SUFFIX,collector.superwall.me
 DOMAIN-SUFFIX,collector.szlcsc.com
+DOMAIN-SUFFIX,collector.t-idr.com
 DOMAIN-SUFFIX,collector.taoxh.life
 DOMAIN-SUFFIX,collector.tescocompare.com
 DOMAIN-SUFFIX,collector.trendmd.com
@@ -32351,6 +32353,7 @@ DOMAIN-SUFFIX,dynamicoxygen.com
 DOMAIN-SUFFIX,dynamitedata.com
 DOMAIN-SUFFIX,dynamosbakongo.shop
 DOMAIN-SUFFIX,dynatrace-managed.com
+DOMAIN-SUFFIX,dynatrace.att.com
 DOMAIN-SUFFIX,dynpaa.com
 DOMAIN-SUFFIX,dynserv.org
 DOMAIN-SUFFIX,dynspt.com
@@ -34796,6 +34799,7 @@ DOMAIN-SUFFIX,erb.tremblant.ca
 DOMAIN-SUFFIX,erbiscusysexbu.info
 DOMAIN-SUFFIX,ercamj.motogp.com
 DOMAIN-SUFFIX,ercoeteasacom.com
+DOMAIN-SUFFIX,ercoils.com
 DOMAIN-SUFFIX,erdeallyighab.com
 DOMAIN-SUFFIX,erdecisesgeorg.info
 DOMAIN-SUFFIX,erdoscs.com
@@ -66414,6 +66418,7 @@ DOMAIN-SUFFIX,o626b32etkg6.com
 DOMAIN-SUFFIX,o68c.sfr.fr
 DOMAIN-SUFFIX,o6b8iq9faurknd3p.k45z7tagm.com
 DOMAIN-SUFFIX,o8.hyatt.com
+DOMAIN-SUFFIX,o8s.icu
 DOMAIN-SUFFIX,o8zoz.icu
 DOMAIN-SUFFIX,o911o.com
 DOMAIN-SUFFIX,oaajylbosyndpjl.com
@@ -73382,6 +73387,7 @@ DOMAIN-SUFFIX,publicidees.com
 DOMAIN-SUFFIX,publicityclerks.com
 DOMAIN-SUFFIX,publiclyphasecategory.com
 DOMAIN-SUFFIX,publicsofa.com
+DOMAIN-SUFFIX,publictelemetry.tophat.com
 DOMAIN-SUFFIX,publicunloadbags.com
 DOMAIN-SUFFIX,publift.com
 DOMAIN-SUFFIX,publipagos.com
@@ -89812,7 +89818,6 @@ DOMAIN-SUFFIX,static.imprexis.biz
 DOMAIN-SUFFIX,static.insideradverts.com
 DOMAIN-SUFFIX,static.intellectscoop.com
 DOMAIN-SUFFIX,static.jampp.com
-DOMAIN-SUFFIX,static.karte.io
 DOMAIN-SUFFIX,static.kellartv.com
 DOMAIN-SUFFIX,static.konnectads.com
 DOMAIN-SUFFIX,static.kremsondigital.com
@@ -102122,6 +102127,7 @@ DOMAIN-SUFFIX,twistsweater.com
 DOMAIN-SUFFIX,twistyscash.com
 DOMAIN-SUFFIX,twitob.com
 DOMAIN-SUFFIX,twittad.com
+DOMAIN-SUFFIX,twitter.sx
 DOMAIN-SUFFIX,twitterfollowers.site
 DOMAIN-SUFFIX,twiz.wizaly.co.uk
 DOMAIN-SUFFIX,twiz.wizaly.fr
@@ -110390,6 +110396,7 @@ DOMAIN-SUFFIX,xx-umomfzqik.today
 DOMAIN-SUFFIX,xx3691b.com
 DOMAIN-SUFFIX,xxaks01080sspao.xyz
 DOMAIN-SUFFIX,xxaks01081sspao.xyz
+DOMAIN-SUFFIX,xxaks01091sspao.xyz
 DOMAIN-SUFFIX,xxccdshj.com
 DOMAIN-SUFFIX,xxcuhe.footway.pl
 DOMAIN-SUFFIX,xxdfexbwv.top

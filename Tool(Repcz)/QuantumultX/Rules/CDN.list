@@ -1,5 +1,5 @@
 # 规则名称: CDN
-# 规则统计: 2959
+# 规则统计: 2965
 
 HOST,0x0.st,CDN
 HOST,3dna.nationbuilder.com,CDN
@@ -595,6 +595,7 @@ HOST,cdn.zapier.com,CDN
 HOST,cdn.zeabur.com,CDN
 HOST,cdn.zhujiwiki.com,CDN
 HOST,cdn0.dan.com,CDN
+HOST,cdn0.iconfinder.com,CDN
 HOST,cdn01.jotfor.ms,CDN
 HOST,cdn02.jotfor.ms,CDN
 HOST,cdn03.jotfor.ms,CDN
@@ -602,6 +603,7 @@ HOST,cdn1.airdroid.com,CDN
 HOST,cdn1.dan.com,CDN
 HOST,cdn1.edgedatg.com,CDN
 HOST,cdn1.epicgames.com,CDN
+HOST,cdn1.iconfinder.com,CDN
 HOST,cdn1.identitymind.com,CDN
 HOST,cdn1.plesk.com,CDN
 HOST,cdn1.stamped.io,CDN
@@ -618,6 +620,7 @@ HOST,cdn2.editmysite.com,CDN
 HOST,cdn2.epicgames.com,CDN
 HOST,cdn2.ettoday.net,CDN
 HOST,cdn2.hextom.com,CDN
+HOST,cdn2.iconfinder.com,CDN
 HOST,cdn2.macpaw.com,CDN
 HOST,cdn2.onlyfans.com,CDN
 HOST,cdn2.stamped.io,CDN
@@ -627,14 +630,17 @@ HOST,cdn2.unrealengine.com,CDN
 HOST,cdn3.dan.com,CDN
 HOST,cdn3.edgedatg.com,CDN
 HOST,cdn3.hextom.com,CDN
+HOST,cdn3.iconfinder.com,CDN
 HOST,cdn3.onlyfans.com,CDN
 HOST,cdn3.stamped.io,CDN
 HOST,cdn3.sysgears.com,CDN
 HOST,cdn3.unrealengine.com,CDN
 HOST,cdn4.edgedatg.com,CDN
+HOST,cdn4.iconfinder.com,CDN
 HOST,cdn4.sysgears.com,CDN
 HOST,cdn5.edgedatg.com,CDN
 HOST,cdn5.hextom.com,CDN
+HOST,cdn5.iconfinder.com,CDN
 HOST,cdn6.aptoide.com,CDN
 HOST,cdn6.edgedatg.com,CDN
 HOST,cdn77.boyfriendtv.com,CDN
