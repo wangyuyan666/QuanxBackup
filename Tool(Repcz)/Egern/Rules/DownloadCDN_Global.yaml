@@ -179,3 +179,15 @@ domain_suffix_set:
   - storage.live.com
 domain_keyword_set:
   - epicgames-download
+- and:
+    match:
+    - domain:
+        match: ((DOMAIN-KEYWORD
+    - domain_suffix:
+        match: (DOMAIN-SUFFIX
+- and:
+    match:
+    - domain:
+        match: ((DOMAIN-KEYWORD
+    - domain:
+        match: (DOMAIN-KEYWORD
