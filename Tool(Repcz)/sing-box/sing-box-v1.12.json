@@ -11,7 +11,7 @@
             "store_fakeip": true
         },
         "clash_api": {
-            "default_mode": "Rule",
+            "default_mode": "规则模式",
             "external_controller": "127.0.0.1:9090",
             "external_ui": "ui",
             "external_ui_download_url": "https://git.repcz.link/github.com/Zephyruso/zashboard/releases/latest/download/dist.zip",
@@ -25,8 +25,8 @@
             {"tag": "remote_fakeip","type": "fakeip","inet4_range": "198.18.0.0/15","inet6_range": "fc00::/18"}
         ],
         "rules": [
-            {"clash_mode": "Direct","action": "route","server": "ali"},
-            {"clash_mode": "Global","action": "route","server": "cloudflare"},
+            {"clash_mode": "全局直连","action": "route","server": "ali"},
+            {"clash_mode": "全局代理","action": "route","server": "cloudflare"},
             {"rule_set": ["GeoSite@CN","Apple"],"action": "route","server": "ali"},
             {"query_type": ["A","AAAA"],"action": "route","server": "remote_fakeip"}
         ],
@@ -62,16 +62,16 @@
     "outbounds": [
         {"tag": "direct","type": "direct"},
         {"tag": "Proxy","type": "selector","outbounds": ["🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "direct","interrupt_exist_connections": true},
-        {"tag": "AI","type": "selector","outbounds": ["🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "direct","interrupt_exist_connections": true},
-        {"tag": "Google","type": "selector","outbounds": ["🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "direct","interrupt_exist_connections": true},
-        {"tag": "Microsoft","type": "selector","outbounds": ["🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "direct","interrupt_exist_connections": true},
-        {"tag": "Twitter","type": "selector","outbounds": ["🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "direct","interrupt_exist_connections": true},
-        {"tag": "Telegram","type": "selector","outbounds": ["🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "direct","interrupt_exist_connections": true},
-        {"tag": "Emby","type": "selector","outbounds": ["🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "direct","interrupt_exist_connections": true},
-        {"tag": "Game","type": "selector","outbounds": ["🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "direct","interrupt_exist_connections": true},
-        {"tag": "Spotify","type": "selector","outbounds": ["🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "direct","interrupt_exist_connections": true},
-        {"tag": "ProxyMedia","type": "selector","outbounds": ["🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "direct","interrupt_exist_connections": true},
-        {"tag": "Final","type": "selector","outbounds": ["Proxy","🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "direct","interrupt_exist_connections": true},
+        {"tag": "AI","type": "selector","outbounds": ["Proxy","🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan"],"default": "Proxy","interrupt_exist_connections": true},
+        {"tag": "Google","type": "selector","outbounds": ["Proxy","🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan"],"default": "Proxy","interrupt_exist_connections": true},
+        {"tag": "Microsoft","type": "selector","outbounds": ["Proxy","🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "Proxy","interrupt_exist_connections": true},
+        {"tag": "Twitter","type": "selector","outbounds": ["Proxy","🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan"],"default": "Proxy","interrupt_exist_connections": true},
+        {"tag": "Telegram","type": "selector","outbounds": ["Proxy","🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan"],"default": "Proxy","interrupt_exist_connections": true},
+        {"tag": "Emby","type": "selector","outbounds": ["Proxy","🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "Proxy","interrupt_exist_connections": true},
+        {"tag": "Game","type": "selector","outbounds": ["Proxy","🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "Proxy","interrupt_exist_connections": true},
+        {"tag": "Spotify","type": "selector","outbounds": ["Proxy","🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "Proxy","interrupt_exist_connections": true},
+        {"tag": "ProxyMedia","type": "selector","outbounds": ["Proxy","🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan"],"default": "Proxy","interrupt_exist_connections": true},
+        {"tag": "Final","type": "selector","outbounds": ["Proxy","🇭🇰 HongKong","🇺🇸 United States","🇸🇬 Singapore","🇯🇵 Japan","🇨🇳 Taiwan","direct"],"default": "Proxy","interrupt_exist_connections": true},
 
         {"tag": "🇭🇰 HongKong","type": "urltest","outbounds": [],"url": "http://1.1.1.1/generate_204","interval": "10m","tolerance": 0,"interrupt_exist_connections": false},
         {"tag": "🇺🇸 United States","type": "urltest","outbounds": [],"url": "http://1.1.1.1/generate_204","interval": "10m","tolerance": 0,"interrupt_exist_connections": false},
@@ -109,8 +109,8 @@
         "rules": [
             {"action": "sniff"},
             {"protocol": "dns","action": "hijack-dns"},
-            {"clash_mode": "Direct","action": "route","outbound": "direct"},
-            {"clash_mode": "Global","action": "route","outbound": "Proxy"},
+            {"clash_mode": "全局直连","action": "route","outbound": "direct"},
+            {"clash_mode": "全局代理","action": "route","outbound": "Proxy"},
             {"rule_set": ["Ads"],"action": "reject"},
             {"rule_set": ["AI"],"action": "route","outbound": "AI"},
             {"rule_set": ["YouTube","Google"],"action": "route","outbound": "Google"},
