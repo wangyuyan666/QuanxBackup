@@ -3,9 +3,9 @@
 项目名称：apphud合集
 下载地址：https://t.cn/A6m7WeMH
 下载地址：https://t.cn/A6WlGNDi
-更新日期：2024-12-02
-脚本作者：chxm1023
-电报频道：https://t.me/chxm1023
+更新日期：2025-03-31
+脚本作者：@ddm1023
+电报频道：https://t.me/ddm1023
 使用声明：⚠️仅供参考，🈲转载与售卖！
 
 **************************************
@@ -19,9 +19,10 @@ hostname = *.apphud.com
 *************************************/
 
 
-const chxm1023 = JSON.parse(typeof $response != "undefined" && $response.body || "{}");
+const ddm = JSON.parse(typeof $response != "undefined" && $response.body || "{}");
 
 const list = [
+  "SnipProYearly", //Snip:Removebg - 抠图换背景
   "com.newlearning.english.premium.forever",  //Excellent
   "1year7days80",  //Bright
   "com.movavi.clips.lifetime",  //Movavi
@@ -72,20 +73,20 @@ const processPaywalls = (paywalls) => {
   return subscriptions;
 };
 
-if (!chxm1023.data) chxm1023.data = {};
-if (!chxm1023.data.results) chxm1023.data.results = {};
+if (!ddm.data) ddm.data = {};
+if (!ddm.data.results) ddm.data.results = {};
 
-chxm1023.data.results.subscriptions = [];
+ddm.data.results.subscriptions = [];
 
-if (chxm1023.data.results.paywalls) {
-  const subscriptions = processPaywalls(chxm1023.data.results.paywalls);
+if (ddm.data.results.paywalls) {
+  const subscriptions = processPaywalls(ddm.data.results.paywalls);
   for (const sub of subscriptions) {
-    chxm1023.data.results.subscriptions.push(sub);
+    ddm.data.results.subscriptions.push(sub);
   }
 }
 
 for (const productId of list) {
-  chxm1023.data.results.subscriptions.push(createSubscription(productId));
+  ddm.data.results.subscriptions.push(createSubscription(productId));
 }
 
-$done({ body: JSON.stringify(chxm1023) });
+$done({ body: JSON.stringify(ddm) });
