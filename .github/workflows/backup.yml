@@ -191,13 +191,13 @@ jobs:
           mv Repcz_Tool/* "Tool(Repcz)/"
           rm -rf Repcz_Tool     
           
-      # - name: Clone chxm1023_Rewrite
-      #   run: |
-      #     git clone --depth=1 -b main https://github.com/chxm1023/Rewrite chxm1023_Rewrite
-      #     rm -rf "Rewrite(chxm1023)"
-      #     mkdir -p "Rewrite(chxm1023)"
-      #     mv chxm1023_Rewrite/* "Rewrite(chxm1023)/"
-      #     rm -rf chxm1023_Rewrite     
+      - name: Clone chxm1023_Rewrite
+        run: |
+          git clone --depth=1 -b main https://github.com/chxm1023/Rewrite chxm1023_Rewrite
+          rm -rf "Rewrite(chxm1023)"
+          mkdir -p "Rewrite(chxm1023)"
+          mv chxm1023_Rewrite/* "Rewrite(chxm1023)/"
+          rm -rf chxm1023_Rewrite     
 
       - name: Clone GeQ1an_Rules
         run: |
