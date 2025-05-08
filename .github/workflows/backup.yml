@@ -207,6 +207,14 @@ jobs:
           mv GeQ1an_Rules/* "Rules(GeQ1an)/"
           rm -rf GeQ1an_Rules   
           
+      - name: Clone WeiGiegie_666
+        run: |
+          git clone --depth=1 -b main https://github.com/WeiGiegie/666 WeiGiegie_666
+          rm -rf "666(WeiGiegie)"
+          mkdir -p "666(WeiGiegie)"
+          mv WeiGiegie_666/* "666(WeiGiegie)/"
+          rm -rf WeiGiegie_666
+          
       - name: Update timestamp
         run: echo "Backup run at $(date)" > backup-timestamp.txt
         
