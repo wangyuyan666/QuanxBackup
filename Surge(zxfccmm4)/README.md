@@ -1,119 +1,146 @@
-# 🌟 欢迎 Star 本项目
+<div align="center">
 
-如果本项目对你有帮助，请点击 [Star](https://github.com/zxfccmm4/Surge) 支持我们！ 
-<!-- GitHub stars badge -->
-![GitHub stars](https://img.shields.io/github/stars/zxfccmm4/Surge?style=social)
+# 🌟 Professional Surge Configuration Collection
+## Surge 配置文件集合
 
-## Surge 引用链接
-1. https://raw.githubusercontent.com/zxfccmm4/Surge/main/Steve_NewSurge.conf
-2. https://raw.githubusercontent.com/zxfccmm4/Surge/main/Steve_SmartGroup.conf
-3. https://raw.githubusercontent.com/zxfccmm4/Surge/main/Surge_2024.conf
-4. https://raw.githubusercontent.com/zxfccmm4/Surge/main/Surge_2024_Emoji.conf
-5. https://raw.githubusercontent.com/zxfccmm4/Surge/refs/heads/main/SurgeProMax.conf
+[![GitHub stars](https://img.shields.io/github/stars/zxfccmm4/Surge?style=social)](https://github.com/zxfccmm4/Surge)
+[![GitHub forks](https://img.shields.io/github/forks/zxfccmm4/Surge?style=social)](https://github.com/zxfccmm4/Surge)
+[![GitHub issues](https://img.shields.io/github/issues/zxfccmm4/Surge)](https://github.com/zxfccmm4/Surge/issues)
+[![GitHub license](https://img.shields.io/github/license/zxfccmm4/Surge)](https://github.com/zxfccmm4/Surge/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/zxfccmm4/Surge)](https://github.com/zxfccmm4/Surge)
 
+[English](README.md) | [简体中文](README_CN.md)
 
-以上引用链接请自行测试是否适合你的 Surge 版本。
-若你是最新版 Surge 用户直接使用第一个配置即可。
+---
 
+</div>
 
-## 其余代理工具配置（可能不会及时更新）
-### Steve_Loon
-https://raw.githubusercontent.com/zxfccmm4/Surge/refs/heads/main/Steve_Loon.conf
-### Steve_QuantumultX
-https://raw.githubusercontent.com/zxfccmm4/Surge/refs/heads/main/Steve_QuantumultX.conf
-### Steve_StashProMax
-https://raw.githubusercontent.com/zxfccmm4/Surge/refs/heads/main/StashProMax.yaml
-### Steve_egern
-https://raw.githubusercontent.com/zxfccmm4/Surge/refs/heads/main/Steve_egern.yaml
+## English
 
-## ✈️ 推荐链接
+### 📖 Project Description
 
-以下是一些推荐✈️的注册链接：
+This is a professional Surge configuration collection that provides multiple optimized configuration files for different needs. All configuration files are carefully designed with excellent proxy rules, optimized performance, and comprehensive feature support.
 
-- [WCloud](https://wcloud.me/register?aff=G0o8UOvu)
-- [在人间](https://dashboard.zrj97.xyz/#/register?code=4U6SUhR7)
-- [Tannel](https://tannel.xn--cesw6hd3s99f.com/auth/register?code=5wyV)
+### 🆕 Latest Update (2025.06.19)
 
+- ✨ **Icon System Optimization** - Completely replaced with high-quality Orz-3 and Koolson icon libraries
+- 🔄 **Rule Logic Refactoring** - Reorganized rule priorities for improved matching efficiency
+- 📋 **Policy Group Optimization** - Restructured policy groups by function for clearer logic
+- 🏠 **DNS Configuration Enhancement** - Optimized Host configuration with service-type grouping
+- 🔧 **Configuration Structure Beautification** - Added detailed comments and grouping for better maintainability
+- 📖 **Documentation Complete Upgrade** - Redesigned README with bilingual Chinese-English support
 
-## 📚 规则资源
+### ✨ Key Features
 
-项目中引用的规则资源：
+- 🔧 **Multiple Configurations** - Various configuration files for different requirements
+- 🚀 **Optimized Performance** - Carefully tuned rule priorities for best performance
+- 🎨 **Beautiful Icons** - Integrated Orz-3 and Koolson icon libraries
+- 📱 **Multi-platform Support** - Compatible with iOS, macOS and other platforms
+- 🛡️ **Security Protection** - Built-in ad blocking and malicious site protection
+- 🌐 **Smart Routing** - Intelligent routing rules based on regions and services
 
-- [ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
-- [TutuBetterRules](https://github.com/bunizao/TutuBetterRules)
-- [Surge](https://github.com/SukkaW/Surge/)
-- [TikTok-Unlock](https://github.com/Semporia/TikTok-Unlock)
-- [Profiles](https://github.com/ke1ewang/Profiles)
+### 📦 Configuration Files
 
+#### 🔥 Recommended (Latest Surge Version)
 
-## 🌄 策略图标订阅合集
+| Configuration | Description | Link |
+|--------------|-------------|------|
+| **Steve_Surge_2026.conf** | 2026 latest version, recommended | [📥 Download](https://raw.githubusercontent.com/zxfccmm4/Surge/main/Steve_Surge_2026.conf) |
+| **Steve_NewSurge.conf** | Latest optimized version | [📥 Download](https://raw.githubusercontent.com/zxfccmm4/Surge/main/Steve_NewSurge.conf) |
 
-<table>
-  <tr>
-    <td valign="top">
-      <h4>图标合集</h4>
-      <table>
-        <tr><td><strong>整合图标合集</strong></td><td><a href="https://raw.githubusercontent.com/weigeshen/-/main/TuBiao/TuBiaoDingYue.json">整合图标合集</a></td></tr>
-        <tr><td><strong>fmz200图标合集</strong></td><td><a href="https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/icons-all.json">fmz200图标合集</a></td></tr>
-        <tr><td><strong>QureColor图标合集</strong></td><td><a href="https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor.json">QureColor图标合集</a></td></tr>
-        <tr><td><strong>Quremini图标合集</strong></td><td><a href="https://raw.githubusercontent.com/Koolson/Qure/master/Other/Quremini.json">Quremini图标合集</a></td></tr>
-        <tr><td><strong>QureLight-All图标合集</strong></td><td><a href="https://github.com/Koolson/Qure/raw/master/Other/QureLight-All.json">QureLight-All图标合集</a></td></tr>
-        <tr><td><strong>离歌图标合集</strong></td><td><a href="https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/ligeicon-surge.json">离歌图标合集</a></td></tr>
-        <tr><td><strong>KeLee旗帜图标合集</strong></td><td><a href="https://gitlab.com/lodepuly/iconlibrary/-/raw/main/Flag_icon/ColorfulStaticFlag.json">KeLee旗帜图标合集</a></td></tr>
-      </table>
-    </td>
-    <td valign="top">
-      <h4>图标分类</h4>
-      <table>
-        <tr><td><strong>彩色小图标</strong></td><td><a href="https://raw.githubusercontent.com/Orz-3/mini/master/mini.json">彩色小图标</a></td></tr>
-        <tr><td><strong>Color+ 图标</strong></td><td><a href="https://raw.githubusercontent.com/Orz-3/mini/master/Color%2B.json">Color+ 图标</a></td></tr>
-        <tr><td><strong>mini Color 图标</strong></td><td><a href="https://raw.githubusercontent.com/Orz-3/mini/master/miniColor.json">mini Color 图标</a></td></tr>
-        <tr><td><strong>其它图标</strong></td><td><a href="https://raw.githubusercontent.com/Orz-3/mini/master/mini%2B.json">其它图标</a></td></tr>
-        <tr><td><strong>应用与游戏图标</strong></td><td><a href="https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-AppGame.json">应用与游戏图标</a></td></tr>
-        <tr><td><strong>归档图标</strong></td><td><a href="https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-Archived.json">归档图标</a></td></tr>
-        <tr><td><strong>地区国旗图标</strong></td><td><a href="https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-Area.json">地区国旗图标</a></td></tr>
-        <tr><td><strong>常用图标</strong></td><td><a href="https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-Common.json">常用图标</a></td></tr>
-        <tr><td><strong>默认图标</strong></td><td><a href="https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-Default.json">默认图标</a></td></tr>
-        <tr><td><strong>禁止图标</strong></td><td><a href="https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-Inhibition.json">禁止图标</a></td></tr>
-        <tr><td><strong>流媒体图标</strong></td><td><a href="https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-Media.json">流媒体图标</a></td></tr>
-        <tr><td><strong>其它图标</strong></td><td><a href="https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-Other.json">其它图标</a></td></tr>
-        <tr><td><strong>服务器图标</strong></td><td><a href="https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-Server.json">服务器图标</a></td></tr>
-        <tr><td><strong>服务图标</strong></td><td><a href="https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-Service.json">服务图标</a></td></tr>
-      </table>
-    </td>
-  </tr>
-</table>
+#### 📋 Other Versions
 
+| Configuration | Description | Link |
+|--------------|-------------|------|
+| Steve_SmartGroup.conf | Smart group version | [📥 Download](https://raw.githubusercontent.com/zxfccmm4/Surge/main/Steve_SmartGroup.conf) |
+| Surge_2024.conf | 2024 version | [📥 Download](https://raw.githubusercontent.com/zxfccmm4/Surge/main/Surge_2024.conf) |
+| Surge_2024_Emoji.conf | 2024 Emoji version | [📥 Download](https://raw.githubusercontent.com/zxfccmm4/Surge/main/Surge_2024_Emoji.conf) |
+| SurgeProMax.conf | Pro Max version | [📥 Download](https://raw.githubusercontent.com/zxfccmm4/Surge/refs/heads/main/SurgeProMax.conf) |
 
-## 🔧 模块引用
+### 🔄 Other Proxy Tools
 
-项目中使用的模块：
+| Tool | Configuration | Link |
+|------|--------------|------|
+| **Loon** | Steve_Loon.conf | [📥 Download](https://raw.githubusercontent.com/zxfccmm4/Surge/refs/heads/main/Steve_Loon.conf) |
+| **QuantumultX** | Steve_QuantumultX.conf | [📥 Download](https://raw.githubusercontent.com/zxfccmm4/Surge/refs/heads/main/Steve_QuantumultX.conf) |
+| **Stash** | StashProMax.yaml | [📥 Download](https://raw.githubusercontent.com/zxfccmm4/Surge/refs/heads/main/StashProMax.yaml) |
+| **Egern** | Steve_egern.yaml | [📥 Download](https://raw.githubusercontent.com/zxfccmm4/Surge/refs/heads/main/Steve_egern.yaml) |
 
-- [Siri](https://github.com/VirgilClyne/iRingo/raw/main/sgmodule/Siri.sgmodule)
-- [Location](https://github.com/VirgilClyne/iRingo/raw/main/sgmodule/Location.sgmodule)
-- [TestFlight](https://github.com/VirgilClyne/iRingo/raw/main/sgmodule/TestFlight.sgmodule)
-- [微博模块](https://whatshub.top/module/weiboad.module)
-- [Ali-DoH](https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Module/Spec/DoH/Moore/Ali-DoH.sgmodule)
-- [DNSPod-DoH](https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Module/Spec/DoH/Moore/DNSPod-DoH.sgmodule)
-- [All-in-One 2.x](https://raw.githubusercontent.com/bunizao/TutuBetterRules/tutu/Surge/module/All-in-One-2.x.sgmodule)
-- [SurgePro](https://raw.githubusercontent.com/bunizao/TutuBetterRules/tutu/Surge/module/SurgePro.sgmodule)
+### 🚀 Quick Start
 
+1. **Download Configuration**
+   ```
+   Copy the recommended configuration link and import it in Surge
+   ```
 
-## 🤝 感谢
+2. **Add Subscription**
+   ```
+   Find: AllServer = select, policy-path=你的订阅链接
+   Replace with your subscription URL
+   ```
 
-感谢以下项目和用户提供了宝贵的资源与支持：
+3. **Configure Custom Nodes** (Optional)
+   ```
+   Add your custom nodes in [Proxy] section
+   ```
 
-- [blackmatrix7](https://github.com/blackmatrix7) - 提供了 `ios_rule_script`。
-- [bunizao](https://github.com/bunizao) - 提供了 `TutuBetterRules` 和相关模块。
-- [SukkaW](https://github.com/SukkaW) - 提供了 `Surge` 相关资源。
-- [Semporia](https://github.com/Semporia) - 提供了 `TikTok-Unlock` 和其他图标。
-- [VirgilClyne](https://github.com/VirgilClyne) - 提供了多种模块。
-- [Orz-3](https://github.com/Orz-3) - 提供了多个图标包（包括 `mini` 系列）。
-- [Koolson](https://github.com/Koolson) - 提供了 `Qure` 系列图标包。
-- [lige47](https://github.com/lige47) - 提供了 `离歌图标集`。
-- [fmz200](https://github.com/fmz200) - 提供了 `fmz200图标合集`。
-- [weigeshen](https://github.com/weigeshen) - 提供了 `整合图标合集`。
-- [KeLee](https://gitlab.com/lodepuly/iconlibrary) - 提供了 `KeLee旗帜图标`。
+4. **Enable Configuration**
+   ```
+   Select and enable the configuration file in Surge
+   ```
 
-没有你们的资源支持，就没有这个项目的诞生！如果你有任何问题或建议，欢迎通过 [Issues](https://github.com/zxfccmm4/Surge/issues) 提交反馈。
+### 🎨 Icon Subscriptions
 
+<details>
+<summary>Click to expand icon library list</summary>
+
+#### Icon Collections
+- [Integrated Icon Collection](https://raw.githubusercontent.com/weigeshen/-/main/TuBiao/TuBiaoDingYue.json)
+- [fmz200 Icon Collection](https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/icons-all.json)
+- [QureColor Icon Collection](https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor.json)
+- [Quremini Icon Collection](https://raw.githubusercontent.com/Koolson/Qure/master/Other/Quremini.json)
+- [Lige Icon Collection](https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/ligeicon-surge.json)
+
+#### Categorized Icons
+- [Colorful Mini Icons](https://raw.githubusercontent.com/Orz-3/mini/master/mini.json)
+- [Regional Flag Icons](https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-Area.json)
+- [Streaming Media Icons](https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-Media.json)
+- [App & Game Icons](https://raw.githubusercontent.com/Koolson/Qure/master/Other/QureColor-AppGame.json)
+
+</details>
+
+### 📚 Referenced Resources
+
+This project uses the following open source resources:
+
+- [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) - Rule scripts
+- [bunizao/TutuBetterRules](https://github.com/bunizao/TutuBetterRules) - Optimized rules
+- [SukkaW/Surge](https://github.com/SukkaW/Surge/) - Surge resources
+- [Semporia/TikTok-Unlock](https://github.com/Semporia/TikTok-Unlock) - TikTok unlock
+- [Orz-3/mini](https://github.com/Orz-3/mini) - Icon library
+- [Koolson/Qure](https://github.com/Koolson/Qure) - Icon library
+
+### ⚠️ Disclaimer
+
+- This project is for educational and research purposes only
+- Please comply with local laws and regulations
+- The author assumes no responsibility
+
+### 📞 Support & Feedback
+
+- **Author**: Steve
+- **X (Twitter)**: [@St7evechou](https://twitter.com/St7evechou)
+- **Telegram Channel**: [https://t.me/st7evee](https://t.me/st7evee)
+- **Issues**: [GitHub Issues](https://github.com/zxfccmm4/Surge/issues)
+
+### 🌟 Support the Project
+
+If this project helps you, please click ⭐ Star to support us!
+
+---
+
+<div align="center">
+
+**Made with ❤️ by Steve**
+
+</div>
