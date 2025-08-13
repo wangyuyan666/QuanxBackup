@@ -16,3 +16,7 @@ payload:
   - DOMAIN-SUFFIX, npm.community
   # echarts
   - DOMAIN, echarts.apache.org
+  #
+  - DOMAIN-SUFFIX, maven.apache.org
+  #
+  - DOMAIN-SUFFIX, android.com
