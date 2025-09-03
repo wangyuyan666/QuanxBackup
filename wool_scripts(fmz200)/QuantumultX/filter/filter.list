@@ -855,7 +855,7 @@ host, ggic03.miguvideo.com, reject
 host, ggmk.miguvideo.com, reject
 host, ggadoffline.miguvideo.com, reject
 
-# > 小米米家
+# > 米家
 host, sdkconfig.ad.xiaomi.com, reject
 
 # > 芒果TV
@@ -1023,7 +1023,7 @@ host, adm3.autoimg.cn, reject
 
 
 # >>>>>>>>>>>>>>> ✅ S ✅ <<<<<<<<<<<<<<
-# > soul
+# > Soul
 host, soul-ad.soulapp.cn, reject
 host, ad-r.soulapp.cn, reject
 host, ad-reward.soulapp.cn, reject
