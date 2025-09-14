@@ -553,6 +553,11 @@ IP-CIDR6, 2402:4e00:1200:ed00:0:9089:6dac:96b6/128, REJECT, no-resolve
 # hostname = sso.ifanr.com
 ^https?:\/\/sso\.ifanr\.com\/jiong\/IOS\/appso\/splash\/ reject
 
+# > Amazon
+# hostname = api-cslp-emt.amazon.cn
+^https?:\/\/api-cslp-emt\.amazon\.cn\/gateway\/content\/widget\/popup reject-200
+^https?:\/\/api-cslp-emt\.amazon\.cn\/gateway\/recommend reject-dict
+
 # > 阿里巴巴
 # hostname = acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.fliggy\.crm\.screen\.(allresource|predict) reject-dict
@@ -849,7 +854,7 @@ IP-CIDR6, 2402:4e00:1200:ed00:0:9089:6dac:96b6/128, REJECT, no-resolve
 # hostname = js-ad.ayximgs.com
 ^https?:\/\/js-ad\.ayximgs\.com\.ad-universe-cdn\.hzhcbkj\.cn\/xgapp\.php\/v2\/top_notice reject
 
-# > csdn
+# > CSDN
 # hostname = app-gw.csdn.net, gw.csdn.net
 # 感谢【Jörgen Frecht】分享
 ^https?:\/\/app-gw\.csdn\.net\/silkroad-api\/api\/v\d\/assemble\/list\/pub\/channel\/app_open_screen_ad reject
@@ -1301,7 +1306,7 @@ http:\/\/ad\.myfriday\.cn\/d\/json\/1\.1 reject
 ^https?:\/\/m5\.amap\.com\/ws\/valueadded\/ reject
 ^https?://optimus-ads.amap.com/uploadimg/[a-zA-Z0-9]+.gif reject-200
 
-# > 谷歌
+# > Google
 # hostname = *.googleapis.com, pagead2.googlesyndication.com
 # 如开启可自行添加主机名，但似乎已不可MITM
 ^https?:\/\/.+\.googleapis.com/.+ad_break reject-img
@@ -2423,7 +2428,7 @@ https://api.rr.tv/storage/business/rootName/app/homePage\?dataType=JSON reject-d
 # 国际版Soul去广告
 ^https?:\/\/api-global\.soulapp\.me\/app\/open\/get reject
 
-# > 苏宁
+# > 苏宁易购
 # hostname = mpcs.suning.com, image.suning.com, luckman.suning.com
 ^https?:\/\/mpcs\.suning\.com\/mpcs\/dm\/getDmInfo reject
 ^https?:\/\/image\.suning\.cn\/uimg\/ma\/ad\/ reject-200
@@ -2621,7 +2626,7 @@ https://apis.lifeweek.com.cn/api/baseConfig/getIosNewConfig reject
 
 
 # >>>>>>>>>>>>>>> ✅ T ✅ <<<<<<<<<<<<<<
-# Talkatone
+# > Talkatone
 # hostname = alt-r.my.com, imgx.jampp.com
 ^https?:\/\/alt-r\.my\.com\/mobile reject-dict
 ^https?:\/\/imgx\.jampp\.com\/imgsrv\/tn reject-img
@@ -2641,7 +2646,7 @@ https://apis.lifeweek.com.cn/api/baseConfig/getIosNewConfig reject
 # 感谢【可莉】分享
 ^https?:\/\/.*\.i18n-pglstatp\.com\/obj\/ad-pattern-sg reject
 
-# > top-widget
+# > Top Widgets
 # hostname = top-widgets-api.xiaozujian.com
 ^https?:\/\/top-widgets-api\.xiaozujian\.com\/api\/ad\/config reject
 
@@ -3566,7 +3571,7 @@ http-response ^https?:\/\/www\.myusmile\.online\/user\/plaqueTopic\/selectByType
 ^https?:\/\/img\.allahall\.com\/img\/59\/6a13a75dfe46ebfdac96bd27ef098885\.jpg reject
 ^https?:\/\/app\.zhoudamozi\.com\/ad\/.+ reject-200
 
-# > 雅虎
+# > Yahoo
 # hostname = m.yap.yahoo.com
 ^https?:\/\/m\.yap\.yahoo\.com\/v\d{2}\/getAds\.do reject
 
@@ -3630,7 +3635,7 @@ http-response ^https?:\/\/www\.myusmile\.online\/user\/plaqueTopic\/selectByType
 # hostname = restapi.iyunmai.com
 ^https?:\/\/restapi\.iyunmai\.com\/api\/ios\/ad\/ reject-200
 
-# > 央视
+# > 央视网
 # hostname = www.cntv.cn
 ^https?:\/\/www\.cntv\.cn\/nettv\/adp\/ reject-200
 
@@ -3665,11 +3670,6 @@ http-response ^https?:\/\/www\.myusmile\.online\/user\/plaqueTopic\/selectByType
 # > 育学园
 # hostname = *.yuxueyuan.cn
 ^https?:\/\/.*\.yuxueyuan\.cn\/yxy-api-gateway\/api\/json\/advert\/getsAdStartScreen reject-200
-
-# > 亚马逊
-# hostname = api-cslp-emt.amazon.cn
-^https?:\/\/api-cslp-emt\.amazon\.cn\/gateway\/content\/widget\/popup reject-200
-^https?:\/\/api-cslp-emt\.amazon\.cn\/gateway\/recommend reject-dict
 
 # > 亚朵开屏
 # hostname = api2.yaduo.com
@@ -3715,6 +3715,7 @@ http:\/\/.+\.gamersky.com/.+/lists/getListElements response-body-json-jq '.listE
 
 # > 中国银行
 # hostname = mlife.jf365.boc.cn
+
 # > 中国银行 缤纷生活
 ^https?:\/\/mlife\.jf365\.boc\.cn\/AppPrj\/FirstPic\.do\?txnId=2PIC000001 reject-200
 
@@ -4105,7 +4106,7 @@ http-response ^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbpresenta
 # 消息中心
 http-response ^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.nbfriend\.message\.conversation\.list\.cn script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/cainiao/cainiao.js, requires-body=true, timeout=60, tag=菜鸟裹裹, enable={cdnngogo_enable}
 
-# > 财新
+# > 财新网
 http-response ^https?:\/\/gg\.caixin\.com\/s\?z=caixin&op=1&c=3362 script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/caixin/caixinAd.js, requires-body=true, timeout=60, tag=财新广告, enable={cdxb_enable}
 
 
