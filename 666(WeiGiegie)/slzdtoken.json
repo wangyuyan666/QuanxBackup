@@ -1,0 +1,21 @@
+{
+  "extraInfoMap": {},
+  "model": {
+    "ticket": "1759485516295vqpom",
+    "uid": 2982522,
+    "registerTime": 1759485516259,
+    "vipExpiration": "",
+    "vipLevel": 0,
+    "vip": false,
+    "vipValid": false
+  },
+  "resultMsg": "操作成功！",
+  "success": true,
+  "resultCode": "SUCCESS",
+  "resultId": null,
+  "redirectUrl": null,
+  "resultCodeBean": "SUCCESS",
+  "pickParams": {},
+  "upload_time": "2025-10-03T09:58:37.702Z",
+  "equipId": "1c61b937aef24714a16f337c85bc6100"
+}
