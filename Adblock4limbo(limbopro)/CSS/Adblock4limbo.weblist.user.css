@@ -1,0 +1,232 @@
+/* ==UserStyle==
+@name Adblock for WebList Injector
+@namespace userstyles.world
+@version 7.0
+@description Extracts element hiding rules from AdGuard filters.
+==/UserStyle== */
+/* removeAds by Adguard Filters */
+
+/* 18comic.vip */
+
+a[herf*="//"]:not([href*="comic."]) > img,
+a[href*="//"]:not([href*="comic."]) > div[style],
+a[href*="//"]:not([href*="comic."]) > img,
+a[href*="//"]:not([href*="comic."]) > img + [style],
+a[href*="//"]:not([href*="comic."]) > [style*="back"],
+#billboard-modal,
+.billboard-modal,
+body .bot-per,
+.container > div[style^="margin-bottom:"]:has(> div.col-lg-3 > div[data-exo]),
+.container > div[style^="padding:"]:has(> [data-group="content_page"]),
+.div-bf-pv,
+div[class="row"][style="display: flex;flex-wrap: wrap;"],
+div[data-group][data-width="300"],
+div[data-group^="photo_center_games_"],
+div[data-group^="skyscraper_"],
+div[data-height="250"][data-width="300"],
+div[data-height="90"][data-width="728"],
+.div_sticky2,
+div[style="position: absolute;bottom: 0px;z-index: 10;"],
+.float-right-daily,
+.float-right-image,
+#guide-modal,
+.modal-backdrop,
+.modal-body > ul.pop-list,
+.row[style="display: flex;flex-wrap: wrap;"],
+style + div[style="cursor: pointer; position: relative;"],
+.tab-content + .row:has(> div[class] > div[class] > .group-notice),
+.top-a2db,
+#wrapper > div.hidden-lg:has(> div[class*="sticky"]),
+
+/* 4hu.tv */
+
+.couplet-left,
+.wrap > div.mod > div.row > dl:has(> dt > a[target="_blank"]:not([href^="/html/"]) > img),
+
+/* 91porna.com */
+
+
+/* 91porn.com */
+
+
+/* 91porny.com */
+
+
+/* 91short.com */
+
+
+/* alicesw.com */
+
+
+/* anime1.me */
+
+
+/* avple.tv */
+
+
+/* baidu.com */
+
+
+/* bbc.com */
+
+
+/* bfdm.xyz */
+
+
+/* bi-girl.net */
+
+
+/* bing.com */
+
+
+/* cnys.tv */
+
+
+/* cupfoxapp.tv */
+
+
+/* d1skbu98kuldnf.cloudfront.net */
+
+
+/* diyibanzhu.me */
+
+
+/* dmmiku.com */
+
+
+/* dnt92ffcqr0xu.cloudfront.net */
+
+
+/* google.com */
+
+
+/* hanime1.me */
+
+
+/* hitomi.la */
+
+
+/* hltv.org */
+
+
+/* howjsay.com */
+
+
+/* huaren.live */
+
+
+/* iyf.tv */
+
+
+/* jable.tv */
+
+
+/* javbus.com */
+
+
+/* javday.app */
+
+
+/* javday.tv */
+
+
+/* javdb.com */
+
+
+/* javlibrary.com */
+
+
+/* javmost.xyz */
+
+
+/* manhuapica.com */
+
+
+/* missav.ai */
+
+
+/* missav.ws */
+
+
+/* netflav.com */
+
+
+/* njav.com */
+
+
+/* novel543.com */
+
+
+/* ntdm9.com */
+
+
+/* olevod.tv */
+
+
+/* op.gg */
+
+
+/* pornhub.com */
+
+
+/* reddit.com */
+
+
+/* reuters.com */
+
+
+/* rouman5.com */
+
+
+/* rou.video */
+
+
+/* supjav.com */
+
+
+/* t1229.btc760.com */
+
+
+/* t66y.com */
+
+
+/* techcrunch.com */
+
+
+/* ted.com */
+
+
+/* thehackernews.com */
+
+
+/* theverge.com */
+
+
+/* time.com */
+
+
+/* turbovidhls.com */
+
+
+/* tz659.com */
+
+
+/* wnacg.com */
+
+
+/* xchina.co */
+
+
+/* xiaobaotv.net */
+
+
+/* xvideos.com */
+
+
+/* yhdmp.com */
+
+ {
+    display: none !important;
+    pointer-events: none !important;
+    opacity: 0;
+}
