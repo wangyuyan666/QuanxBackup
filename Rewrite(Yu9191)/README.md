@@ -1,61 +1,51 @@
- [只有这一个号其他均是盗版](https://t.me/ios151)
+# Yu9191 / Rewrite
 
+<p align="center">
+  <a href="https://github.com/Yu9191/Rewrite"><img src="https://img.shields.io/badge/Repo-Rewrite-111827?logo=github&logoColor=white" /></a>
+  <a href="https://github.com/Yu9191"><img src="https://img.shields.io/badge/Author-Yu9191-181717?logo=github&logoColor=white" /></a>
+  <a href="https://t.me/ios151"><img src="https://img.shields.io/badge/Telegram-@ios151-26A5E4?logo=telegram&logoColor=white" /></a>
+  <a href="https://t.me/Jsforbaby"><img src="https://img.shields.io/badge/Channel-@Jsforbaby-26A5E4?logo=telegram&logoColor=white" /></a>
+</p>
 
- [目前在Tg创建了频道欢迎你的加入](https://t.me/Jsforbaby)
+<p align="center">
+  <a href="https://github.com/Yu9191/Rewrite/stargazers"><img src="https://img.shields.io/github/stars/Yu9191/Rewrite?style=flat&logo=github" /></a>
+  <a href="https://github.com/Yu9191/Rewrite/network/members"><img src="https://img.shields.io/github/forks/Yu9191/Rewrite?style=flat&logo=github" /></a>
+  <a href="https://github.com/Yu9191/Rewrite/issues"><img src="https://img.shields.io/github/issues/Yu9191/Rewrite?style=flat&logo=github" /></a>
+  <a href="https://github.com/Yu9191/Rewrite/commits/main"><img src="https://img.shields.io/github/last-commit/Yu9191/Rewrite?style=flat&logo=github" /></a>
+  <img src="https://komarev.com/ghpvc/?username=Yu9191" />
+</p>
 
-[![访问量](https://komarev.com/ghpvc/?username=Yu9191)](https://github.com/Yu9191)
-[![GitHub 关注者](https://img.shields.io/github/followers/Yu9191?style=social)](https://github.com/Yu9191)
+> **唯一账号声明：只有 Telegram [@ios151](https://t.me/ios151) 为本人，其它均为冒充。**  
+> 频道：[@Jsforbaby](https://t.me/Jsforbaby)
 
-欢迎来到我的 GitHub 仓库！在这里，您可以找到我的最新项目和贡献。
+---
 
-| 统计项   | 数量                                                                 |
-| -------- | -------------------------------------------------------------------- |
-| 总访问量 | [![总访问量](https://komarev.com/ghpvc/?username=Yu9191)](https://github.com/Yu9191) |
-| 关注者   | [![GitHub 关注者](https://img.shields.io/github/followers/Yu9191?style=social)](https://github.com/Yu9191) |
+## Overview
 
-请随意探索并为我的项目做出贡献。如果您觉得它们有用，请不要忘记给它们一个星标！
+本仓库主要存放我整理的脚本/规则集合，方便自用与分享。  
+部分内容属于历史存档，具体以仓库当前文件为准。
 
-- [GitHub 仓库](https://github.com/Yu9191)
-- 累计访客量: ![累计访客量](https://profile-counter.glitch.me/Yu9191/count.svg)
-- [星标数量](https://img.shields.io/github/stars/Yu9191/Rewrite?style=social): ![星标数量](https://img.shields.io/github/stars/Yu9191/Rewrite?style=social)
+- GitHub：<https://github.com/Yu9191>
+- 合集入口：<https://raw.githubusercontent.com/Yu9191/Rewrite/main/BabyScript.txt>
 
-## My GitHub Contributions
+---
 
-<div align="center"><img src="https://raw.githubusercontent.com/Achuan-2/Achuan-2/main/assets/github-contribution-grid-snake.svg" ></div>
+## Maintenance
 
-## My Gtihub Trohpy
+- **iTunes / RevenueCat / 旧合集：目前基本不再维护**
+- 需要更完整/持续更新的整理：**请用叮当猫的版本**
 
-<div align="center">
+---
 
-![](https://github-profile-trophy.vercel.app/?username=Yu9191)
-
-</div>
- 
-## 仓库脚本合集 没加iTunes和api.reven的 请用叮当猫的
-
-脚本链接：[点击查看脚本](https://raw.githubusercontent.com/Yu9191/Rewrite/main/BabyScript.txt)
-
-最后更新时间：2024.3.28
-
-## iTunes 合集
-
-总共有 17 个软件在这个合集中。
-
-脚本链接：[点击查看脚本](https://raw.githubusercontent.com/Yu9191/Rewrite/main/iTunes.js)
-
-最后更新时间：2023.10.19
-
-## Revenuecat 合集
-
-总共有 11 个软件在这个合集中。
-
-脚本链接：[点击查看脚本](https://raw.githubusercontent.com/Yu9191/Rewrite/main/Revenuecat.js)
-
-最后更新时间：2023.10.5最新
-
-**请注意：** 这两个合集只包含iTunes和Revenuecat域名的软件。脚本仅供学习，请勿传播或售卖。如果您需要其他域名的软件，请查看仓库中的其他合集。
-
-后续的iTunes软件，移步到 [这个链接](https://github.com/Yu9191/Rewrite/tree/main/itunes)。
+## Repo Map
 
 
 
+```mermaid
+flowchart TD
+  A[Rewrite / Rules / Rewrite] --> B[按域名/功能分类]
+  A --> C[合集入口 BabyScript.txt]
+  A --> D[历史存档区域]
+  B --> E[常用规则片段]
+  B --> F[脚本模块]
+  D --> G[iTunes / RevenueCat 旧合集（已停更）]
