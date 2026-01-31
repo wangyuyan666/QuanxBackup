@@ -1109,7 +1109,7 @@ function boom() {
 window.body_build = function body_build(x) { // 判断导航显示与否
 
 
-    navCheck()
+    //navCheck()
 
     if (typeof initFloatingNav == 'function') {
         setTimeout(() => {
