@@ -1,26 +1,26 @@
 {
-  "token": "9175bab03dbc9fb107bf835e0907da69",
-  "updateTime": "2026/3/16 08:34:59",
+  "token": "c7106f14a1205db225c0be07599e2e5e",
+  "updateTime": "2026/3/16 11:35:00",
   "vip": {
     "vip1": {
       "status": true,
-      "expireTime": "2026/3/16 09:34:51",
-      "expireTimestamp": 1773624891
+      "expireTime": "2026/3/16 12:34:51",
+      "expireTimestamp": 1773635691
     },
     "vip2": {
-      "status": true,
-      "expireTime": "2026/3/16 09:34:56",
-      "expireTimestamp": 1773624896
+      "status": false,
+      "expireTime": "未开通",
+      "expireTimestamp": 0
     },
     "vip3": {
       "status": true,
-      "expireTime": "2026/3/16 09:35:00",
-      "expireTimestamp": 1773624900
+      "expireTime": "2026/3/16 12:35:01",
+      "expireTimestamp": 1773635701
     },
     "vip4": {
       "status": true,
-      "expireTime": "2026/3/16 09:35:05",
-      "expireTimestamp": 1773624905
+      "expireTime": "2026/3/16 12:35:06",
+      "expireTimestamp": 1773635706
     }
   }
 }
