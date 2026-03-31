@@ -27,8 +27,8 @@ let obj = JSON.parse(body);
 if (obj.data && obj.data.record) {
     let record = JSON.parse(obj.data.record);
 
-    record.money = "99999999999999999999999999999999999";//金币
-    record.zuanShi = 99999;//钻石💎改多会封号😭
+    record.money = "9999999999999999";//金币
+    record.zuanShi = 9999;//钻石💎改多会封号😭
 
     obj.data.record = JSON.stringify(record);
 }
