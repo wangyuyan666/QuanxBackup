@@ -5,16 +5,16 @@
 #
 # 以 '#' 或 '//' 开头的配置文件行为注释行
 #
-# Mihomo Version ≥ 1.8.4
+# Mihomo Version ≥ 1.19.23
 #
-# 最后更新时间: 2025-02-27 23:00
+# 最后更新时间: 2026-04-15 22:00
 #
 # ================
 
 mixed-port: 65222 # HTTP(S) 和 SOCKS 代理混合端口
 tcp-concurrent: true # TCP 并发连接所有 IP, 将使用最快握手的 TCP
 allow-lan: false # 允许局域网连接
-ipv6: true # 开启 IPv6 总开关，关闭阻断所有 IPv6 链接和屏蔽 DNS 请求 AAAA 记录
+ipv6: false # 开启 IPv6 总开关，关闭阻断所有 IPv6 链接和屏蔽 DNS 请求 AAAA 记录
 log-level: info # 日志等级 silent/error/warning/info/debug
 
 hosts:
@@ -23,13 +23,11 @@ hosts:
 dns:
   enable: true
   listen: :65223 # 开启 DNS 服务器监听
-  ipv6: true # false 将返回 AAAA 的空结果
+  ipv6: false # false 将返回 AAAA 的空结果
   use-hosts: true # 查询 hosts
   enhanced-mode: redir-host
+  default-nameserver: [1.1.1.1]
   nameserver: [8.8.4.4, 1.1.1.1]
-
-rules:
-  - MATCH,DIRECT
 
 listeners: #搭建代理节点
 
@@ -44,5 +42,6 @@ listeners: #搭建代理节点
     masquerade: "https://bing.com"
     alpn:
     - h3
+    # openssl req -x509 -nodes -newkey ec:<(openssl ecparam -name prime256v1) -keyout /root/mihomo/server.key -out /root/mihomo/server.crt -subj "/CN=bing.com" -days 36500 && sudo chown mihomo /root/mihomo/server.key && sudo chown mihomo /root/mihomo/server.crt
     certificate: ./server.crt
     private-key: ./server.key
