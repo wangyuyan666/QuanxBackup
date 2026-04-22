@@ -1,0 +1,7 @@
+//2025/10/18
+#Name：xTerm256调试解锁🔓会员
+#Author：怎么肥事
+#使用方法：打开重写进软件恢复购买
+^https:\/\/buy\.itunes\.apple\.com\/verifyReceipt url jsonjq-response-body '.receipt.in_app[].expires_date_ms = "4092599349000" | .latest_receipt_info[].expires_date_ms = "4092599349000" | .pending_renewal_info[].auto_renew_status = "1"'
+
+hostname = buy.itunes.apple.com
