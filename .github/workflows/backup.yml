@@ -215,6 +215,14 @@ jobs:
           mv WeiGiegie_666/* "666(WeiGiegie)/"
           rm -rf WeiGiegie_666
           
+      - name: Clone ZenmoFeiShi_Qx
+        run: |
+          git clone --depth=1 -b main https://github.com/ZenmoFeiShi/Qx
+          rm -rf "Qx(ZenmoFeiShi)"
+          mkdir -p "Qx(ZenmoFeiShi)"
+          mv ZenmoFeiShi_Qx/* "Qx(ZenmoFeiShi)/"
+          rm -rf ZenmoFeiShi_Qx
+          
       - name: Update timestamp
         run: echo "Backup run at $(date)" > backup-timestamp.txt
         
