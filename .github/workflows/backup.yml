@@ -217,7 +217,7 @@ jobs:
           
       - name: Clone ZenmoFeiShi_Qx
         run: |
-          git clone --depth=1 -b main https://github.com/ZenmoFeiShi/Qx
+          git clone --depth=1 -b main https://github.com/ZenmoFeiShi/Qx ZenmoFeiShi_Qx
           rm -rf "Qx(ZenmoFeiShi)"
           mkdir -p "Qx(ZenmoFeiShi)"
           mv ZenmoFeiShi_Qx/* "Qx(ZenmoFeiShi)/"
