@@ -3,6 +3,8 @@ import { modifyCards } from "../handlers/cards.mjs";
 import { modifyMediaList } from "../handlers/mediaList.mjs";
 import { modifyMediaPlay, notifyMediaPlay } from "../handlers/mediaPlay.mjs";
 import { modifyPingConfig } from "../handlers/pingConfig.mjs";
+import { modifyPosts } from "../handlers/posts.mjs";
+import { modifyStaticJs } from "../handlers/staticAssets.mjs";
 import { modifyUserInfo } from "../handlers/userInfo.mjs";
 import { decryptResponse, encryptResponse, safeJson } from "../utils/crypto.mjs";
 
@@ -11,6 +13,7 @@ function pickHandler(url) {
 	if (/\/api\/app\/media\/play/.test(url)) return modifyMediaPlay;
 	if (/\/api\/app\/media\/(home|short\/hot)/.test(url)) return modifyMediaList;
 	if (/\/api\/app\/card\/(promotion|list|advance\/status)/.test(url)) return modifyCards;
+	if (/\/api\/app\/post\/(detail|list|pay|rent\/check)/.test(url)) return modifyPosts;
 	if (/\/api\/app\/user\/info/.test(url)) return modifyUserInfo;
 	if (/\/api\/app\/login\/guest/.test(url)) return modifyUserInfo;
 	return null;
@@ -46,6 +49,14 @@ export async function Response($request, $response, settings) {
 	const url = $request.url || "";
 	Console.group(`Response ${url}`);
 	try {
+		if (/\/js\/index-Dg2qL6uR\.\d+\.js/.test(url)) {
+			const body = modifyStaticJs($response.body);
+			if (body) {
+				$response.body = body;
+				Console.info("已补丁跳过默认启动页");
+				return $response;
+			}
+		}
 		const handler = pickHandler(url);
 		if (!handler) {
 			Console.debug("无匹配 handler，body 原样返回");
