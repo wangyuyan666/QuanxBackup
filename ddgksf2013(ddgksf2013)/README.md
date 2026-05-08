@@ -46,7 +46,7 @@
 		<td > 1</td> <td > 哔哩哔哩广告净化</td> <td ><a href="https://ddgksf2013.top/rewrite/BiliBiliAds.conf"><em>BilibiliVip.conf</em></a></td><td>ddgksf2013</td>
     </tr>	
 	<tr>
-		<td > 2 </td> <td > Spotify会员 </td> <td ><a href="https://github.com/ddgksf2013/Rewrite/raw/master/UnlockVip/Spotify.conf"><em>SpotifyPro.conf</em></a></td><td>app2smile</td>
+		<td > 2 </td> <td > Spotify会员 </td> <td ><a href="https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.conf"><em>SpotifyPro.conf</em></a></td><td>app2smile</td>
     </tr>
 	<tr>
 		<td > 3</td> <td > 墨鱼专属VIP </td> <td ><a href="https://github.com/ddgksf2013/dev/raw/master/ForOwnUse.conf"><em>ForOwnUse.conf</em></a></td><td>ddgksf2013</td>
