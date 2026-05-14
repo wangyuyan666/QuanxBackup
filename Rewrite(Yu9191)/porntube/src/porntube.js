@@ -1,55 +1,40 @@
 // porntube.cool / 91porn family VIP 解锁
-// 适用 v2.* CDN 池上所有同源站点，加密 CryptoJS AES passphrase "xxx"
-import { $app, Console, done } from "@nsnanocat/util";
-import { Request } from "./process/Request.mjs";
+// API response-body 入口
+import { $app, Console, done, notification } from "@nsnanocat/util";
 import { Response } from "./process/Response.mjs";
 import { resolveSettings } from "./utils/settings.mjs";
 
-let requestResult = $request;
-let responseResult;
-let responseMode = false;
-
-function getScriptResponse() {
-	try {
-		return typeof $response !== "undefined" ? $response : undefined;
-	} catch {
-		return undefined;
-	}
+function finish($response) {
+	const status = $response.status || $response.statusCode || 200;
+	const headers = { ...($response.headers || {}) };
+	delete headers["Content-Encoding"];
+	delete headers["content-encoding"];
+	delete headers["Content-Length"];
+	delete headers["content-length"];
+	delete headers["Transfer-Encoding"];
+	delete headers["transfer-encoding"];
+	const body = $response.body || "";
+	const out = body ? { status, headers, body } : { status, headers };
+	return done(out);
 }
 
-!(async () => {
-	const scriptResponse = getScriptResponse();
-	if (scriptResponse) {
-		responseMode = true;
-		const settings = resolveSettings();
-		Console.logLevel = settings.logLevel;
-		responseResult = await Response($request, scriptResponse, settings);
-		return;
-	}
-	({ $request: requestResult, $response: responseResult } = await Request($request));
+function notifyError(e) {
+	const msg = e?.message || String(e || "未知错误");
+	notification(
+		"Porntube 解锁脚本异常",
+		"请进群反馈并附带当前日志截图",
+		`错误: ${msg}`,
+		{ open: "https://t.me/GithubYu9191" },
+	);
+}
+
+(async () => {
+	const settings = resolveSettings();
+	Console.logLevel = settings.logLevel;
+	return finish(await Response($request, $response, settings));
 })()
-	.catch(e => Console.error(e))
-	.finally(() => {
-		switch (typeof responseResult) {
-			case "object":
-				if (responseResult.headers?.["Content-Encoding"]) responseResult.headers["Content-Encoding"] = "identity";
-				if (responseResult.headers?.["content-encoding"]) responseResult.headers["content-encoding"] = "identity";
-				if ($app === "Quantumult X" || responseMode) {
-					if (!responseResult.status) responseResult.status = 200;
-					delete responseResult.headers?.["Content-Length"];
-					delete responseResult.headers?.["content-length"];
-					delete responseResult.headers?.["Transfer-Encoding"];
-					done(responseResult);
-				} else {
-					done({ response: responseResult });
-				}
-				break;
-			case "undefined":
-				done(requestResult);
-				break;
-			default:
-				Console.error(`[porntube] bad $response type: ${typeof responseResult}`);
-				done({});
-				break;
-		}
+	.catch(e => {
+		Console.error(`[porntube] ${e?.stack || e?.message || e}`);
+		notifyError(e);
+		done({});
 	});

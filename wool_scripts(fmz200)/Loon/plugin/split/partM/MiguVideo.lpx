@@ -19,5 +19,22 @@ DOMAIN, ggmk.miguvideo.com, REJECT
 DOMAIN, ggadoffline.miguvideo.com, REJECT
 
 
+[Rewrite]
+^https?:\/\/ggc\.miguvideo\.com\/v1\/iflyad\/deliverysystem\/direct\/ reject-img
+^https?:\/\/public-deliver9\.miguvideo\.com\/deliver\/site\/batchMatch\/mergeSpot\/miguvideo\/ reject-dict
+^https?:\/\/recommend-dy\.miguvideo\.com\/recommend-dynamic\/dataSource\/v1\/recommend\/merge reject-dict
+^https?:\/\/app-sc\.miguvideo\.com\/app-management\/v1\/staticcache\/settings\/miguvideo\/SHARE_PIC reject-dict
+^https?:\/\/common-sc\.miguvideo\.com\/videoActivity\/activityList\/ reject-dict
+#^https?:\/\/display-sc\.miguvideo\.com\/display\/v3\/static\/PERSONAL_CENTER\/ reject-dict
+^https?:\/\/ggx.+\.miguvideo\.com\/request\/sdk.+[^?]*$ reject-dict
+^https?:\/\/ggic\d+.miguvideo\.com\/ad\/ reject-dict
+
+
 [Script]
 http-response ^https?:\/\/display-sc\.miguvideo\.com\/display\/v3\/static\/PERSONAL_CENTER$ script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/refs/heads/main/Scripts/miguvideo/miguvideo_ads.js, requires-body=true, timeout=60, tag=咪咕视频个人中心去广告
+
+
+
+
+[MITM]
+hostname = ggc.miguvideo.com, public-deliver9.miguvideo.com, display*-sc.miguvideo.com, recommend-dy.miguvideo.com, app-sc.miguvideo.com, common-sc.miguvideo.com, ggx*.miguvideo.com, ggic*.miguvideo.com

@@ -17,24 +17,26 @@ let mod_rsp = rsp_body;
 try {
   mod_rsp = JSON.parse(rsp_body);
   
-  // 开启“翻译”按钮
-  if (req_url.includes("/HomeTimeline") || req_url.includes("/TweetDetail")) {
-    // 递归函数：寻找推文对象并开启翻译开关
-    // 深度递归修改函数
+  // 开启"翻译"按钮 - 仅处理首页信息流
+  if (req_url.includes("/HomeTimeline")) {
     const processTweet = (node) => {
       if (!node || typeof node !== 'object') return;
 
-      // 1. 寻找推文主体（包含 __typename 且类型为 Tweet 的对象）
+      // 寻找推文主体（包含 __typename 且类型为 Tweet 的对象）
       if (node.__typename === "Tweet" || node.__typename === "TweetWithVisibilityResults") {
         let tweetData = node.tweet || node.result || node;
 
         // 强制开启翻译开关
-        tweetData.is_translatable = true;
+        // 非中文 & 非未知语言 → 强制开启翻译
+        // zh = 中文, zxx = 未知/纯链接, und = 未确定
+        const lang = tweetData.legacy?.lang;
+        if (lang && lang !== "zh" && lang !== "zxx" && lang !== "und") {
+          tweetData.is_translatable = true;
+        }
 
-        // 2. 修改 legacy 字段中的语种
-        // 提示：如果你的推文是中文，将其改为 "en" 才会触发浏览器的翻译按钮显示
-        if (tweetData.legacy?.lang !== "zh") {
-          tweetData.legacy.lang = "en";
+        // 开启 Grok 翻译可用性
+        if (tweetData.grok_translated_post_with_availability) {
+          tweetData.grok_translated_post_with_availability.is_available = true;
         }
       }
 
@@ -47,7 +49,7 @@ try {
     };
 
     processTweet(mod_rsp.data);
-    console.log(`✅开启翻译按钮执行完成`);
+    console.log(`✅HomeTimeline开启翻译按钮执行完成`);
   }
 
   // "顶部标签页" - 返回固定的 PinnedTimelines 数据

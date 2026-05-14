@@ -35,8 +35,7 @@ davsdmpk_enable = switch,true,false,tag=大众点评-脚本开关
 
 [Script]
 # 开屏广告
-http-response ^https?:\/\/img\.meituan\.net\/dpmobile\/ script-path=https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/dianping.js, requires-body=true, timeout=60, tag=大众点评, enable={davsdmpk_enable}
-http-response ^https?:\/\/img\.meituan\.net\/goodsawardpic\/\w+\.(?!gif)\w+$ script-path=https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/dianping.js, requires-body=true, timeout=60, tag=大众点评, enable={davsdmpk_enable}
+http-response ^https?:\/\/img\.meituan\.net\/(?>dpmobile|goodsawardpic)\/ script-path=https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/dianping.js, requires-body=true, timeout=60, tag=大众点评, enable={davsdmpk_enable}
 http-response ^https?:\/\/ddplus\.meituan\.net\/v\d\/mss_\w+\/picassovc script-path=https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/dianping.js, requires-body=true, timeout=60, tag=大众点评, enable={davsdmpk_enable}
 
 

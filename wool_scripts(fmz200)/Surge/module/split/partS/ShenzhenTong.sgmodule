@@ -3,8 +3,12 @@
 #!author=奶思
 #!category=奶思的模块
 #!homepage=https://github.com/fmz200/wool_scripts
-#!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Surge/module/split/partS/ShenzhenTong.sgmodule
+#!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Surge/module/split/partS/ShenZhenTong.sgmodule
 #!tg-channel=https://t.me/inaisi
+
+[Rule]
+# 微信小程序, REJECT
+DOMAIN-SUFFIX,wxsnsdythumb.wxs.qq.com,REJECT
 
 [Map Local]
 ^https?:\/\/ecard\.shenzhentong\.com\/wxweb\/bwxppub2\/QryAdvertList\.do data-type=text data=" " status-code=200

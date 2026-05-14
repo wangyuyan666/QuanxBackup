@@ -8,6 +8,11 @@
 #!date=
 #############################################
 
+[Rule]
+# 微信小程序, REJECT
+DOMAIN-SUFFIX,wxsnsdythumb.wxs.qq.com, REJECT
+
+
 [Rewrite]
 ^https?:\/\/ecard\.shenzhentong\.com\/wxweb\/bwxppub2\/QryAdvertList\.do reject-200
 

@@ -1,3 +1,6 @@
+import { Console } from "@nsnanocat/util";
+import { decompress } from "fzstd";
+
 export function getHeader(headers, name) {
 	const key = Object.keys(headers || {}).find(k => k.toLowerCase() === name.toLowerCase());
 	return key ? headers[key] : "";
@@ -13,6 +16,14 @@ function toUint8Array(v) {
 	if (v instanceof Uint8Array) return v;
 	if (typeof ArrayBuffer !== "undefined" && v instanceof ArrayBuffer) return new Uint8Array(v);
 	if (Array.isArray(v)) return new Uint8Array(v);
+	// QX/Egern 不解 zstd 时 body 是 latin1 binary string（一 char = 一字节）
+	if (typeof v === "string") {
+		const b64 = base64ToUint8Array(v);
+		if (b64 && isZstd(b64)) return b64;
+		const u = new Uint8Array(v.length);
+		for (let i = 0; i < v.length; i++) u[i] = v.charCodeAt(i) & 0xff;
+		return u;
+	}
 	if (typeof v === "object") {
 		if (v.bytes) return toUint8Array(v.bytes);
 		if (v.data) return toUint8Array(v.data);
@@ -25,6 +36,21 @@ function toUint8Array(v) {
 	return null;
 }
 
+function base64ToUint8Array(s) {
+	const text = String(s || "").trim();
+	if (!/^KLUv[+/]/.test(text)) return null;
+	try {
+		if (typeof atob === "function") {
+			const bin = atob(text);
+			const u = new Uint8Array(bin.length);
+			for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i) & 0xff;
+			return u;
+		}
+		if (typeof Buffer !== "undefined") return new Uint8Array(Buffer.from(text, "base64"));
+	} catch {}
+	return null;
+}
+
 function utf8(bytes) {
 	try {
 		return new TextDecoder("utf-8").decode(bytes);
@@ -33,39 +59,45 @@ function utf8(bytes) {
 	}
 }
 
-async function loadFzstd() {
-	if (typeof globalThis.fzstd !== "undefined") return globalThis.fzstd;
-	try {
-		if (typeof fetch !== "function") return null;
-		const r = await fetch("https://cdn.jsdelivr.net/npm/fzstd@0.1.1/umd/index.js");
-		const code = await r.text();
-		Function(code).call(globalThis);
-		return globalThis.fzstd || null;
-	} catch {
-		return null;
-	}
+function looksApiText(s) {
+	return /^\s*(\{|\[|")/.test(s || "");
+}
+
+function describeBody(v) {
+	if (v == null) return String(v);
+	const tag = Object.prototype.toString.call(v);
+	const len = typeof v === "string" ? v.length : v.byteLength || v.length || 0;
+	const ctor = v && v.constructor && v.constructor.name || "";
+	return `${tag} ctor=${ctor} len=${len}`;
 }
 
 // 试图把 $response.body 解成 utf8 文本，遇到 zstd 按需加载 fzstd 解压
 export async function decodeResponseText($response) {
 	const body = $response.body;
-	// 已是文本：JSON 通常以 { 开头，HTML 以 < 开头，AES base64 以字母开头。
-	if (typeof body === "string" && body.length) {
-		const c0 = body.charCodeAt(0);
-		if (c0 !== 0x28) return body; // 非 zstd magic 直接用
-	}
-	const bytes = toUint8Array($response.bodyBytes) || (typeof body === "string" ? null : toUint8Array(body));
-	if (!bytes || !bytes.length) return typeof body === "string" ? body : null;
-
 	const enc = (getHeader($response.headers, "content-encoding") || "").toLowerCase();
-	if (!enc.includes("zstd") && !isZstd(bytes)) return utf8(bytes);
+	Console.debug(`响应体: body=${describeBody(body)} bodyBytes=${describeBody($response.bodyBytes)} 压缩=${enc || "无"}`);
+	if (typeof body === "string" && body.length && looksApiText(body)) {
+		Console.debug("响应体已是明文 JSON");
+		return body;
+	}
 
-	const z = await loadFzstd();
-	if (!z) return null;
+	const bytes = toUint8Array($response.bodyBytes) || toUint8Array(body);
+	Console.debug(`二进制检测: ${bytes ? bytes.length : 0} bytes, zstd=${isZstd(bytes) ? "是" : "否"}`);
+	if (!bytes || !bytes.length) return typeof body === "string" ? body : null;
+	const text = utf8(bytes);
+	if (looksApiText(text)) {
+		Console.debug("按 UTF-8 转换后是 JSON");
+		return text;
+	}
+	if (!isZstd(bytes)) return text || (typeof body === "string" ? body : null);
+
 	try {
-		const out = (z.decompress || z.decompressSync).call(z, bytes);
-		return utf8(out);
-	} catch {
+		const out = decompress(bytes);
+		const text = utf8(out);
+		Console.debug(`zstd 解压成功: ${out && out.length || 0} bytes`);
+		return text;
+	} catch (e) {
+		Console.error(`zstd 解压失败: ${e?.message || e}`);
 		return null;
 	}
 }

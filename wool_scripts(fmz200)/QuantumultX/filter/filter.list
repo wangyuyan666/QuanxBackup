@@ -2047,7 +2047,8 @@ host-suffix, dl.wan.sogoucdn.com, reject
 ;host-keyword, business-cdn.shouji.sogou.com, reject
 host-suffix, push-service-ios.sginput.qq.com, reject
 
-# > 深圳通微信小程序
+# > 深圳通
+# 微信小程序
 host-suffix, wxsnsdythumb.wxs.qq.com, reject
 
 # > 收钱吧
