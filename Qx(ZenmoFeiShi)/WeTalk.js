@@ -1,4 +1,4 @@
-//2026/04/27
+//2026/06/02
 /*
 @Name：WeTalk 自动化签到+视频奖励
 @Author：TG@ZenMoFiShi
@@ -242,8 +242,12 @@ function buildHeaders(capture, ua) {
   delete headers[':authority']; delete headers[':method']; delete headers[':path']; delete headers[':scheme'];
   headers['Host'] = API_HOST;
   headers['Accept'] = headers['Accept'] || 'application/json';
-  Object.keys(headers).forEach(k => { if (k.toLowerCase() === 'user-agent') delete headers[k]; });
+  Object.keys(headers).forEach(k => {
+    const lk = k.toLowerCase();
+    if (lk === 'user-agent' || lk === 'connection' || lk === 'proxy-connection' || lk === 'keep-alive') delete headers[k];
+  });
   headers['User-Agent'] = ua;
+  headers['Connection'] = 'close';
   return headers;
 }
 
@@ -261,8 +265,15 @@ function runAccount(acc, index, total) {
   const headers = buildHeaders(acc.capture, ua);
   const msgs = [tag];
 
-  function fetchApi(path) {
-    return $task.fetch({ url: buildUrl(path, acc.capture), method: 'GET', headers });
+  function fetchApi(path, retry) {
+    retry = (retry === undefined) ? 3 : retry;
+    return $task.fetch({ url: buildUrl(path, acc.capture), method: 'GET', headers }).catch(err => {
+      const m = (err && (err.error || String(err))) || '';
+      if (retry > 0 && /stream closed|SSL|SSLSessionState|reset|timeout|closed|EOF|connection/i.test(m)) {
+        return new Promise(r => setTimeout(r, 1200)).then(() => fetchApi(path, retry - 1));
+      }
+      return Promise.reject(err);
+    });
   }
 
   function doVideoLoop(count) {
