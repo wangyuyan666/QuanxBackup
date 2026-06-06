@@ -1,10 +1,10 @@
 /******************************
   
-# 脚本功能：小蓝视频——解锁—金币视频—VIP视频-净化广告
-# 特别说明：必须开启HTTP抓包，并且关闭其他脚本
+# 脚本功能：小蓝视频———解锁———金币视频———VIP视频
+# 特别说明：必须开启HTTP抓包,并且关闭其他的脚本
 # 特别说明：捕获成功后，点击通知即可观看
 # 脚本作者：彭于晏💞
-# 更新时间：2026-6-6
+# 更新时间：2026-6-2
 # TG反馈群：https://t.me/plus8889
 # TG频道群：https://t.me/py996
 # 使用声明：此脚本仅供学习与交流，请勿转载与贩卖！⚠️⚠️⚠️
@@ -14,25 +14,25 @@
 
 [rewrite_local]
 
+
 ^https?:\/\/[^\/]+\/pwa\.php\/api\/ url script-response-body https://raw.githubusercontent.com/89996462/Quantumult-X/main/ghs/xlspad.js
 
 [filter-local]
 
-^https?:\/\/api-dc-prod-008\.cyou\/ - reject
+^https?:\/\/ap\.dc-report\.cc\/ - reject
 
-^https?:\/\/api-dc2-prod-08\.cyou\/ - reject
+^https?:\/\/api-dc-prod-002\.cyou\/ - reject
+
+^https?:\/\/api-dc2-prod-02\.cyou\/ - reject
 
 ^https?:\/\/[^\/]+\/upload_01\/ads\/ - reject
 
 [mitm]
 
-hostname = p4.bnxidvdqw.cc, *.bnxidvdqw.cc, api.tsxtvams.com, *.tsxtvams.com, new.ebrgxi.cn, *.ebrgxi.cn, tp7.ebrgxi.cn, new.wpzatg.cn, *.wpzatg.cn, tp3.wpzatg.cn, wyyl-120play.rnhqeo.cn, 10play.ujnuvx.cn
+hostname = p1.ceogberj.cc, *.ceogberj.cc, api3.caanrrim.cc, *.caanrrim.cc, new.iajckz.cn, *.iajckz.cn, tp5.iajckz.cn, tp6.iajckz.cn, tp7.iajckz.cn, 120play.*.cn, long.*.cn, *.wpyxbxt.cn, h5play.*.com, *.fipxor.cn
 
 
 *******************************/
-
-
-// hls-noad v1
 var CryptoJS;
 (function () {
   var g = typeof globalThis !== "undefined" ? globalThis : this;
@@ -43,7 +43,6 @@ var CryptoJS;
   }
 })();
 
-// 小蓝视频 PWA 去广告 v1 — 抓包 2026-06-06-134236 / Dndj7SUT.js 校验
 const AES_KEY = "cc88ddc9357ff461e08f047aedee692b";
 const AES_IV = "e89225cfbbimgkcu";
 const SIGN_SALT = "cc88ddc9357ff461e08f047aedee692b";
@@ -111,6 +110,64 @@ function isAdItem(item) {
   return false;
 }
 
+function buildFullPlayUrl(preview) {
+  if (!preview) return "";
+  var url = String(preview)
+    .replace(/:\/\/([^\/:@]+)-120play\./i, "://$1-long.")
+    .replace(/:\/\/120play\./i, "://long.")
+    .replace(/[?&]seconds=\d+/gi, "")
+    .replace(/[?&]via_m=[^&]*/gi, "")
+    .replace(/\?&/, "?")
+    .replace(/[?&]$/, "");
+  if (url.indexOf("via_m=") < 0) {
+    url += (url.indexOf("?") >= 0 ? "&" : "?") + "via_m=xblue";
+  }
+  return url;
+}
+
+function unlockMvItem(item) {
+  if (!item || typeof item !== "object") return;
+  if (item.preview_video === undefined && item.play_url === undefined && item.coins === undefined) return;
+  if (item.preview_video) {
+    if (!item.play_url) item.play_url = buildFullPlayUrl(item.preview_video);
+    item.preview_video = "";
+  } else if (item.play_url && /seconds=\d+/i.test(item.play_url)) {
+    item.play_url = buildFullPlayUrl(item.play_url);
+  }
+  if (item.is_pay !== undefined) item.is_pay = 1;
+  if (item.is_free !== undefined) item.is_free = 1;
+  if (item.web_free !== undefined) item.web_free = 1;
+  if (item.status !== undefined) item.status = 1;
+  if (item.preview_tip !== undefined) item.preview_tip = "";
+  if (item.coins !== undefined && item.coins > 0) item.coins = 0;
+}
+
+function unlockUserItem(user) {
+  if (!user || typeof user !== "object") return;
+  if (user.is_vip !== undefined) user.is_vip = 1;
+  if (user.vip_level !== undefined) user.vip_level = 1;
+  if (user.coins !== undefined) user.coins = 99999;
+  if (user.expired_at !== undefined) user.expired_at = Math.floor(Date.now() / 1000) + 86400 * 365;
+  if (user.role_type !== undefined) user.role_type = "vip";
+}
+
+function unlockVideo(node) {
+  if (!node || typeof node !== "object") return;
+  if (Array.isArray(node)) {
+    for (var i = 0; i < node.length; i++) unlockVideo(node[i]);
+    return;
+  }
+  if (node.detail && typeof node.detail === "object") unlockMvItem(node.detail);
+  if (node.user && typeof node.user === "object") unlockUserItem(node.user);
+  unlockMvItem(node);
+  unlockUserItem(node);
+  var keys = Object.keys(node);
+  for (var j = 0; j < keys.length; j++) {
+    if (keys[j] === "sign" || keys[j] === "crypt") continue;
+    unlockVideo(node[keys[j]]);
+  }
+}
+
 function stripAds(node) {
   if (Array.isArray(node)) {
     for (var i = node.length - 1; i >= 0; i--) {
@@ -163,6 +220,7 @@ function processBody(body) {
     var payload = JSON.parse(plain);
     stripAds(payload);
     if (payload.data) stripAds(payload.data);
+    unlockVideo(payload);
     wrapper.data = encryptPayload(JSON.stringify(payload));
     if (wrapper.timestamp === undefined) {
       wrapper.timestamp = Math.floor(Date.now() / 1000);
