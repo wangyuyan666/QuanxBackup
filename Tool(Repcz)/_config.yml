@@ -1,11 +1,1 @@
 theme: jekyll-theme-architect
-
-# GitHub Pages 配置
-# 搜索页部署在 https://repcz.github.io/Tool/
-baseurl: /Tool
-url: https://repcz.github.io
-
-# 不处理 docs/ 目录中的文件（由 search_index.json 驱动）
-exclude:
-  - docs/search_index.json
-  - scripts/
