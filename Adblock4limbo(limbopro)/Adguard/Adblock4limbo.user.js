@@ -40,6 +40,7 @@
 // @match        https://bf.bfdm.xyz/*
 // @match        https://cnys.tv/*
 // @match        https://bi-girl.net/*
+// @match        https://8marketcap.com/*
 // @match        https://jable.tv/*
 // @match        https://en.jable.tv/*
 // @match        https://*.jable.tv/*
@@ -379,6 +380,7 @@ var adsMax = {
         /* @media (min-width:640px){.sm\\:hidden{margin:6px 0 0;padding:0;display:flex !important}} */
         missav: "a[href^='https://theporndude.com'],a[href*='mycomic'],a[href*=myavlive],[href*='bit.ly'],[href*='bit.ly'][target=_blank],a[href*='/vip'],img[src*='.gif'],iframe,#a[href*='//bit.ly/'],div[style*='z-index: 1001'],ul.space-y-2.mb-4.ml-4.list-disc.text-nord14,div.space-y-5.mb-5,div.under_player,div[style=\"width: 300px; height: 250px;\"]{display:none !important;pointer-events:none !important}body{overflow-x:hidden}", //  MissAV
         bigirl: 'div#container + div, h4.adblock_title,div.adblock_subtitle,[class^=\'adblock\'],div[class^=\'ad_\'], .toppage_av {display:none !important; pointer-events: none !important;}', // https://bi-girl.net/
+        marketcap: '.ad-tr {display:none !important; pointer-events: none !important;}', // https://8marketcap.com/
         opgg: ".AdSense,  div[data-ad], tr.ad, #banner-container, section[class*='md:hidden'] {display:none !important; pointer-events: none !important;}",
         btc760: ".ad_img,.ad_img,#ad_headerbanner {display:none !important; pointer-events: none !important;}", // btc760
         dnfcloudfront: "div.van-swipe__track,div.swiper-wrapper,div.van-count-down,div[class*=mine-ad],div.van-overlay, div[role=dialog], iframe {display:none !important; pointer-events:none important;}", // cloudfront mdsp
@@ -460,6 +462,7 @@ function values() {
         'dmm.co.jp',
         "missav",
         "bi-girl",
+        "marketcap",
         "op.gg",
         "t1229.btc760.com",
         "d1skbu98kuldnf.cloudfront.net",
@@ -1927,8 +1930,14 @@ function adsDomain_switch(x) { // 匹配参数值 执行相应函数
         case 'alicesw':
             css_adsRemove(adsMax.css.alicesw, 100, 'alicesw');
             break;
+            
         case 'bi-girl': // bigirl
             css_adsRemove(adsMax.css.bigirl, 500, 'bigirl')
+            js_adsRemove(uBlockOrigin.noevalif);
+            break;
+
+            case 'marketcap': // marketcap
+            css_adsRemove(adsMax.css.marketcap, 500, 'bigirl')
             js_adsRemove(uBlockOrigin.noevalif);
             break;
 
