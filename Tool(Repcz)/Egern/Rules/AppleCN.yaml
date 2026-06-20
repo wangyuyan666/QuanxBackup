@@ -1,5 +1,5 @@
 # 规则名称: AppleCN
-# 规则统计: 165
+# 规则统计: 166
 
 domain_set:
   - api.smoot.apple.cn
@@ -110,6 +110,7 @@ domain_suffix_set:
   - itunes-apple.com.akadns.net
   - itunes.apple.com
   - itunesconnect.apple.com
+  - mensura.cdn-apple.com
   - mesu-cdn.apple.com.akadns.net
   - mesu-china.apple.com.akadns.net
   - mesu.apple.com

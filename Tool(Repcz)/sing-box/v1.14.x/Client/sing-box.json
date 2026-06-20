@@ -129,16 +129,6 @@
             "access_control_allow_private_network": true
         }
     ],
-    "experimental": {
-        "cache_file": {
-            "enabled": true,
-            "store_fakeip": true
-        },
-        "clash_api": {
-            "default_mode": "规则模式",
-            "external_controller": "127.0.0.1:9090"
-        }
-    },
     "inbounds": [
         {
             "type": "mixed",

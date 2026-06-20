@@ -1,5 +1,5 @@
 # 规则名称: AppleCN
-# 规则统计: 165
+# 规则统计: 166
 
 HOST,api.smoot.apple.cn,AppleCN
 HOST,appleintelligencefeedback.care.apple.com,AppleCN
@@ -108,6 +108,7 @@ HOST-SUFFIX,is5.mzstatic.com,AppleCN
 HOST-SUFFIX,itunes-apple.com.akadns.net,AppleCN
 HOST-SUFFIX,itunes.apple.com,AppleCN
 HOST-SUFFIX,itunesconnect.apple.com,AppleCN
+HOST-SUFFIX,mensura.cdn-apple.com,AppleCN
 HOST-SUFFIX,mesu-cdn.apple.com.akadns.net,AppleCN
 HOST-SUFFIX,mesu-china.apple.com.akadns.net,AppleCN
 HOST-SUFFIX,mesu.apple.com,AppleCN

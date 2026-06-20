@@ -1,5 +1,5 @@
 # 规则名称: AppleCN
-# 规则统计: 165
+# 规则统计: 166
 
 DOMAIN,api.smoot.apple.cn
 DOMAIN,appleintelligencefeedback.care.apple.com
@@ -108,6 +108,7 @@ DOMAIN-SUFFIX,is5.mzstatic.com
 DOMAIN-SUFFIX,itunes-apple.com.akadns.net
 DOMAIN-SUFFIX,itunes.apple.com
 DOMAIN-SUFFIX,itunesconnect.apple.com
+DOMAIN-SUFFIX,mensura.cdn-apple.com
 DOMAIN-SUFFIX,mesu-cdn.apple.com.akadns.net
 DOMAIN-SUFFIX,mesu-china.apple.com.akadns.net
 DOMAIN-SUFFIX,mesu.apple.com
