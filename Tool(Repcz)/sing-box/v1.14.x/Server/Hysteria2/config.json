@@ -58,6 +58,16 @@
                 "enabled": true,
                 "server_name": "your_server_ip",
                 "certificate_provider": "ip_cert"
+            },
+            "masquerade": {
+                "type": "string",
+                "status_code": 200,
+                "headers": {
+                    "Content-Type": [
+                        "text/html"
+                    ]
+                },
+                "content": "<!DOCTYPE html><title>OK</title><p>Service is running.</p>"
             }
         }
     ],
