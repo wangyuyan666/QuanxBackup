@@ -2,7 +2,8 @@
 //
 // Clash Verge Rev (Version ≥ 17.2) & Mihomo-Party (Version ≥ 1.5.10)
 //
-// 最后更新时间: 2026-6-13 15:00
+// 最后更新时间: 2026-6-21 13:00
+
 
 // 规则集通用配置
 const ruleProviderCommon = {
@@ -49,10 +50,10 @@ function main(config) {
   // 覆盖 geodata 配置
   config["geodata-mode"] = true;
   config["geox-url"] = {
-    "geoip": "https://git.repcz.link/raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip.dat",
-    "geosite": "https://git.repcz.link/github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat",
-    "mmdb": "https://git.repcz.link/raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb",
-    "asn": "https://git.repcz.link/raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb"
+    "geoip": "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip.dat",
+    "geosite": "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat",
+    "mmdb": "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb",
+    "asn": "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb"
   };
 
   // 覆盖 sniffer 配置
