@@ -38,6 +38,16 @@
                 // openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/sing-box/bing.key -out /etc/sing-box/bing.crt -subj "/C=US/CN=www.bing.com" > /dev/null 2>&1
                 "certificate_path": "/etc/sing-box/bing.crt",
                 "key_path": "/etc/sing-box/bing.key"
+            },
+            "masquerade": {
+                "type": "string",
+                "status_code": 200,
+                "headers": {
+                    "Content-Type": [
+                        "text/html"
+                    ]
+                },
+                "content": "<!DOCTYPE html><title>OK</title><p>Service is running.</p>"
             }
         }
     ],
