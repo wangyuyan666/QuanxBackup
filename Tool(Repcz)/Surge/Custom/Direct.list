@@ -1,4 +1,4 @@
-# 2025-04-14
+# 2026-06-25 09:57:16
 
 # > NTP
 # AND,((DEST-PORT,123),(PROTOCOL,UDP))
@@ -12,9 +12,6 @@ DOMAIN-SUFFIX,test-ipv6.com
 # > Goodnotes
 DOMAIN,api.goodnotescloud.com
 DOMAIN-SUFFIX,goodnotesapp.com.cn
-
-# > subhd.tv
-DOMAIN-SUFFIX,subhd.tv
 
 # > pianyuan.org
 DOMAIN-SUFFIX,pianyuan.org
