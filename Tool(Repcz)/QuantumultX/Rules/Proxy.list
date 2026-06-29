@@ -1,5 +1,5 @@
 # 规则名称: Proxy
-# 规则统计: 17541
+# 规则统计: 17543
 
 HOST,api.avax.network,Proxy
 HOST,api.revenuecat.com,Proxy
@@ -3354,6 +3354,7 @@ HOST-SUFFIX,cloudinsights.com,Proxy
 HOST-SUFFIX,cloudlive.com,Proxy
 HOST-SUFFIX,cloudlock.com,Proxy
 HOST-SUFFIX,cloudmagic.com,Proxy
+HOST-SUFFIX,cloudns.net,Proxy
 HOST-SUFFIX,cloudproxy.app,Proxy
 HOST-SUFFIX,cloudrobotics.com,Proxy
 HOST-SUFFIX,cloudvolumes.com,Proxy
@@ -3892,6 +3893,7 @@ HOST-SUFFIX,deps.info,Proxy
 HOST-SUFFIX,derekhsu.homeip.net,Proxy
 HOST-SUFFIX,derpibooru.org,Proxy
 HOST-SUFFIX,desc.se,Proxy
+HOST-SUFFIX,desec.io,Proxy
 HOST-SUFFIX,desertbmw.com,Proxy
 HOST-SUFFIX,design-seeds.com,Proxy
 HOST-SUFFIX,designers-artists.com,Proxy

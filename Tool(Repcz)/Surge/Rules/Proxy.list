@@ -1,5 +1,5 @@
 # 规则名称: Proxy
-# 规则统计: 17559
+# 规则统计: 17561
 
 DOMAIN,api.avax.network
 DOMAIN,api.revenuecat.com
@@ -3354,6 +3354,7 @@ DOMAIN-SUFFIX,cloudinsights.com
 DOMAIN-SUFFIX,cloudlive.com
 DOMAIN-SUFFIX,cloudlock.com
 DOMAIN-SUFFIX,cloudmagic.com
+DOMAIN-SUFFIX,cloudns.net
 DOMAIN-SUFFIX,cloudproxy.app
 DOMAIN-SUFFIX,cloudrobotics.com
 DOMAIN-SUFFIX,cloudvolumes.com
@@ -3892,6 +3893,7 @@ DOMAIN-SUFFIX,deps.info
 DOMAIN-SUFFIX,derekhsu.homeip.net
 DOMAIN-SUFFIX,derpibooru.org
 DOMAIN-SUFFIX,desc.se
+DOMAIN-SUFFIX,desec.io
 DOMAIN-SUFFIX,desertbmw.com
 DOMAIN-SUFFIX,design-seeds.com
 DOMAIN-SUFFIX,designers-artists.com

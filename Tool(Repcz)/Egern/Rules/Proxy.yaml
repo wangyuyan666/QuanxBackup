@@ -1,5 +1,5 @@
 # 规则名称: Proxy
-# 规则统计: 17541
+# 规则统计: 17543
 
 no_resolve: true
 domain_set:
@@ -3357,6 +3357,7 @@ domain_suffix_set:
   - cloudlive.com
   - cloudlock.com
   - cloudmagic.com
+  - cloudns.net
   - cloudproxy.app
   - cloudrobotics.com
   - cloudvolumes.com
@@ -3895,6 +3896,7 @@ domain_suffix_set:
   - derekhsu.homeip.net
   - derpibooru.org
   - desc.se
+  - desec.io
   - desertbmw.com
   - design-seeds.com
   - designers-artists.com
