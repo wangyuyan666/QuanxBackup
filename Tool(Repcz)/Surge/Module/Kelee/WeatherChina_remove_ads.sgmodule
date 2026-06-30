@@ -1,0 +1,11 @@
+#!name=中国天气去广告
+#!desc=移除开屏广告、弹窗广告、横幅广告，移除焦点视频、精简我的页面。\n@可莉🅥
+#!category=⚙️ ▸ Kelee Mode
+#!URL=https://kelee.one/Tool/Loon/Lpx/WeatherChina_remove_ads.lpx
+#!date=2026-06-30 21:38:58
+
+[Map Local]
+^https:\/\/tqtdata\.weathercn\.com\/forestbox\/getVideoListApp\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% tqtdata.weathercn.com

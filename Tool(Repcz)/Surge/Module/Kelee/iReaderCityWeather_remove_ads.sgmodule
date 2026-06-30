@@ -1,0 +1,12 @@
+#!name=天气预报去广告
+#!desc=移除开屏广告、弹窗广告、横幅广告、悬浮挂件，精简我的页面。\n@可莉🅥
+#!category=⚙️ ▸ Kelee Mode
+#!URL=https://kelee.one/Tool/Loon/Lpx/iReaderCityWeather_remove_ads.lpx
+#!date=2026-06-30 19:41:51
+
+[Rule]
+DOMAIN,adsys.nineton.cn,REJECT,extended-matching,pre-matching
+DOMAIN,adcdn.ccqyj.com,REJECT,extended-matching,pre-matching
+
+[Map Local]
+^http:\/\/weatherapi\.ccqyj\.com\/server\/listsv\d$ data-type=text data="{\"data\":[{\"title\":\"小工具\",\"type\":1,\"sort\":1,\"id\":\"5d5fb7c41a0c40015679a3e3\",\"list\":[{\"title\":\"主题皮肤\",\"groupId\":\"5d5fb7c41a0c40015679a3e3\",\"image\":\"http://cdn.weather.nineton.cn/b52be26ae06f6824d171375d0dac51f1.png\",\"dark_icon\":\"http://cdn.weather.nineton.cn/e714ad6421965c8368ca6af438acde36.png\",\"type\":1,\"protocol\":\"ntweather://opentheme\",\"sort\":1103,\"version\":814,\"rightVersion\":0,\"symbol\":1}]}],\"code\":1,\"info\":\"ok\"}" status-code=200 header="Content-Type:application/json"

@@ -1,0 +1,18 @@
+#!name=天猫校园去广告
+#!desc=移除广告配置、开屏广告、弹窗广告、AI助手、促销模块，精简我的页面。\n@可莉🅥
+#!category=⚙️ ▸ Kelee Mode
+#!URL=https://kelee.one/Tool/Loon/Lpx/TmallCampus_remove_ads.lpx
+#!date=2026-06-30 18:13:11
+
+[Body Rewrite]
+http-response-jq ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.tmall\.kangaroo\.core\.service\.route\.fixrespagerecommend\/ 'delpaths([["data","resultValue","data","normal-banner-resource-code"],["data","resultValue","data","feeds-channel-code"]])'
+http-response-jq ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.tmall\.campus\.guide\.app\.userprofile\.framework\.v\d\/ 'del(.data.memberBenefit, .data.memberBenefitNew) | .data.moduleSorts |= map(select(. != "memberBenefit" and . != "memberBenefitNew"))'
+
+[Map Local]
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.tmall\.campus\.guide\.advertising\.config\.list\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.tmall\.campus\.ai\.agent\.assistant\.settings\.get\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.tmall\.campus\.guide\.delivering\.recall\.general\.data\.query\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.tmall\.campus\.guide\.app\.home\.pop\.get\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% acs.m.taobao.com

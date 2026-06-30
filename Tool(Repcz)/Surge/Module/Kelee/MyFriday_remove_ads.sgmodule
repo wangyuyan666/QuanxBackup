@@ -1,0 +1,9 @@
+#!name=超级课程表去广告
+#!desc=移除开屏广告、首页头图、悬浮挂件。\n@可莉🅥
+#!category=⚙️ ▸ Kelee Mode
+#!URL=https://kelee.one/Tool/Loon/Lpx/MyFriday_remove_ads.lpx
+#!date=2026-06-30 17:11:12
+
+[Rule]
+DOMAIN,ad.myfriday.cn,REJECT,extended-matching,pre-matching
+IP-CIDR,182.92.244.70/32,REJECT,no-resolve,pre-matching

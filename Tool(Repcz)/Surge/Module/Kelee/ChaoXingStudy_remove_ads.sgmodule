@@ -1,0 +1,19 @@
+#!name=学习通去广告
+#!desc=移除开屏广告、横幅推广，精简校园补给站频道。\n@可莉🅥
+#!category=⚙️ ▸ Kelee Mode
+#!URL=https://kelee.one/Tool/Loon/Lpx/ChaoXingStudy_remove_ads.lpx
+#!date=2026-06-30 19:09:23
+
+[Body Rewrite]
+http-response-jq ^https:\/\/learn\.chaoxing\.com\/apis\/service\/appConfig\? 'delpaths([["data","ad"]])'
+http-response-jq ^https:\/\/apps\.chaoxing\.com\/apis\/home\/getHpXsqy\.jspx\? '.data.list |= map(select(.pid == 4 or .pid == 44)) | .data.list_xsqy |= map(select(.pid == 4 or .pid == 44)) | .data.list_xysqbj |= map(select(.pid == 4 or .pid == 44)) | .data.lanmu |= map(select(.id == 4 or .id == 44))'
+http-response-jq ^https:\/\/apps\.chaoxing\.com\/apis\/home\/getHpXsqy\.jspx\? 'delpaths([["data","list_timeapp"]])'
+
+[Map Local]
+^https:\/\/home-yd\.chaoxing\.com\/apis\/data\/getAdsRecommend\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/home-yd\.chaoxing\.com\/apis\/banner\/getConfigInfoForXsqy\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/groupyd2\.chaoxing\.com\/apis\/activity\/getActivitys_attention\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/appswh\.chaoxing\.com\/apis\/activity\/getNoteTopicList\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% learn.chaoxing.com, home-yd.chaoxing.com, apps.chaoxing.com, groupyd2.chaoxing.com, appswh.chaoxing.com
