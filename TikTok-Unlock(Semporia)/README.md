@@ -1,286 +1,118 @@
-# iPhone （免拔卡）解锁 TikTok + 换区 + 发布视频 + 直播 + 点赞评论
+
+
+# TikTok-Unlock (免拔卡解鎖 TikTok)
+
+TikTok 無需拔卡解鎖，最新支援 iPhone & iPad。支援地區切換、影片發佈、Live 直播、點讚評論、私信聊天等完整功能！
 
 > 目录
 
-* [TikTok](#TikTok)
 * [準備工作](#準備工作)
 * [Quantumult X](#Quantumult-X)
 * [Loon](#Loon)
 * [Surge](#Surge)
 * [Shadowrocket](#Shadowrocket)
-* [抓包降级](#抓包降级)
 * [抖音無法觀看](#抖音)
-* [抖音IP代理](#抖音IP代理)
 
 ---
 
-### <a id="TikTok"> TikTok </a>
+> **🎉 最新版本更新說明：**
 
-* iOS系统版本：26.0  （支持向下兼容）
-* TikTok Version : 41.6.0（前置操作：从 [iTunes for Windows V 12.6.5.3](https://secure-appldnld.apple.com/itunes12/091-87820-20180912-69177170-B085-11E8-B6AB-C1D03409AD2A5/iTunesSetup.exe) 抓包 TikTok Version 21.1.0 安装，登陆后观看视频、直播、评论、点赞、发布视频等模块都正常使用后，再从 App Store 升级至最新版方可使用！）
-* iTunes 歷史版本: [下載鏈接直達蘋果官網](https://www.theiphonewiki.com/wiki/ITunes)
-* TikTok TestFlight
-* 下载方式：在 美区/日区/台区 App Store 搜索 TikTok 并下载 （港区已停止运营）
-  
-  * 支持功能：
-  
-  - [x] 换区
-  - [x] 看视频
-  - [x] 发布视频
-  - [x] 点赞
-  - [x] 评论
-  - [x] TikTok直播
+> **現在無需下載歷史版本，且無需進行 HTTPS 解密 (MitM)！**
 
-### <a id="準備工作"> 準備工作 </a>
+> **您只需直接在 App Store 下載最新版 TikTok，搭配代理工具的「分流規則 (Rule / 節點)」即可正常使用。**
 
-- App Store 下载 TikTok
-  
-  * 美区/日区/台区/韩区等 Apple ID、密码 自备
-- 自备 Quantumult X｜Loon｜Surge｜Shadowrocket
-  
-  * 可在美区/日区等 App Store 获取
-- 自备代理，ss/ssr/vmess等
+> **⚠️ 唯一前提：您的代理節點 IP 必須原生支援解鎖 TikTok。**
 
 ---
 
-**特别说明**
+## <a id="📌 準備工作"> 📌 準備工作 </a>##
 
-1. 为什么要先卸载 TikTok，TikTok 会在第一次使用时触发限制，并导致之后无法通过 MiMt 解密。
-2. 所以先配置好规则之后，然后在下载 TikTok，减少重定向的请求次数，降低风险，延长规则的寿命。
-3. 为什么配置好之后还是无法使用，请检查软件的证书有没有安装，信任。
-4. 或者是 Https 解密（MiMt）与重写（Rewrite）有没有开启。
-5. 或者是软件是不是盗版，比如用共享 ID 下载的，有设备限制，是无法使用重写脚本功能的。
-
-<span style="color:red">**如安装商店最新版本，则直接使用规则分流即可访使用TikTok。**</span>
-
----
-
-### <a id="Quantumult-X"> Quantumult X </a>
-
-**关于换区**
-
-* 解锁并换区：将`CN`改为想看的国家/地区的2位`大写`英文简写，
-  
-  * 在`HTTP复写`中，将`CN`的替换值改为`SG`、`MO`、`TW`等即可换区
-
-**操作步骤**
-
-1、打开`Quantumult X`
-
-2、开启**MitM**并**信任**Quantumult X证书：
-
-* `设置` → `MitM` → 开启`MitM` → `生成密钥及证书` → 右上角点`保存` → `允许`安装描述文件 → `关闭` → 前往手机的`设置`，不在Quantumult X了 → 看到`已下载描述文件` → `安装` → 输入手机的解锁密码 → `安装` → `安装` → 前往手机的`设置` → `通用` → `关于本机` → `证书信任设置` → 找到`Quantumult X Custom Root Certificate…`点绿它以信任该根证书 → `继续`
-
-**方法一：**
-
-3、配置文件点击`编辑`找到`[rewrite_remote]`添加下面对应国家的复写
-
-**日本**
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Quantumult-X/TikTok-JP.conf, tag=TikTok, update-interval=86400, opt-parser=false, enabled=true
-```
-
-**台湾**
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Quantumult-X/TikTok-TW.conf, tag=TikTok, update-interval=86400, opt-parser=false, enabled=true
-```
-
-**韩国**
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Quantumult-X/TikTok-KR.conf, tag=TikTok, update-interval=86400, opt-parser=false, enabled=true
-```
-
-**美国**
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Quantumult-X/TikTok-US.conf, tag=TikTok, update-interval=86400, opt-parser=false, enabled=true
-```
-
-**方法二：**
-
-3、在`[rewrite_local]`中添加以下重写
-
-```
-(?<=_region=)CN(?=&) url 307 KR
-(?<=&mcc_mnc=)4 url 307 2
-^(https?:\/\/(tnc|dm)[\w-]+\.\w+\.com\/.+)(\?)(.+) url 302  $1$3
-(?<=\d\/\?\w{7}_\w{4}=)1[6-9]..(?=.?.?&) url 307 17
-```
-
-3.1、在`[mitm]`中添加
-
-```
-hostname = *.tiktokv.com, *.byteoversea.com, *.tik-tokapi.com
-```
-
-4、找到`[filter_remote]`添加下句分流(无论使用方法一或是方法二，此分流都需要添加！)
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Quantumult-X/TikTok.list, tag=TikTok, force-policy=TikTok, update-interval=86400, opt-parser=false, enabled=true
-```
-
-5、换区：在[rewrite_local]中添加下句重写，并将`CN`改为想看的国家/地区的2位`大写`英文简写 JP（日本）｜KR（韩国）｜UK（英国）｜US（美国）｜TW（台湾）
-
-```
-(?<=_region=)CN(?=&) url 307 CN
-```
-
-6、开启Quantumult X：前往Quantumult X的主页 → 找到`TikTok`策略 → 长按添加`节点` → TikTok愉快
+1. **下載 TikTok 最新版**：
+   - 請自備美區、日區、台區、韓區等非中國大陸區的 Apple ID。
+   - 在 App Store 搜尋並直接下載最新版 TikTok。
+2. **準備工具**：
+   - 自備 Quantumult X、Loon、Surge 或 Shadowrocket (小火箭) 等 iOS 代理工具。
+3. **準備解鎖節點（核心）**：
+   - 您的代理節點（SS / SSR / Vmess / Trojan 等）必須**支援 TikTok**（即原生 IP 或機場有提供特別優化的路線）。
 
 ---
 
-### <a id="Loon"> Loon </a>
+## 🚀 核心原理與換區說明
 
-**操作步骤**
+當前最新版本的 TikTok 解鎖機制已大幅簡化。只要您的代理節點本身支援 TikTok ，就**不需要**再進行繁瑣的 MitM 憑證安裝和 URL 重寫 (Rewrite)。
 
-[一鍵安裝](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/Semporia/TikTok-Unlock/refs/heads/master/Loon/TikTok.plugin)
-
-1、打开`Loon`
-
-2、点击`插件`在右上角找到`➕`进去在URL添加想看的对应国家链接,tag处自定义；PROXY 选择TikTok分流策略即可。
-
-**日本**
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Loon/TikTok-JP.plugin
-```
-
-**台湾**
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Loon/TikTok-TW.plugin
-```
-
-**韩国**
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Loon/TikTok-KR.plugin
-```
-
-**美国**
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Loon/TikTok-US.plugin
-```
-
-3、在`[Remote Rule]`下面添加TikTok分流规则，示例如下：
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Loon/TikTok.list, tag=TikTok, policy=TikTok, update-interval=86400, enabled=true
-```
+🌍 **關於地區切換**：
+由於現在完全依賴節點本身來解鎖，您在 TikTok 上看到的地區內容，將**直接取決於您所使用的節點 IP 所在國家/地區**。
+- 想看 **日本區** TikTok 👉 請將策略切換至 **日本節點**
+- 想看 **美國區** TikTok 👉 請切換至 **美國節點**
+- 想看 **台灣區** TikTok 👉 請切換至 **台灣節點**
 
 ---
 
-### <a id="Surge"> Surge </a>
+## 🛠 分流配置教學
 
-**操作步骤**
+以下提供主流代理工具的「分流規則」配置方法，只需將 TikTok 的流量引導至支援解鎖的節點即可。
 
-1、打开`Surge`
-
-2、点击`模块`进去添加想看国家的对应模块。
-
-**日本**
-
+### <a id="Quantumult-X"> Quantumult X </a> ###
+1、打開 Quantumult X 進入設定。
+2、在 資源-分流 中添加 TikTok 分流規則：
 ```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Surge/TiKTok-JP.sgmodule
+https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Quantumult-X/TikTok.list
 ```
 
-**台湾**
+3、開啟 Quantumult X 即可愉快使用。
 
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Surge/TiKTok-TW.sgmodule
-```
+### <a id="Loon"> Loon </a> ###
 
-**韩国**
-
+1、打開 Loon 進入設定。
+2、在 `[Remote Rule]` (遠端規則) 下方添加 TikTok 分流規則：
 ```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Surge/TiKTok-KR.sgmodule
+https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Loon/TikTok.list
 ```
 
-**美国**
+3、確保該策略組內選中了支援解鎖的節點。
 
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Surge/TiKTok-US.sgmodule
-```
+### <a id="Surge"> Surge </a> ###
 
-3、添加以下`分流`
-
+1、打開 Surge。
+2、在「規則 (Rule)」中添加以下分流，並指向對應的策略組：
 ```
 https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Surge/TikTok.list
 ```
 
----
+### <a id="Shadowrocket"> Shadowrocket </a> ###
 
-### <a id="Shadowrocket"> Shadowrocket </a>
-
-**操作步骤**
-
-1、打开`Shadowrocket`
-
-2、开启**HTTPS解密**并**安装、信任**Shadowrocket证书：
-
-* `配置` → 你使用的配置文件后的`i` → `HTTPS解密` → 开启`HTTPS解密` → `生成新的CA证书` → 允许 → 返回点击`安装证书`，并点击`允许` → 前往手机的`设置`，不是Shadowrocket的 → 看到`已下载描述文件` → `安装` → 输入手机的解锁密码 → `安装` → `安装` → 前往手机的`设置` → `通用` → `关于本机` → `证书信任设置` → 找到`Shadowrocket…`点绿它以信任该根证书 → `继续`
-
-3、点击`配置` → `模块` → 右上角加号，添加想看国家的对应模块。
-
-**日本**
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Shadowrocket/TiKTok-JP.conf
-```
-
-**台湾**
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Shadowrocket/TiKTok-TW.conf
-```
-
-**韩国**
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Shadowrocket/TiKTok-KR.conf
-```
-
-**美国**
-
-```
-https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Shadowrocket/TiKTok-US.conf
-```
-
-4、添加以下`分流`，点击`配置` → 你使用的配置后的`i` → `规则` → 右上角加号 → `类型` → 选择`RULE-SET` → 策略 → 选择`PROXY`或者其他你想使用的策略（一般是对应地区的代理服务器节点） → 规则集URL文本框内填写
-
+1、打開 Shadowrocket。
+2、點擊 `配置` → 點擊您正在使用的配置文件後方的 `i` → `規則` → 右上角 `+` 號新增。
+3、**類型**：選擇 `RULE-SET`
+4、**策略**：選擇 `PROXY` 或您專門為 TikTok 建立的策略組。
+5、**規則集 URL** 填寫以下連結：
 ```
 https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Shadowrocket/TikTok.list
 ```
 
----
-
-### <a id="抓包降级"> 抓包降级 TikTok 21.1.0 </a>
-
-* [教程](https://semporia.github.io/iTunes.html)
-* [备用地址](https://semporia.blogspot.com/2022/06/tiktok-2110.html)
+6、點擊右上角「儲存」並確保套用配置。
 
 ---
 
-### <a id="抖音"> 抖音無法觀看 </a>
+## ❓ 常見問題 (FAQ)
 
-在hostname中加上以下兩條
+**Q1：為什麼配置了分流還是無法觀看，一直轉圈圈、黑屏或提示「無網絡連接」？**
 
-```
--*snssdk.com, -*amemv.com
-```
+A：這百分之百是因為**您的代理節點不支援 TikTok **（該節點 IP 已被 TikTok 官方封鎖或識別為機房 IP）。請聯絡您的機場供應商確認是否支援 TikTok，或自行更換為「原生 IP」節點。
 
----
+**Q2：我還需要像以前一樣安裝憑證並開啟 HTTPS 解密 (MitM) 嗎？**
 
-### <a id="抖音IP代理"> 抖音IP代理 </a>
+A：**完全不需要！** 新方案直接依賴 App Store 最新版 + 支援的節點，免去了安裝憑證、信任憑證和 URL 重寫的步驟，更安全且不影響其他 App 運行。
 
-订阅分流
+**Q3：<a id="抖音"> 我有同時使用中國版抖音，代理會影響抖音觀看嗎？ </a>**
+
+A：有可能。如果發現國內抖音無法觀看，建議添加抖音的直連分流規則以排除代理干擾。您可以在配置中加入以下抖音 IP 分流訂閱（策略選 `DIRECT` 直連）：
 
 ```
 https://raw.githubusercontent.com/Semporia/Quantumult-X/master/Filter/DouYin.list
 ```
 
+---
 
+> **免責聲明**：本專案僅供學習與交流使用，請遵守當地法律法規，請勿用於非法用途。
