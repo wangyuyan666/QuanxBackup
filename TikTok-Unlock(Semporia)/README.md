@@ -4,15 +4,6 @@
 
 TikTok 無需拔卡解鎖，最新支援 iPhone & iPad。支援地區切換、影片發佈、Live 直播、點讚評論、私信聊天等完整功能！
 
-> 目录
-
-* [準備工作](#準備工作)
-* [Quantumult X](#Quantumult-X)
-* [Loon](#Loon)
-* [Surge](#Surge)
-* [Shadowrocket](#Shadowrocket)
-* [抖音無法觀看](#抖音)
-
 ---
 
 > **🎉 最新版本更新說明：**
@@ -25,7 +16,7 @@ TikTok 無需拔卡解鎖，最新支援 iPhone & iPad。支援地區切換、�
 
 ---
 
-## <a id="📌 準備工作"> 📌 準備工作 </a>##
+## 📌 準備工作
 
 1. **下載 TikTok 最新版**：
    - 請自備美區、日區、台區、韓區等非中國大陸區的 Apple ID。
@@ -53,8 +44,8 @@ TikTok 無需拔卡解鎖，最新支援 iPhone & iPad。支援地區切換、�
 
 以下提供主流代理工具的「分流規則」配置方法，只需將 TikTok 的流量引導至支援解鎖的節點即可。
 
-### <a id="Quantumult-X"> Quantumult X </a> ###
-1、打開 Quantumult X 進入設定。
+### Quantumult X
+1、打開 Quantumult X 進入設定。  
 2、在 資源-分流 中添加 TikTok 分流規則：
 ```
 https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Quantumult-X/TikTok.list
@@ -62,9 +53,9 @@ https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Quantumult-X/Tik
 
 3、開啟 Quantumult X 即可愉快使用。
 
-### <a id="Loon"> Loon </a> ###
+### Loon
 
-1、打開 Loon 進入設定。
+1、打開 Loon 進入設定。  
 2、在 `[Remote Rule]` (遠端規則) 下方添加 TikTok 分流規則：
 ```
 https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Loon/TikTok.list
@@ -72,21 +63,21 @@ https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Loon/TikTok.list
 
 3、確保該策略組內選中了支援解鎖的節點。
 
-### <a id="Surge"> Surge </a> ###
+### Surge
 
-1、打開 Surge。
+1、打開 Surge。  
 2、在「規則 (Rule)」中添加以下分流，並指向對應的策略組：
 ```
 https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Surge/TikTok.list
 ```
 
-### <a id="Shadowrocket"> Shadowrocket </a> ###
+### Shadowrocket
 
-1、打開 Shadowrocket。
-2、點擊 `配置` → 點擊您正在使用的配置文件後方的 `i` → `規則` → 右上角 `+` 號新增。
-3、**類型**：選擇 `RULE-SET`
-4、**策略**：選擇 `PROXY` 或您專門為 TikTok 建立的策略組。
-5、**規則集 URL** 填寫以下連結：
+1、打開 Shadowrocket。  
+2、點擊 `配置` → 點擊您正在使用的配置文件後方的 `i` → `規則` → 右上角 `+` 號新增。  
+3、**類型**：選擇 `RULE-SET`  
+4、**策略**：選擇 `PROXY` 或您專門為 TikTok 建立的策略組。  
+5、**規則集 URL** 填寫以下連結：  
 ```
 https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Shadowrocket/TikTok.list
 ```
@@ -105,7 +96,7 @@ A：這百分之百是因為**您的代理節點不支援 TikTok **（該節點 
 
 A：**完全不需要！** 新方案直接依賴 App Store 最新版 + 支援的節點，免去了安裝憑證、信任憑證和 URL 重寫的步驟，更安全且不影響其他 App 運行。
 
-**Q3：<a id="抖音"> 我有同時使用中國版抖音，代理會影響抖音觀看嗎？ </a>**
+**Q3：我有同時使用中國版抖音，代理會影響抖音觀看嗎？**
 
 A：有可能。如果發現國內抖音無法觀看，建議添加抖音的直連分流規則以排除代理干擾。您可以在配置中加入以下抖音 IP 分流訂閱（策略選 `DIRECT` 直連）：
 
