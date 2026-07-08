@@ -13,7 +13,6 @@
                 "luolita_custom_scheme",
                 "luolita_url_encode",
                 "luolita_player_jump",
-                "luolita_remove_ads",
                 "luolita_log_level"
             ],
             "settings": [
@@ -71,17 +70,6 @@
                         { "key": "yes", "label": "视频详情通知并跳转外部播放器" }
                     ],
                     "desc": "开启后在视频详情推送系统通知，点击调起外部播放器"
-                },
-                {
-                    "id": "luolita_remove_ads",
-                    "name": "去广告",
-                    "val": "yes",
-                    "type": "selects",
-                    "items": [
-                        { "key": "yes", "label": "去广告（默认）" },
-                        { "key": "no", "label": "保留广告" }
-                    ],
-                    "desc": "开屏 / 弹窗 / 悬浮 / 信息流 / banner / 促销弹窗等"
                 },
                 {
                     "id": "luolita_log_level",
