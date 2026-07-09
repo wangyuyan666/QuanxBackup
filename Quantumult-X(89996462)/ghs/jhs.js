@@ -32,6 +32,11 @@ if (typeof $response === 'undefined' || !$response) {
             delete reqHeaders[k];
         }
     }
+    // 强制设置不缓存的请求头
+    reqHeaders['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+    reqHeaders['Pragma'] = 'no-cache';
+    reqHeaders['Expires'] = '0';
+    
     $done({ headers: reqHeaders });
 }
 // ========== 模式2: script-response-body ==========
@@ -64,7 +69,14 @@ const injectScript = `
         'u7d2w.com',
         'pg71json',
         'pg71.epuf3tk',
-        'pg71h5.yihaici'
+        'pg71h5.yihaici',
+        // 悬浮广告相关域名
+        'va2p.com',
+        'worldcup-ad.com',
+        'float-ad.com',
+        'ia-tech.com',
+        'prize-ad.com',
+        'lottery-ad.com'
     ];
 
     function isAdUrl(u) {
@@ -296,11 +308,16 @@ const injectScript = `
             }
         }
 
-        // 红包/活动弹窗 → 关闭
+        // 红包/活动弹窗 → 关闭 (包含redPacket和redPacket大小写变体)
         if ('redPacket' in obj && obj.redPacket && typeof obj.redPacket === 'object') {
             obj.redPacket.canClick = false;
             obj.redPacket.enabled = false;
             obj.redPacket.show = false;
+        }
+        if ('redpacket' in obj && obj.redpacket && typeof obj.redpacket === 'object') {
+            obj.redpacket.canClick = false;
+            obj.redpacket.enabled = false;
+            obj.redpacket.show = false;
         }
     }
 
@@ -324,6 +341,24 @@ const injectScript = `
         for (var m = 0; m < urlFields.length; m++) {
             if (urlFields[m] in item && typeof item[urlFields[m]] === 'string') {
                 if (isAdUrl(item[urlFields[m]])) return true;
+            }
+        }
+
+        // 5. 悬浮广告特征检测
+        if ('type' in item && (item.type === 'float' || item.type === 'popup' || item.type === 'dialog')) {
+            return true;
+        }
+        
+        // 6. 世界杯红包雨特征检测
+        if ('eventName' in item && (item.eventName.indexOf('世界杯') !== -1 || item.eventName.indexOf('红包雨') !== -1)) {
+            return true;
+        }
+        
+        // 7. 活动类型检测
+        var activityTypes = ['redRain', 'prize', 'lottery', 'worldCup', 'football', 'match', 'innovation', 'tech'];
+        for (var n = 0; n < activityTypes.length; n++) {
+            if (item.type === activityTypes[n] || (item.activityType && item.activityType === activityTypes[n])) {
+                return true;
             }
         }
 
@@ -483,7 +518,10 @@ const injectScript = `
         document.querySelectorAll(
             '[class*="ad-popup"], [class*="adPopup"], [class*="popup-ad"],' +
             '[class*="ad-dialog"], [class*="ad-modal"],' +
-            '[class*="floating-ad"], [class*="float-ad"], [class*="ad-float"]'
+            '[class*="floating-ad"], [class*="float-ad"], [class*="ad-float"],' +
+            '[class*="float"], [class*="popup"], [class*="dialog"],' +
+            '[class*="redRain"], [class*="红包"], [class*="prize"], [class*="lottery"],' +
+            '[class*="worldCup"], [class*="世界杯"], [class*="ia-tech"], [class*="IA科技"]'
         ).forEach(function(el) { el.remove(); });
 
         // 推广/赞助
@@ -609,7 +647,22 @@ const injectScript = `
 `;
 
 // ========== 注入脚本到HTML页面 ==========
+// 只对HTML文件注入，避免破坏JS/CSS文件
 if (body && (url.indexOf('d18v10algpi965.cloudfront.net') !== -1)) {
+    // 检查是否为HTML文件（通过响应头判断）
+    var contentType = $response.headers['Content-Type'] || $response.headers['content-type'] || '';
+    if (contentType.indexOf('html') === -1 && contentType.indexOf('text/html') === -1) {
+        // 非HTML文件，直接返回原内容
+        $done({ body: body });
+        return;
+    }
+
+    // 检查文件扩展名，确保是HTML文件
+    if (url.match(/\.(js|css|png|jpg|jpeg|gif|svg|json|xml|pdf|mp4|mp3|woff|woff2|ttf|eot)$/i)) {
+        $done({ body: body });
+        return;
+    }
+
     var newBody = body;
 
     // 在</head>前注入 (最优先)
@@ -633,7 +686,14 @@ if (body && (url.indexOf('d18v10algpi965.cloudfront.net') !== -1)) {
         newBody = newBody + injectScript;
     }
 
-    $done({ body: newBody });
+    // 强制设置不缓存的响应头
+    var headers = $response.headers || {};
+    headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+    headers['Pragma'] = 'no-cache';
+    headers['Expires'] = '0';
+    headers['X-Cache'] = 'BYPASS';
+
+    $done({ body: newBody, headers: headers });
 } else {
     $done({});
 }
