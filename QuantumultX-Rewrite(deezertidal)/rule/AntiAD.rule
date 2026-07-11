@@ -1,4 +1,4 @@
-# 由yfamilys.com自动维护 202607111725
+# 由yfamilys.com自动维护 202607112011
 payload:
   - DOMAIN-SUFFIX,0.avmarket.rs
   - DOMAIN-SUFFIX,0.code.cotsta.ru
@@ -20774,6 +20774,7 @@ payload:
   - DOMAIN-SUFFIX,amplify.madison365.com
   - DOMAIN-SUFFIX,amplilab.thepure.app
   - DOMAIN-SUFFIX,amplitude-experiment.bandlab.com
+  - DOMAIN-SUFFIX,amplitude.anytype.io
   - DOMAIN-SUFFIX,amplitude.bandlab.com
   - DOMAIN-SUFFIX,amplitude.chess.com
   - DOMAIN-SUFFIX,amplitude.com
@@ -22201,6 +22202,7 @@ payload:
   - DOMAIN-SUFFIX,anonymecytoid.cfd
   - DOMAIN-SUFFIX,anonymestupes.website
   - DOMAIN-SUFFIX,anonymised.io
+  - DOMAIN-SUFFIX,anonymized-metrics.rmbl.ws
   - DOMAIN-SUFFIX,anonymous-net.com
   - DOMAIN-SUFFIX,anonymousads.com
   - DOMAIN-SUFFIX,anonymousdemographics.com
@@ -29130,6 +29132,7 @@ payload:
   - DOMAIN-SUFFIX,b-s.tercept.com
   - DOMAIN-SUFFIX,b-short.link
   - DOMAIN-SUFFIX,b-sing.com
+  - DOMAIN-SUFFIX,b-static.bet-links.com
   - DOMAIN-SUFFIX,b.16vcd.com
   - DOMAIN-SUFFIX,b.1istochnik.ru
   - DOMAIN-SUFFIX,b.53yao.com
@@ -30265,7 +30268,6 @@ payload:
   - DOMAIN-SUFFIX,banner.kaktus.media
   - DOMAIN-SUFFIX,banner.kanald.com.tr
   - DOMAIN-SUFFIX,banner.lbs.km.ru
-  - DOMAIN-SUFFIX,banner.linux.se
   - DOMAIN-SUFFIX,banner.media-system.de
   - DOMAIN-SUFFIX,banner.mob.hr
   - DOMAIN-SUFFIX,banner.monacogoldcasino.com
@@ -97698,6 +97700,7 @@ payload:
   - DOMAIN-SUFFIX,healthhoria.com
   - DOMAIN-SUFFIX,healthier.aahs.org
   - DOMAIN-SUFFIX,healthier.luminishealth.org
+  - DOMAIN-SUFFIX,healthit.live
   - DOMAIN-SUFFIX,healthnasdaqfeature.com
   - DOMAIN-SUFFIX,healthnutritia.com
   - DOMAIN-SUFFIX,healthoutabol.site
@@ -112378,6 +112381,7 @@ payload:
   - DOMAIN-SUFFIX,jitsu.ixbt.com
   - DOMAIN-SUFFIX,jitsu.ixbt.games
   - DOMAIN-SUFFIX,jitsu.ixbt.site
+  - DOMAIN-SUFFIX,jitsu.www1.ru
   - DOMAIN-SUFFIX,jitterendeavour.com
   - DOMAIN-SUFFIX,jitterspauperusher.com
   - DOMAIN-SUFFIX,jittervouli.cyou
@@ -133262,6 +133266,7 @@ payload:
   - DOMAIN-SUFFIX,m.pquea.com
   - DOMAIN-SUFFIX,m.prazpf.cn
   - DOMAIN-SUFFIX,m.premier.info.shutterstock.com
+  - DOMAIN-SUFFIX,m.privatesportshop.es
   - DOMAIN-SUFFIX,m.providers.alto.com
   - DOMAIN-SUFFIX,m.pt05c.cn
   - DOMAIN-SUFFIX,m.ptuoa.com
@@ -182258,6 +182263,7 @@ payload:
   - DOMAIN-SUFFIX,rum.azion.com
   - DOMAIN-SUFFIX,rum.azioncdn.net
   - DOMAIN-SUFFIX,rum.battle.net
+  - DOMAIN-SUFFIX,rum.catchmetrics.io
   - DOMAIN-SUFFIX,rum.cdnpure.com
   - DOMAIN-SUFFIX,rum.conde.io
   - DOMAIN-SUFFIX,rum.condenastdigital.com
@@ -224133,6 +224139,7 @@ payload:
   - DOMAIN-SUFFIX,telemetry.adobe.io
   - DOMAIN-SUFFIX,telemetry.algolia.com
   - DOMAIN-SUFFIX,telemetry.am.pictet.com
+  - DOMAIN-SUFFIX,telemetry.anytype.io
   - DOMAIN-SUFFIX,telemetry.api.playstation.com
   - DOMAIN-SUFFIX,telemetry.api.swiftkey.com
   - DOMAIN-SUFFIX,telemetry.appex.bing.net
@@ -224149,6 +224156,7 @@ payload:
   - DOMAIN-SUFFIX,telemetry.chrobinson.com
   - DOMAIN-SUFFIX,telemetry.codefusion.technology
   - DOMAIN-SUFFIX,telemetry.commonspirit.org
+  - DOMAIN-SUFFIX,telemetry.data.nvidia.com
   - DOMAIN-SUFFIX,telemetry.dematic.com
   - DOMAIN-SUFFIX,telemetry.doitbeststore.com
   - DOMAIN-SUFFIX,telemetry.doxo.com
@@ -245623,7 +245631,6 @@ payload:
   - DOMAIN-SUFFIX,vivituii.com
   - DOMAIN-SUFFIX,vivocha.com
   - DOMAIN-SUFFIX,vivodemisrentas.net
-  - DOMAIN-SUFFIX,vivtracking.com
   - DOMAIN-SUFFIX,vivuple.xyz
   - DOMAIN-SUFFIX,viwsqbbvfknp.com
   - DOMAIN-SUFFIX,viwvamotrnu.com
@@ -255194,6 +255201,7 @@ payload:
   - DOMAIN-SUFFIX,www.i32689.net
   - DOMAIN-SUFFIX,www.iaccede.net.jumia.ug
   - DOMAIN-SUFFIX,www.icclient.rottne.com
+  - DOMAIN-SUFFIX,www.iconatsbs.com
   - DOMAIN-SUFFIX,www.icybrand.eu
   - DOMAIN-SUFFIX,www.icygrovejn.com
   - DOMAIN-SUFFIX,www.icyhivemy.name
@@ -255209,6 +255217,7 @@ payload:
   - DOMAIN-SUFFIX,www.ili100.cn
   - DOMAIN-SUFFIX,www.imaginative-trade7.com
   - DOMAIN-SUFFIX,www.imcounting.com
+  - DOMAIN-SUFFIX,www.improvingthe.com
   - DOMAIN-SUFFIX,www.indexprofile.com
   - DOMAIN-SUFFIX,www.indiads.com
   - DOMAIN-SUFFIX,www.info.dunnhumby.com
@@ -255789,6 +255798,7 @@ payload:
   - DOMAIN-SUFFIX,www.safeken.com
   - DOMAIN-SUFFIX,www.sailesi.cn
   - DOMAIN-SUFFIX,www.sailpirate.com
+  - DOMAIN-SUFFIX,www.saintmc.com
   - DOMAIN-SUFFIX,www.salentoeasy.it
   - DOMAIN-SUFFIX,www.salliemaebenefits.com
   - DOMAIN-SUFFIX,www.salttm.com
@@ -255797,6 +255807,7 @@ payload:
   - DOMAIN-SUFFIX,www.sankyo.gr.jp
   - DOMAIN-SUFFIX,www.sanseracingteam.com
   - DOMAIN-SUFFIX,www.santemama.com
+  - DOMAIN-SUFFIX,www.sapiatinsurance.com
   - DOMAIN-SUFFIX,www.sarge05.plus.com
   - DOMAIN-SUFFIX,www.sauteenacoochee.com
   - DOMAIN-SUFFIX,www.save.adp.ca
