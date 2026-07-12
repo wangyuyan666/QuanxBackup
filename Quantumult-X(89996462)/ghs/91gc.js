@@ -1,22 +1,15 @@
 /**********************************************
- * Light体系站点去广告 + VIP模拟脚本
- * 目标网站: 基于2026-07-12-173249抓包数据
- * App: light v2.1.7 (iOS H5)
- * 功能: 净化全站广告(开屏/悬浮窗/Banner/弹窗) + 模拟VIP
- *
- * 原理:
- *   1. API响应为加密格式 {"code":200,"data":"<base64>","hash":true}
- *   2. App前端JS解密data字段后通过JSON.parse解析
- *   3. 本脚本hook JSON.parse拦截解密后的明文数据并修改
- *   4. 同时拦截fetch/XHR阻止广告请求,移除广告DOM元素
- *
- * 双模式:
- *   - script-request-header: 删除缓存头,强制200返回完整HTML
- *   - script-response-body: 注入去广告JS到HTML
- **********************************************/
 
-// ========== 模式1: script-request-header ==========
-// 删除浏览器缓存头,防止304导致无法注入
+# 脚本功能：91国产———解锁———金币视频———VIP视频-付费帖子
+# 特别说明：必须开启HTTP抓包,并且关闭其他的脚本
+# 特别说明：捕获成功后，点击通知即可观看
+# 脚本作者：彭于晏💞
+# 更新时间：2026-7-13
+# TG反馈群：https://t.me/plus8889
+# TG频道群：https://t.me/py996
+# 使用声明：此脚本仅供学习与交流，请勿转载与贩卖！⚠️⚠️⚠️
+
+ **********************************************/
 if (typeof $response === 'undefined' || !$response) {
     var reqHeaders = $request.headers || {};
     var keysToDelete = ['If-None-Match', 'If-Modified-Since', 'if-none-match', 'if-modified-since', 'IF-NONE-MATCH', 'IF-MODIFIED-SINCE'];
@@ -62,11 +55,9 @@ const injectScript = `
         'va2p.com', 'worldcup-ad.com', 'float-ad.com',
         'ia-tech.com', 'prize-ad.com', 'lottery-ad.com',
         'api-dc-prod-008.cyou', 'api-dc2-prod-08.cyou',
-        // 新增Light相关广告域名
-        'cjhecnimg.jiekrrj.cn',
-        'api-dc-prod-008.cyou',
-        'api-dc2-prod-08.cyou',
-        'd270v74snrdyr6.cloudfront.net'
+        // 新增06erg相关广告域名
+        'd3k4e7spixznr4.cloudfront.net',
+        'sssyyshc.lkkwip.cn'
     ];
 
     function isAdUrl(u) {
@@ -82,7 +73,6 @@ const injectScript = `
         if (lower.indexOf('/ads/click') !== -1) return true;
         if (lower.indexOf('/recreation/click') !== -1) return true;
         if (lower.indexOf('/webp/splash-') !== -1) return true;
-        if (lower.indexOf('/mmtls/') !== -1) return true;
         return false;
     }
 
@@ -506,8 +496,6 @@ const injectScript = `
         '[class*="ad-container"], [class*="adContainer"], [class*="ad-wrapper"],',
         '[class*="google-ad"], [class*="adsbygoogle"],',
         '.corner-tag.isAdv',
-        '[class*="dark-waring-popup"]',
-        '[class*="loli-waring"]',
         '{display:none!important}'
     ].join('');
     (document.head || document.documentElement).appendChild(style);
@@ -536,7 +524,8 @@ const injectScript = `
 `;
 
 // ========== 注入脚本到HTML页面 ==========
-var isTarget = url.indexOf('d270v74snrdyr6.cloudfront.net') !== -1;
+var isTarget = url.indexOf('da8ttmrfqqhqf.cloudfront.net') !== -1 ||
+               url.indexOf('06erg.com') !== -1;
 
 if (isTarget && body) {
     // 检查文件扩展名排除非HTML
