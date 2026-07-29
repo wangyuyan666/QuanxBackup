@@ -17,7 +17,7 @@
 */
 const $ = new Env("雨晨ios签到");
 //notify
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../qinglong/sendNotify') : '';
 const ckName = "yuchenios_data";
 const userCookie = getEnvByNode();
 //用户多账号配置
