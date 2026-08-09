@@ -558,19 +558,19 @@
                 {
                     "id": "porntube_player_jump",
                     "name": "播放器跳转",
-                    "val": "no",
+                    "val": "yes",
                     "type": "selects",
                     "items": [
                         {
-                            "key": "no",
-                            "label": "关闭（默认）"
+                            "key": "yes",
+                            "label": "通知并跳转外部播放器"
                         },
                         {
-                            "key": "yes",
-                            "label": "开启"
+                            "key": "no",
+                            "label": "不通知、不跳转"
                         }
                     ],
-                    "desc": "开启后播放视频时通知跳转外部播放器"
+                    "desc": "关闭后仅修改接口响应，不发送播放器跳转通知"
                 }
             ],
             "author": "Yu9191 Rewrite",
