@@ -1,4 +1,13 @@
-//17点25分
+/*
+ * 妻社 VIP解锁+去广告
+ * @Yu9191
+ *
+ * [rewrite_local]
+ * ^https?:\/\/[\w-]+\.qsh\d+\.(?:com|cn|org\.cn)\/(?:source\/plugin\/qsts_app\/index\.php|mserver)\/ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qishe/qishe.js
+ *
+ * [mitm]
+ * hostname = *.qsh526215.org.cn, *.qsh526724.com
+ */
 
 const NAME = "妻社VIP";
 const VIP_GROUP_ID = "32";
