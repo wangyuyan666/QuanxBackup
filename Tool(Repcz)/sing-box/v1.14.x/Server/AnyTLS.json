@@ -12,7 +12,9 @@
             "domain": [
                 "your_server_ip"
             ],
-            "email": "admin@example.com"
+            "email": "admin@example.com",
+            "data_directory": "/var/lib/sing-box/acme",
+            "key_type": "ed25519"
         }
     ],
 
@@ -28,7 +30,9 @@
             {"match_response": "gg","response_rcode": "NOERROR","action": "respond","race": true}
         ],
         "strategy": "prefer_ipv4",
-        "optimistic": true,
+        "optimistic": {
+            "enabled": true
+        },
         "final": "cloudflare"
     },
 
@@ -38,6 +42,8 @@
             "tag": "anytls-in",
             "listen": "::",
             "listen_port": 443,
+            "tcp_fast_open": true,
+            "tcp_multi_path": true,
             "users": [
                 {
                     "name": "singbox",
@@ -69,7 +75,10 @@
                 "udp_disable_domain_unmapping": true
             }
         ],
-        "default_domain_resolver": "cloudflare"
+        "final": "direct",
+        "default_domain_resolver": {
+            "server": "cloudflare"
+        }
     },
 
     "outbounds": [

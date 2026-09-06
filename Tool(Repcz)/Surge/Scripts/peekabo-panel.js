@@ -157,9 +157,9 @@ function notifyExpiring(daysLeft, planName, expire) {
   try {
     if ($persistentStore.read(key)) return; // 今天已通知过
     $notification.post(
-      "Peekabo 流量提醒",
+      "Peekabo 到期提醒",
       `${planName} 剩余 ${daysLeft} 天`,
-      `到期时间: ${formatDate(expire)}，请及时续费`
+      `到期时间: ${formatDate(expire)}\n已续费请忽略此提醒`
     );
     $persistentStore.write("1", key);
   } catch (_) {}
@@ -173,7 +173,7 @@ function notifyDaily(planName, usedText, totalText, percent, daysLeft, expire) {
     $notification.post(
       "Peekabo 流量日报",
       `${planName} 已用 ${usedText} / ${totalText} (${percent}%)`,
-      `剩余 ${daysLeft} 天，到期: ${formatDate(expire)}`
+      `剩余 ${daysLeft} 天，到期: ${formatDate(expire)}\n已续费请忽略剩余天数`
     );
     $persistentStore.write("1", key);
   } catch (_) {}
@@ -261,13 +261,18 @@ function fail(msg) {
     notifyExpiring(daysLeft, planName, expire);
 
     const ipText = IP_MODE === "hide" ? null : `IP: ${IP_MODE === "mask" ? maskIp(ip) : ip}`;
+    // 快到期时标注"已续费请忽略": currentMonthlyPeriod 为流量周期, 续费后需等新周期开始才会刷新
+    const expireText =
+      daysLeft <= NOTIFY_DAYS
+        ? `到期: ${formatDate(expire)} (已续费请忽略)`
+        : `到期: ${formatDate(expire)}`;
     const content = [
       `服务器: ${planName}`,
       ip ? ipText : null,
       `地区: ${region || "未知"}`,
       `已用: ${usedText} / ${totalText} (${percent}%)`,
       `剩余: ${daysLeft} 天`,
-      `到期: ${formatDate(expire)}`,
+      expireText,
     ]
       .filter(Boolean)
       .join("\n");

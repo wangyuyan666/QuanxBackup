@@ -12,7 +12,9 @@
             "domain": [
                 "your_server_ip"
             ],
-            "email": "admin@example.com"
+            "email": "admin@example.com",
+            "data_directory": "/var/lib/sing-box/acme",
+            "key_type": "ed25519"
         }
     ],
 
@@ -28,7 +30,9 @@
             {"match_response": "gg","response_rcode": "NOERROR","action": "respond","race": true}
         ],
         "strategy": "prefer_ipv4",
-        "optimistic": true,
+        "optimistic": {
+            "enabled": true
+        },
         "final": "cloudflare"
     },
 
@@ -47,7 +51,6 @@
             "up_mbps": 200,
             "down_mbps": 200,
             "ignore_client_bandwidth": false,
-            "obfs": {},
             "tls": {
                 "enabled": true,
                 "server_name": "your_server_ip",
@@ -82,7 +85,10 @@
                 "udp_disable_domain_unmapping": true
             }
         ],
-        "default_domain_resolver": "cloudflare"
+        "final": "direct",
+        "default_domain_resolver": {
+            "server": "cloudflare"
+        }
     },
 
     "outbounds": [

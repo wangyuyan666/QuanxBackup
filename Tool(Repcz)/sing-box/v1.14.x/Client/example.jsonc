@@ -1,54 +1,96 @@
+// sing-box v1.14.x 客户端示例配置（仅测试 iOS/macOS/Windows）
+// ─────────────────────────────────────────────────────────────
+// 架构：TUN 全局接管 + mixed/socks 本机代理端口，fakeip 加速，国服 DoH 竞速
+// 策略组：按地区 urltest 自动选优 + Manual 手动组 + 分类业务组
+// 注意：urltest 地区组与订阅节点需配合（节点名含地区前缀即可被外部程序
+//       填充到对应 outbounds 数组）；本文件为 JSONC 格式，sing-box 原生支持
 {
+    "$schema": "https://sing-box.sagernet.org/schema.json",
+
+    // ── DNS：国服 DoH 双上游竞速 + fakeip ───────────────────
     "dns": {
         "servers": [
+            // hosts 服务器：固定 DoH 服务商域名的解析结果，
+            // 避免 DoH 服务器域名自身解析走 DoH 形成鸡生蛋问题
             {"tag": "hosts_fix","type": "hosts","predefined": {
                 "dns.alidns.com": ["223.5.5.5","223.6.6.6"],
                 "doh.pub": ["1.12.12.21","120.53.53.53"]}
             },
+            // 阿里 DoH：服务器域名经 hosts_fix 直接得 IP，无递归依赖
             {"tag": "ali-doh","type": "https","server": "dns.alidns.com","domain_resolver": "hosts_fix"},
             {"tag": "ali-udp","type": "udp","server": "223.5.5.5"},
+            // 腾讯 DoH（doh.pub）
             {"tag": "tx-doh","type": "https","server": "doh.pub","domain_resolver": "hosts_fix"},
             {"tag": "tx-udp","type": "udp","server": "119.29.29.29"},
+            // fakeip 池：TUN 场景下域名连接零本地解析延迟，
+            // 真实解析延迟到远端出站侧进行
             {"tag": "fakeip","type": "fakeip","inet4_range": "198.18.0.0/15","inet6_range": "fc00::/18"},
+            // 系统本地解析：mDNS 等局域网域名必须交给系统，避免 fakeip 劫持
             {"tag": "local","type": "local","neighbor_domain": [".local",".lan"]}
         ],
         "rules": [
+            // 广告域名规则集命中直接拒绝（DNS 层拦截，请求不出门）
             {"rule_set": ["Reject"],"action": "reject"},
+            // 拒绝 HTTPS(type65) 查询：该记录无解析意义且泄漏域名
             {"query_type": "HTTPS","action": "reject"},
+            // 局域网 / 网络连通性检测域名走系统本地解析
             {"domain_suffix": ["lancache.steamcontent.com","10099.com.cn","msftconnecttest.com","msftncsi.com","local","lan","home","internal","corp","example.com"],"server": "local"},
+            // 普通域名 A/AAAA 查询返回 fakeip（TTL=1 防缓存残留）
             {"query_type": ["A","AAAA"],"action": "route","server": "fakeip","rewrite_ttl": 1},
+            // Clash 面板模式联动：全局模式全部 fakeip，直连模式走本地
             {"clash_mode": "Global","action": "route","server": "fakeip"},
             {"clash_mode": "Direct","action": "route","server": "local"},
+            // 国服域名：阿里/腾讯 DoH 并发竞速，首个 NOERROR 胜出
             {"action": "evaluate","server": "ali-doh","tag": "ali"},
             {"action": "evaluate","server": "tx-doh","tag": "tencent"},
             {"match_response": "ali","response_rcode": "NOERROR","action": "respond","race": true},
             {"match_response": "tencent","response_rcode": "NOERROR","action": "respond","race": true}
         ],
+        // 反向映射：IP 连接可反查域名（嗅探失败时的路由兜底依据）
         "reverse_mapping": true,
+        // 仅解析 IPv4：避免 fakeip 环境下 v6 解析不一致
         "strategy": "ipv4_only",
+        // 乐观缓存：TTL 过期先答旧值、后台刷新
         "optimistic": true,
+        // 未命中任何规则的 DNS 查询兜底走阿里 DoH
         "final": "ali-doh"
     },
+
+    // ── 出站：策略组 ────────────────────────────────────────
+    // 结构：Manual 手动总组 ← 地区 urltest 组（自动选优）← 分类业务组
+    // 订阅注入：真实节点按地区前缀填入对应地区组的 outbounds 数组
     "outbounds": [
         {"tag": "Direct","type": "direct"},
+        // Manual：手动选择具体地区组或节点，默认直连
         {"tag": "Manual","type": "selector","outbounds": ["HongKong","United States","Singapore","Japan","Taiwan","Direct"],"default": "Direct","interrupt_exist_connections": true},
+        // 业务组：默认值体现业务特性
+        // AI 服务对落地 IP 风控严格，默认美国
         {"tag": "AI","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan"],"default": "United States","interrupt_exist_connections": true},
         {"tag": "Google","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan"],"default": "United States","interrupt_exist_connections": true},
+        // Microsoft 含国内服务（如 Azure CN），保留 Direct 选项
         {"tag": "Microsoft","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan","Direct"],"default": "United States","interrupt_exist_connections": true},
         {"tag": "Social","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan"],"default": "Manual","interrupt_exist_connections": true},
+        // Telegram 默认新加坡：与 TG 服务器机房距离近，延迟低
         {"tag": "Telegram","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan"],"default": "Singapore","interrupt_exist_connections": true},
         {"tag": "Game","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan","Direct"],"default": "Manual","interrupt_exist_connections": true},
         {"tag": "Emby","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan","Direct"],"default": "Manual","interrupt_exist_connections": true},
         {"tag": "Spotify","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan","Direct"],"default": "Manual","interrupt_exist_connections": true},
+        // Streaming：流媒体解锁，默认跟随手动组
         {"tag": "Streaming","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan"],"default": "Manual","interrupt_exist_connections": true},
+        // Final 兜底组：未命中任何规则的流量去向
         {"tag": "Final","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan","Direct"],"default": "Manual","interrupt_exist_connections": true},
+        // 地区 urltest 组：定期对组内节点测速，自动切换到延迟最低者
+        // outbounds 为空 = 由订阅注入同地区节点
         {"tag": "HongKong","type": "urltest","outbounds": [],"url": "http://1.1.1.1/generate_204","interrupt_exist_connections": true},
         {"tag": "United States","type": "urltest","outbounds": [],"url": "http://1.1.1.1/generate_204","interrupt_exist_connections": true},
         {"tag": "Singapore","type": "urltest","outbounds": [],"url": "http://1.1.1.1/generate_204","interrupt_exist_connections": true},
         {"tag": "Japan","type": "urltest","outbounds": [],"url": "http://1.1.1.1/generate_204","interrupt_exist_connections": true},
         {"tag": "Taiwan","type": "urltest","outbounds": [],"url": "http://1.1.1.1/generate_204","interrupt_exist_connections": true}
     ],
+
+    // ── 路由 ────────────────────────────────────────────────
     "route": {
+        // 远程规则集：{tag} 占位符批量生成下载地址，binary=srs 二进制格式
         "rule_set": [
             {
                 "tag": [
@@ -66,14 +108,18 @@
             }
         ],
         "rules": [
+            // 嗅探 http/tls/quic/dns 还原真实目标域名（fakeip 必需）
             {"action": "sniff","sniffer": ["http","tls","quic","dns"]},
+            // 劫持明文 DNS 查询转交内部 DNS 模块（防绕过本机 DNS）
             {"protocol": "dns","action": "hijack-dns"},
+            // 私网地址直连
             {"ip_is_private": true,"action": "route","outbound": "Direct"},
+            // 面板模式联动路由
             {"clash_mode": "Direct","action": "route","outbound": "Direct"},
             {"clash_mode": "Global","action": "route","outbound": "Manual"},
+            // 广告拦截
             {"rule_set": ["Reject"],"action": "reject"},
-            {"rule_set": ["AI"],"action": "route","outbound": "AI"},
-            {"rule_set": ["Telegram"],"action": "route","outbound": "Telegram"},
+            // 分流：社交 / 游戏 / 各类流媒体分别独立组，可按业务选落地
             {"rule_set": ["Twitter","Facebook","TikTok"],"action": "route","outbound": "Social"},
             {"rule_set": ["Steam","Epic"],"action": "route","outbound": "Game"},
             {"rule_set": ["Google"],"action": "route","outbound": "Google"},
@@ -81,36 +127,53 @@
             {"rule_set": ["Emby"],"action": "route","outbound": "Emby"},
             {"rule_set": ["Spotify"],"action": "route","outbound": "Spotify"},
             {"rule_set": ["Bahamut","Netflix","Disney","PrimeVideo","HBO"],"action": "route","outbound": "Streaming"},
+            // 兜底代理规则集：未精确分类的国外域名
             {"rule_set": ["Proxy"],"action": "route","outbound": "Manual"},
+            // 苹果海外服务默认香港（对大陆友好的就近节点）
             {"rule_set": ["AppleProxy"],"action": "route","outbound": "HongKong"},
+            // 剩余域名先解析为 IP（fakeip 域名此时取真实 IP），
+            // 再按 ChinaIP 规则集分流：国内 IP 直连，其余 → route.final
             {"action": "resolve"},
             {"rule_set": ["ChinaDomain","ChinaIP"],"action": "route","outbound": "Direct"}
         ],
+        // 自动探测默认出口网卡：Direct 出站绑定物理网卡，防回环
         "auto_detect_interface": true,
+        // 默认 HTTP 客户端（规则集下载等）走 Manual 组
         "default_http_client": "default",
+        // 出站域名默认解析服务器（IP 直连的 udp DNS，无递归依赖）
         "default_domain_resolver": "ali-udp",
+        // 兜底出站：未命中规则的流量去向
         "final": "Final"
     },
+
     "log": {
         "disabled": false,
         "level": "info",
+        // 日志落盘相对路径（工作目录下）；排查完成后建议改 warn 降噪
         "output": "sing-box.log",
         "timestamp": true
     },
+
+    // HTTP 客户端：sing-box 自身发起的 HTTP 请求（下载规则集等）
     "http_clients": [
         {
         "tag": "default",
         "version": 2,
+        // 经 Manual 组出站：保证 GitHub 等资源在国内可达
         "detour": "Manual"
         }
     ],
+
+    // Clash API 服务：网页面板远程管理（切换节点/查看连接）
     "services": [
         {
             "type": "api",
             "tag": "sing-box dashboard",
+            // 仅监听本机回环，避免暴露到局域网
             "listen": "127.0.0.1",
             "listen_port": 9091,
-            "secret": "",
+            "secret": "",               // 建议设置访问密钥
+            // 允许官方在线面板跨域访问
             "access_control_allow_origin": [
                 "http://sing-box-dashboard.sagernet.org",
                 "http://dash.sing-box.app"
@@ -118,20 +181,27 @@
             "access_control_allow_private_network": true
         }
     ],
+
+    // ── 入站 ────────────────────────────────────────────────
     "inbounds": [
+        // mixed 入站：同端口提供 HTTP + SOCKS 代理，供手动配置/其他应用使用
         {
             "type": "mixed",
             "tag": "mixed",
             "listen": "127.0.0.1",
             "listen_port": 7080
-        },
+       },
+        // TUN 入站：虚拟网卡全局接管系统流量（需管理员权限）
         {
             "type": "tun",
             "tag": "tun",
+            // TUN 网卡地址：/30 与 /126 为最小可用子网
             "address": [
                 "172.18.0.1/30",
                 "fdfe:dcba:9876::1/126"
             ],
+            // 平台钩子：自动将系统代理指向下方 mixed 入站，
+            // 浏览器流量走系统代理而非 TUN，延迟更低
             "platform": {
                 "http_proxy": {
                     "enabled": true,
@@ -139,7 +209,9 @@
                     "server_port": 7080
                 }
             },
+            // mixed 栈：TCP 走 system 高性能栈，UDP 走 gvisor 兼容栈
             "stack": "mixed",
+            // 自动配置系统路由表，全局流量导入 TUN
             "auto_route": true
         }
     ]
