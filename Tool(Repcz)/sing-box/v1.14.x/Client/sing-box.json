@@ -42,11 +42,11 @@
         {"tag": "Spotify","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan","Direct"],"default": "Manual","interrupt_exist_connections": true},
         {"tag": "Streaming","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan"],"default": "Manual","interrupt_exist_connections": true},
         {"tag": "Final","type": "selector","outbounds": ["Manual","HongKong","United States","Singapore","Japan","Taiwan","Direct"],"default": "Manual","interrupt_exist_connections": true},
-        {"tag": "HongKong","type": "urltest","outbounds": [],"url": "http://1.1.1.1/generate_204","interrupt_exist_connections": true},
-        {"tag": "United States","type": "urltest","outbounds": [],"url": "http://1.1.1.1/generate_204","interrupt_exist_connections": true},
-        {"tag": "Singapore","type": "urltest","outbounds": [],"url": "http://1.1.1.1/generate_204","interrupt_exist_connections": true},
-        {"tag": "Japan","type": "urltest","outbounds": [],"url": "http://1.1.1.1/generate_204","interrupt_exist_connections": true},
-        {"tag": "Taiwan","type": "urltest","outbounds": [],"url": "http://1.1.1.1/generate_204","interrupt_exist_connections": true}
+        {"tag": "HongKong","type": "urltest","outbounds": [],"interrupt_exist_connections": true},
+        {"tag": "United States","type": "urltest","outbounds": [],"interrupt_exist_connections": true},
+        {"tag": "Singapore","type": "urltest","outbounds": [],"interrupt_exist_connections": true},
+        {"tag": "Japan","type": "urltest","outbounds": [],"interrupt_exist_connections": true},
+        {"tag": "Taiwan","type": "urltest","outbounds": [],"interrupt_exist_connections": true}
     ],
     "route": {
         "rule_set": [
