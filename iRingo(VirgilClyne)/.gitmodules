@@ -1,0 +1,27 @@
+[submodule "WeatherKit"]
+	path = WeatherKit
+	url = https://github.com/NSRingo/WeatherKit.git
+[submodule "Maps"]
+	path = Maps
+	url = https://github.com/NSRingo/Maps.git
+[submodule "LocationServices"]
+	path = LocationServices
+	url = https://github.com/NSRingo/LocationServices.git
+[submodule "Siri"]
+	path = Siri
+	url = https://github.com/NSRingo/Siri.git
+[submodule "TV"]
+	path = TV
+	url = https://github.com/NSRingo/TV.git
+[submodule "TestFlight"]
+	path = TestFlight
+	url = https://github.com/NSRingo/TestFlight.git
+[submodule "News"]
+	path = News
+	url = https://github.com/NSRingo/News.git
+[submodule "Weather"]
+	path = Weather
+	url = https://github.com/NSRingo/Weather.git
+[submodule "PrivateRelay"]
+	path = PrivateRelay
+	url = https://github.com/NSRingo/PrivateRelay.git

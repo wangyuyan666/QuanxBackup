@@ -1,5 +1,5 @@
 # 规则名称: AdGuardChinese
-# 规则统计: 6383
+# 规则统计: 6419
 
 domain_suffix_set:
   - 002777.xyz
@@ -46,6 +46,7 @@ domain_suffix_set:
   - 0iem8mw1lx.com
   - 0ihw4ipvm5.com
   - 0jghm60qg.com
+  - 0kl9n3q2b.com
   - 0kplffrs42.com
   - 0l34c7sqy.com
   - 0l7t5qhb4.com
@@ -192,6 +193,7 @@ domain_suffix_set:
   - 1h90ydceq.com
   - 1hcgomshd.com
   - 1hhwyb4vl.com
+  - 1hkhec0jk0.com
   - 1hmklj60i.com
   - 1hotu9uyll.com
   - 1iuh5l.com
@@ -400,6 +402,7 @@ domain_suffix_set:
   - 41vtzzt0s.com
   - 42vaywaovr.com
   - 431kls9qsf.com
+  - 43gu7zzn0.com
   - 43y3q8h5mz.com
   - 444223564.xyz
   - 44b2zlch5q.com
@@ -588,6 +591,7 @@ domain_suffix_set:
   - 68tkaiaji.com
   - 693836.com
   - 6acupxubky.com
+  - 6aontlsdf.com
   - 6aoodbdx94.com
   - 6b8emvi3ya.com
   - 6b9wbbjf5s.com
@@ -715,6 +719,7 @@ domain_suffix_set:
   - 7w7kditsz.com
   - 7xi9g1.com1.z0.glb.clouddn.com
   - 7xkdyg9b8k.com
+  - 7xm6spgwu.com
   - 7xsf3h.com1.z0.glb.clouddn.com
   - 7xx3jbcil.com
   - 7y50wscnc8.com
@@ -759,6 +764,7 @@ domain_suffix_set:
   - 8g2a7mifv.com
   - 8gptk28oag.com
   - 8h6oiw0uo.com
+  - 8h6whvlpnz.com
   - 8h7j79qxm.com
   - 8hx7k0211.com
   - 8iav2fuiy.com
@@ -868,6 +874,7 @@ domain_suffix_set:
   - 9rkh7nbaj.com
   - 9soefyenw.com
   - 9swovqnp52.com
+  - 9t9r2tkr9.com
   - 9tlfy3rrh.com
   - 9txnu9rlmd.com
   - 9v7sbm9zc.com
@@ -1151,6 +1158,7 @@ domain_suffix_set:
   - aixuntupian.oss-cn-hongkong.aliyuncs.com
   - aizhantj.com
   - ajazaci.icu
+  - ajhwwlye.com
   - ajjo5hsvlp.com
   - ajvznxaox.com
   - ak7ko01zs.com
@@ -1237,6 +1245,7 @@ domain_suffix_set:
   - ax.ifeng.com
   - ax07in8xkr.com
   - ax2t0u9ly.com
+  - axq9j15p0.com
   - aybhalkar.com
   - aybikaemg.com
   - ayodanuauw.com
@@ -1405,6 +1414,7 @@ domain_suffix_set:
   - bistoury55.com
   - biuisz9ss.com
   - biz.gexing.com
+  - bj8g3fso1i.com
   - bj9zvb5ih.com
   - bjj02sf4c.com
   - bjk08210ip.com
@@ -1577,10 +1587,12 @@ domain_suffix_set:
   - c1.chajiaotong.com
   - c1.china.cn
   - c1.czcol.cn
+  - c166fuy29o.com
   - c1qm3mg41.com
   - c2vodqlmy.com
   - c2y82fkyv.com
   - c3mldou51.com
+  - c3p9jkqd22.com
   - c3q6l5oeq.com
   - c3vzqvifsn.com
   - c4ru5li2sa.com
@@ -2483,6 +2495,7 @@ domain_suffix_set:
   - gdxxb.com
   - gdyjs.com
   - ge99lo1z2.com
+  - geav5man0.com
   - geecradv.com
   - generation456.com
   - generation74.com
@@ -2817,6 +2830,7 @@ domain_suffix_set:
   - hfezidhmmm.com
   - hfisngksng.com
   - hfqarnolmm.com
+  - hfr8l4ebdt.com
   - hfrkamhoz.com
   - hg237nbher.com
   - hgruknobpq.com
@@ -2978,6 +2992,7 @@ domain_suffix_set:
   - identity39.com
   - idobqo.icu
   - idzdsbanio.com
+  - iedchqswx7.com
   - ieubws.icu
   - if8hhbrk4.com
   - ifb33zuqc.com
@@ -3311,6 +3326,7 @@ domain_suffix_set:
   - k99.cc
   - k9egtgh8v.com
   - k9zxbudgix.com
+  - kab201k0xs.com
   - kaboodle49.com
   - kacq.cn
   - kagxyvk.com
@@ -3625,6 +3641,7 @@ domain_suffix_set:
   - m2.lelemh.com
   - m292dfq9c.com
   - m2wrsmrsbj.com
+  - m30bh0coz2.com
   - m3cqjc3og6.com
   - m3j1pkrjg3.com
   - m3ks1o8jz.com
@@ -4188,6 +4205,7 @@ domain_suffix_set:
   - p15vjj3og.com
   - p2h08fn94d.com
   - p2muoczf5.com
+  - p43c4oysmb.com
   - p4dc8ve6i.com
   - p4p.sina.com.cn
   - p5si0mu8u7.com
@@ -4241,6 +4259,7 @@ domain_suffix_set:
   - pepwpv.icu
   - performance89.com
   - periscope73.com
+  - periscope80.com
   - permissible67.com
   - perspective44.top
   - pfdqvf.icu
@@ -4295,6 +4314,7 @@ domain_suffix_set:
   - plateau77.com
   - plectrum53.top
   - plsec7wll8.com
+  - plzahxycoctjxq.com
   - pm.poqwua.cn
   - pmpantdgzvttbk.com
   - pmqhelkean.com
@@ -4306,12 +4326,14 @@ domain_suffix_set:
   - polygon58.top
   - pop.wioau.com
   - porqbb.icu
+  - porthole58.top
   - pos.baidu.com
   - position66.top
   - poster.weather.com.cn
   - pow46ru6c.com
   - power.adhacker.online
   - ppbtdj.icu
+  - ppdzrzm5z7.com
   - ppkufuc5vg.com
   - pppteennal.com
   - ppsn1dzi3h.com
@@ -4425,6 +4447,7 @@ domain_suffix_set:
   - qcs6kxekav.com
   - qcuncolm.com
   - qcvf.ifeng.com
+  - qcwvmdi.com
   - qczg1nsnvo.com
   - qd.x4399.com
   - qd38xgoin9.com
@@ -4503,6 +4526,7 @@ domain_suffix_set:
   - qtozietgp.com
   - qtqv3cy43w.com
   - qttroiey.com
+  - quarterdeck96.top
   - qucxwvt.com
   - quince22.top
   - qujishu.com
@@ -4621,6 +4645,7 @@ domain_suffix_set:
   - rhombus74.com
   - rhrrf.cn
   - richh.cn
+  - ridfvncgizfjlq.com
   - rio9s1zdpd.com
   - riptgxsype.com
   - riveter29.com
@@ -4644,6 +4669,7 @@ domain_suffix_set:
   - rmfbrz.icu
   - rmhfrtnd.com
   - rmt827wgr.com
+  - rmv8gc43g.com
   - rn30y7u7h.com
   - rndmlk8asw.com
   - rnikvuneo.com
@@ -4655,6 +4681,7 @@ domain_suffix_set:
   - ronfjvonmo.com
   - rorwdbuazjbxta.com
   - rovz7ekw3r.com
+  - rowlock05.com
   - roywc0iql.com
   - rp9zb27jn1.com
   - rphwjxzekcbzxu.com
@@ -5030,6 +5057,7 @@ domain_suffix_set:
   - tjvpnh.icu
   - tk.504pk.com
   - tk11rxjhvm.com
+  - tk71mu9u7.com
   - tkdjrsee.icu
   - tkij.cn
   - tkll12110nb.com
@@ -5053,6 +5081,7 @@ domain_suffix_set:
   - tlgivardfp.com
   - tljsxt.icu
   - tlq8ufqddj.com
+  - tlre4aso7.com
   - tluutoido.com
   - tlvbtryetgppha.com
   - tmea116.oss-cn-beijing.aliyuncs.com
@@ -5112,6 +5141,7 @@ domain_suffix_set:
   - tsaor7o1e9.com
   - tsdtvcx579.com
   - tshmhp.icu
+  - tshnjvgecwtbzk.com
   - tsjt0k8wa.com
   - tslkd9ygnh.com
   - tsuh.cn
@@ -5291,6 +5321,7 @@ domain_suffix_set:
   - ulx1cpf68.com
   - um5xcgngmart.xyz
   - umbrella6.top
+  - umhjh9rwe.com
   - umini.shujupie.com
   - umqigvethe.com
   - umrd62a7zy.com
@@ -5349,6 +5380,7 @@ domain_suffix_set:
   - uxb030ku4s.com
   - uxfe.cn
   - uxjw.cn
+  - uxkjxzq7wh.com
   - uxnsiyuew.com
   - uxtlrah.com
   - uxx1sawfwm.com
@@ -5475,6 +5507,7 @@ domain_suffix_set:
   - vlpq.cn
   - vlxmfvvknsxldw.com
   - vm5xs8nvqh.com
+  - vmgi10lt0i.com
   - vmj428qvi4.com
   - vmkp.cn
   - vmn05pnuh.com
@@ -5490,6 +5523,7 @@ domain_suffix_set:
   - volume68.top
   - vophiptv.com
   - voqf299p8.com
+  - vovvrpueuffrjw.com
   - vowellm4.com
   - vpeebbq.com
   - vplrvf.icu
@@ -5888,6 +5922,7 @@ domain_suffix_set:
   - xkverkik38.com
   - xleemek84.com
   - xlekg58lub.com
+  - xlx2ddw4f.com
   - xmbfrn.icu
   - xmgi1tqka.com
   - xmm.wxc.cc
@@ -5978,6 +6013,7 @@ domain_suffix_set:
   - xxts11200zs.com
   - xxts11201zs.com
   - xxxx68xxxx.com
+  - xybrf8tcvf.com
   - xyf21yawkj.com
   - xyllbx.icu
   - xylophone37.com
