@@ -2,244 +2,261 @@ name: Backup Repositories
 
 on:
   schedule:
-    - cron: '0 */2 * * *'  
+    - cron: '0 */2 * * *'
   workflow_dispatch:
-  
+
+permissions:
+  contents: write
+
 jobs:
   backup:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout Backup Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_TOKEN }}
+          fetch-depth: 1
 
-      - name: Clone xiaomaoJT_QxScript
+      - name: Backup repositories
+        shell: bash
         run: |
-          git clone --depth=1 https://github.com/xiaomaoJT/QxScript xiaomaoJT_QxScript
-          rm -rf "QxScript(xiaomaoJT)"
-          mkdir -p "QxScript(xiaomaoJT)"
-          mv xiaomaoJT_QxScript/* "QxScript(xiaomaoJT)/"
-          rm -rf xiaomaoJT_QxScript
+          set -u
 
-      - name: Clone blackmatrix7_ios_rule_script
-        run: |
-          git clone --depth=1 https://github.com/blackmatrix7/ios_rule_script blackmatrix7_ios_rule_script
-          rm -rf "ios_rule_script(blackmatrix7)"
-          mkdir -p "ios_rule_script(blackmatrix7)"
-          mv blackmatrix7_ios_rule_script/* "ios_rule_script(blackmatrix7)/"
-          rm -rf blackmatrix7_ios_rule_script
+          SUCCESS_COUNT=0
+          FAILED_COUNT=0
+          FAILED_REPOS=()
 
-      - name: Clone NobyDa_Script
-        run: |
-          git clone --depth=1 https://github.com/NobyDa/Script NobyDa_Script
-          rm -rf "Script(NobyDa)"
-          mkdir -p "Script(NobyDa)"
-          mv NobyDa_Script/* "Script(NobyDa)/"
-          rm -rf NobyDa_Script    
+          backup_repo() {
+            local repo_url="$1"
+            local dest_dir="$2"
+            local branch="${3:-}"
+            local repo_name
+            local temp_dir
+            local stage_dir
+            local old_dir
 
-      - name: Clone limbopro_Adblock4limbo
-        run: |
-          git clone --depth=1 https://github.com/limbopro/Adblock4limbo limbopro_Adblock4limbo
-          rm -rf "Adblock4limbo(limbopro)"
-          mkdir -p "Adblock4limbo(limbopro)"
-          mv limbopro_Adblock4limbo/* "Adblock4limbo(limbopro)/"
-          rm -rf limbopro_Adblock4limbo    
+            repo_name="${repo_url#https://github.com/}"
+            repo_name="${repo_name%.git}"
 
-      - name: Clone VirgilClyne_iRingo
-        run: |
-          git clone --depth=1 https://github.com/VirgilClyne/iRingo VirgilClyne_iRingo
-          rm -rf "iRingo(VirgilClyne)"
-          mkdir -p "iRingo(VirgilClyne)"
-          mv VirgilClyne_iRingo/* "iRingo(VirgilClyne)/"
-          rm -rf VirgilClyne_iRingo
+            temp_dir="$(mktemp -d)"
+            stage_dir="${dest_dir}.new"
+            old_dir="${dest_dir}.old"
 
-      - name: Clone app2smile_rules
-        run: |
-          git clone --depth=1 https://github.com/app2smile/rules app2smile_rules
-          rm -rf "rules(app2smile)"
-          mkdir -p "rules(app2smile)"
-          mv app2smile_rules/* "rules(app2smile)/"
-          rm -rf app2smile_rules    
+            echo
+            echo "============================================================"
+            echo "Backing up: ${repo_name}"
+            echo "Destination: ${dest_dir}"
+            if [[ -n "${branch}" ]]; then
+              echo "Branch: ${branch}"
+            fi
+            echo "============================================================"
 
-      - name: Clone Semporia_TikTok-Unlock
-        run: |
-          git clone --depth=1 https://github.com/Semporia/TikTok-Unlock Semporia_TikTok_Unlock
-          rm -rf "TikTok-Unlock(Semporia)"
-          mkdir -p "TikTok-Unlock(Semporia)"
-          mv Semporia_TikTok_Unlock/* "TikTok-Unlock(Semporia)/"
-          rm -rf Semporia_TikTok_Unlock
+            rm -rf "${stage_dir}" "${old_dir}"
 
-      - name: Clone deezertidal_QuantumultX-Rewrite
-        run: |
-          git clone --depth=1 https://github.com/deezertidal/QuantumultX-Rewrite deezertidal_QuantumultX_Rewrite
-          rm -rf "QuantumultX-Rewrite(deezertidal)"
-          mkdir -p "QuantumultX-Rewrite(deezertidal)"
-          mv deezertidal_QuantumultX_Rewrite/* "QuantumultX-Rewrite(deezertidal)/"
-          rm -rf deezertidal_QuantumultX_Rewrite    
+            # Clone failure is isolated to this repository.
+            if [[ -n "${branch}" ]]; then
+              if ! git clone --depth=1 --single-branch --branch "${branch}" "${repo_url}" "${temp_dir}/repo"; then
+                echo "::warning title=Backup failed::Failed to clone ${repo_name}. Keeping the previous backup."
+                FAILED_REPOS+=("${repo_name} (clone failed)")
+                FAILED_COUNT=$((FAILED_COUNT + 1))
+                rm -rf "${temp_dir}" "${stage_dir}" "${old_dir}"
+                return 0
+              fi
+            else
+              if ! git clone --depth=1 "${repo_url}" "${temp_dir}/repo"; then
+                echo "::warning title=Backup failed::Failed to clone ${repo_name}. Keeping the previous backup."
+                FAILED_REPOS+=("${repo_name} (clone failed)")
+                FAILED_COUNT=$((FAILED_COUNT + 1))
+                rm -rf "${temp_dir}" "${stage_dir}" "${old_dir}"
+                return 0
+              fi
+            fi
 
-      - name: Clone TributePaulWalker_Profiles
-        run: |
-          git clone --depth=1 https://github.com/TributePaulWalker/Profiles TributePaulWalker_Profiles
-          rm -rf "Profiles(TributePaulWalker)"
-          mkdir -p "Profiles(TributePaulWalker)"
-          mv TributePaulWalker_Profiles/* "Profiles(TributePaulWalker)/"
-          rm -rf TributePaulWalker_Profiles
-          
-      #- name: Clone zxfccmm4_Surge
-        #run: |
-          #git clone --depth=1 https://github.com/zxfccmm4/Surge zxfccmm4_Surge
-          #rm -rf "Surge(zxfccmm4)"
-          #mkdir -p "Surge(zxfccmm4)"
-          #mv zxfccmm4_Surge/* "Surge(zxfccmm4)/"
-          #rm -rf zxfccmm4_Surge     
-      
-      - name: Clone zqzess_rule_for_quantumultX
-        run: |
-          git clone --depth=1 https://github.com/zqzess/rule_for_quantumultX zqzess_rule_for_quantumultX
-          rm -rf "rule_for_quantumultX(zqzess)"
-          mkdir -p "rule_for_quantumultX(zqzess)"
-          mv zqzess_rule_for_quantumultX/* "rule_for_quantumultX(zqzess)/"
-          rm -rf zqzess_rule_for_quantumultX         
-          
-      - name: Clone 89996462_Quantumult
-        run: |
-          git clone --depth=1 https://github.com/89996462/Quantumult-X 89996462_Quantumult
-          rm -rf "Quantumult-X(89996462)"
-          mkdir -p "Quantumult-X(89996462)"
-          mv 89996462_Quantumult/* "Quantumult-X(89996462)/"
-          rm -rf 89996462_Quantumult    
+            # Build the replacement copy separately first.
+            mkdir -p "${stage_dir}"
 
-      - name: Clone ddgksf2013_ddgksf2013
-        run: |
-          git clone --depth=1 https://github.com/ddgksf2013/ddgksf2013 ddgksf2013_ddgksf2013
-          rm -rf "ddgksf2013(ddgksf2013)"
-          mkdir -p "ddgksf2013(ddgksf2013)"
-          mv ddgksf2013_ddgksf2013/* "ddgksf2013(ddgksf2013)/"
-          rm -rf ddgksf2013_ddgksf2013     
-          
-      - name: Clone ddgksf2013_Profile
-        run: |
-          git clone --depth=1 https://github.com/ddgksf2013/Profile ddgksf2013_Profile
-          rm -rf "Profile(ddgksf2013)"
-          mkdir -p "Profile(ddgksf2013)"
-          mv ddgksf2013_Profile/* "Profile(ddgksf2013)/"
-          rm -rf ddgksf2013_Profile     
-          
-      - name: Clone ddgksf2013_Rewrite
-        run: |
-          git clone --depth=1 https://github.com/ddgksf2013/Rewrite ddgksf2013_Rewrite
-          rm -rf "Rewrite(ddgksf2013)"
-          mkdir -p "Rewrite(ddgksf2013)"
-          mv ddgksf2013_Rewrite/* "Rewrite(ddgksf2013)/"
-          rm -rf ddgksf2013_Rewrite     
+            if ! rsync -a --delete --exclude='.git' "${temp_dir}/repo/" "${stage_dir}/"; then
+              echo "::warning title=Backup failed::Failed to prepare files for ${repo_name}. Keeping the previous backup."
+              FAILED_REPOS+=("${repo_name} (copy failed)")
+              FAILED_COUNT=$((FAILED_COUNT + 1))
+              rm -rf "${temp_dir}" "${stage_dir}" "${old_dir}"
+              return 0
+            fi
 
-      - name: Clone ddgksf2013_Filter
-        run: |
-          git clone --depth=1 https://github.com/ddgksf2013/Filter ddgksf2013_Filter
-          rm -rf "Filter(ddgksf2013)"
-          mkdir -p "Filter(ddgksf2013)"
-          mv ddgksf2013_Filter/* "Filter(ddgksf2013)/"
-          rm -rf ddgksf2013_Filter     
-          
-      - name: Clone ddgksf2013_Scripts
-        run: |
-          git clone --depth=1 https://github.com/ddgksf2013/Scripts ddgksf2013_Scripts
-          rm -rf "Scripts(ddgksf2013)"
-          mkdir -p "Scripts(ddgksf2013)"
-          mv ddgksf2013_Scripts/* "Scripts(ddgksf2013)/"
-          rm -rf ddgksf2013_Scripts     
+            # Swap only after clone + copy are both successful.
+            if [[ -e "${dest_dir}" ]]; then
+              if ! mv "${dest_dir}" "${old_dir}"; then
+                echo "::warning title=Backup failed::Failed to move old backup for ${repo_name}."
+                FAILED_REPOS+=("${repo_name} (replace failed)")
+                FAILED_COUNT=$((FAILED_COUNT + 1))
+                rm -rf "${temp_dir}" "${stage_dir}" "${old_dir}"
+                return 0
+              fi
+            fi
 
-      - name: Clone Yu9191_Rewrite
-        run: |
-          git clone --depth=1 https://github.com/Yu9191/Rewrite Yu9191_Rewrite
-          rm -rf "Rewrite(Yu9191)"
-          mkdir -p "Rewrite(Yu9191)"
-          mv Yu9191_Rewrite/* "Rewrite(Yu9191)/"
-          rm -rf Yu9191_Rewrite     
+            if ! mv "${stage_dir}" "${dest_dir}"; then
+              echo "::warning title=Backup failed::Failed to install new backup for ${repo_name}. Restoring previous backup."
 
-      - name: Clone Marol62926_Quantumultx
-        run: |
-          git clone --depth=1 https://github.com/Marol62926/Quantumultx Marol62926_Quantumultx
-          rm -rf "Quantumultx(Marol62926)"
-          mkdir -p "Quantumultx(Marol62926)"
-          mv Marol62926_Quantumultx/* "Quantumultx(Marol62926)/"
-          rm -rf Marol62926_Quantumultx
+              rm -rf "${dest_dir}"
+              if [[ -e "${old_dir}" ]]; then
+                mv "${old_dir}" "${dest_dir}" || true
+              fi
 
-      - name: Clone Marol62926_MarScrpt
-        run: |
-          git clone --depth=1 https://github.com/Marol62926/MarScrpt Marol62926_MarScrpt
-          rm -rf "MarScrpt(Marol62926)"
-          mkdir -p "MarScrpt(Marol62926)"
-          mv Marol62926_MarScrpt/* "MarScrpt(Marol62926)/"
-          rm -rf Marol62926_MarScrpt
-          
-      - name: Clone fmz200_wool_scripts
-        run: |
-          git clone --depth=1 https://github.com/fmz200/wool_scripts fmz200_wool_scripts
-          rm -rf "wool_scripts(fmz200)"
-          mkdir -p "wool_scripts(fmz200)"
-          mv fmz200_wool_scripts/* "wool_scripts(fmz200)/"
-          rm -rf fmz200_wool_scripts     
-          
-      - name: Clone Repcz_Tool
-        run: |
-          git clone --depth=1 https://github.com/Repcz/Tool Repcz_Tool
-          rm -rf "Tool(Repcz)"
-          mkdir -p "Tool(Repcz)"
-          mv Repcz_Tool/* "Tool(Repcz)/"
-          rm -rf Repcz_Tool     
-          
-      - name: Clone chxm1023_Rewrite
-        run: |
-          git clone --depth=1 -b main https://github.com/chxm1023/Rewrite chxm1023_Rewrite
-          rm -rf "Rewrite(chxm1023)"
-          mkdir -p "Rewrite(chxm1023)"
-          mv chxm1023_Rewrite/* "Rewrite(chxm1023)/"
-          rm -rf chxm1023_Rewrite     
+              FAILED_REPOS+=("${repo_name} (replace failed)")
+              FAILED_COUNT=$((FAILED_COUNT + 1))
+              rm -rf "${temp_dir}" "${stage_dir}" "${old_dir}"
+              return 0
+            fi
 
-      - name: Clone GeQ1an_Rules
-        run: |
-          git clone --depth=1 -b master https://github.com/GeQ1an/Rules GeQ1an_Rules
-          rm -rf "Rules(GeQ1an)"
-          mkdir -p "Rules(GeQ1an)"
-          mv GeQ1an_Rules/* "Rules(GeQ1an)/"
-          rm -rf GeQ1an_Rules   
-          
-      - name: Clone WeiGiegie_666
-        run: |
-          git clone --depth=1 -b main https://github.com/WeiGiegie/666 WeiGiegie_666
-          rm -rf "666(WeiGiegie)"
-          mkdir -p "666(WeiGiegie)"
-          mv WeiGiegie_666/* "666(WeiGiegie)/"
-          rm -rf WeiGiegie_666
-          
-      - name: Clone ZenmoFeiShi_Qx
-        run: |
-          git clone --depth=1 -b main https://github.com/ZenmoFeiShi/Qx ZenmoFeiShi_Qx
-          rm -rf "Qx(ZenmoFeiShi)"
-          mkdir -p "Qx(ZenmoFeiShi)"
-          mv ZenmoFeiShi_Qx/* "Qx(ZenmoFeiShi)/"
-          rm -rf ZenmoFeiShi_Qx
-          
+            rm -rf "${old_dir}" "${temp_dir}"
+
+            echo "Backup succeeded: ${repo_name}"
+            SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
+            return 0
+          }
+
+          # Format:
+          # backup_repo "repository URL" "destination directory" ["optional branch"]
+
+          backup_repo "https://github.com/xiaomaoJT/QxScript" \
+            "QxScript(xiaomaoJT)"
+
+          backup_repo "https://github.com/blackmatrix7/ios_rule_script" \
+            "ios_rule_script(blackmatrix7)"
+
+          backup_repo "https://github.com/NobyDa/Script" \
+            "Script(NobyDa)"
+
+          backup_repo "https://github.com/limbopro/Adblock4limbo" \
+            "Adblock4limbo(limbopro)"
+
+          backup_repo "https://github.com/VirgilClyne/iRingo" \
+            "iRingo(VirgilClyne)"
+
+          backup_repo "https://github.com/app2smile/rules" \
+            "rules(app2smile)"
+
+          backup_repo "https://github.com/Semporia/TikTok-Unlock" \
+            "TikTok-Unlock(Semporia)"
+
+          backup_repo "https://github.com/deezertidal/QuantumultX-Rewrite" \
+            "QuantumultX-Rewrite(deezertidal)"
+
+          backup_repo "https://github.com/TributePaulWalker/Profiles" \
+            "Profiles(TributePaulWalker)"
+
+          # Disabled in your original workflow:
+          # backup_repo "https://github.com/zxfccmm4/Surge" \
+          #   "Surge(zxfccmm4)"
+
+          backup_repo "https://github.com/zqzess/rule_for_quantumultX" \
+            "rule_for_quantumultX(zqzess)"
+
+          backup_repo "https://github.com/89996462/Quantumult-X" \
+            "Quantumult-X(89996462)"
+
+          backup_repo "https://github.com/ddgksf2013/ddgksf2013" \
+            "ddgksf2013(ddgksf2013)"
+
+          backup_repo "https://github.com/ddgksf2013/Profile" \
+            "Profile(ddgksf2013)"
+
+          backup_repo "https://github.com/ddgksf2013/Rewrite" \
+            "Rewrite(ddgksf2013)"
+
+          backup_repo "https://github.com/ddgksf2013/Filter" \
+            "Filter(ddgksf2013)"
+
+          backup_repo "https://github.com/ddgksf2013/Scripts" \
+            "Scripts(ddgksf2013)"
+
+          backup_repo "https://github.com/Yu9191/Rewrite" \
+            "Rewrite(Yu9191)"
+
+          backup_repo "https://github.com/Marol62926/Quantumultx" \
+            "Quantumultx(Marol62926)"
+
+          backup_repo "https://github.com/Marol62926/MarScrpt" \
+            "MarScrpt(Marol62926)"
+
+          backup_repo "https://github.com/fmz200/wool_scripts" \
+            "wool_scripts(fmz200)"
+
+          backup_repo "https://github.com/Repcz/Tool" \
+            "Tool(Repcz)"
+
+          backup_repo "https://github.com/chxm1023/Rewrite" \
+            "Rewrite(chxm1023)" \
+            "main"
+
+          backup_repo "https://github.com/GeQ1an/Rules" \
+            "Rules(GeQ1an)" \
+            "master"
+
+          backup_repo "https://github.com/WeiGiegie/666" \
+            "666(WeiGiegie)" \
+            "main"
+
+          backup_repo "https://github.com/ZenmoFeiShi/Qx" \
+            "Qx(ZenmoFeiShi)" \
+            "main"
+
+          echo
+          echo "============================================================"
+          echo "Backup summary"
+          echo "Succeeded: ${SUCCESS_COUNT}"
+          echo "Failed:    ${FAILED_COUNT}"
+
+          if (( FAILED_COUNT > 0 )); then
+            echo
+            echo "Repositories with problems:"
+            printf ' - %s\n' "${FAILED_REPOS[@]}"
+          fi
+          echo "============================================================"
+
+          {
+            echo "## Repository backup summary"
+            echo
+            echo "- Succeeded: ${SUCCESS_COUNT}"
+            echo "- Failed: ${FAILED_COUNT}"
+
+            if (( FAILED_COUNT > 0 )); then
+              echo
+              echo "### Failed repositories"
+              for repo in "${FAILED_REPOS[@]}"; do
+                echo "- ${repo}"
+              done
+            fi
+          } >> "${GITHUB_STEP_SUMMARY}"
+
+          # Deliberately succeed even when one or more source repositories fail.
+          exit 0
+
       - name: Update timestamp
-        run: echo "Backup run at $(date)" > backup-timestamp.txt
-        
+        shell: bash
+        run: |
+          echo "Backup run at $(date -u '+%Y-%m-%d %H:%M:%S UTC')" > backup-timestamp.txt
+
       - name: Commit and Push Changes
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        shell: bash
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          if git diff-index --quiet HEAD; then
-            echo "No changes detected, adding timestamp file."
-            echo "Backup run at $(date)" > backup-timestamp.txt
-            git add backup-timestamp.txt
-            git commit -m "$(date +'%Y-%m-%d %H:%M:%S')"
-          else
-            git commit -m "Automated backup $(date +'%Y-%m-%d %H:%M:%S')"
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
           fi
-          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/wangyuyan666/QuanxBackup.git
-          git push origin main
+
+          git commit -m "Automated backup $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
