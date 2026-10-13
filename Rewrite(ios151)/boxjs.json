@@ -1,0 +1,46 @@
+{
+  "id": "scheme",
+  "name": "URLscheme",
+  "author": "@ios151",
+  "icon": "https://raw.githubusercontent.com/ios151/-/main/dingdangmao.jpg",
+  "repo": "https://t.me/Jsforbaby",
+  "apps": [
+    {
+      "id": "video",
+      "name": "选择你喜欢的播放器",
+      "keys": ["scheme_select", "scheme_custom"],
+      "settings": [
+        {
+          "id": "scheme_select",
+          "name": "播放器选择",
+          "val": "SenPlayer",
+          "type": "selects",
+          "items": [
+            { "key": "Safari", "label": "Safari" },
+            { "key": "SenPlayer", "label": "SenPlayer" },
+            { "key": "nPlayer", "label": "nPlayer" },
+            { "key": "Infuse", "label": "Infuse" },
+            { "key": "自定义", "label": "🛠 自定义播放器" }
+          ],
+          "desc": "选择播放器（或使用自定义）"
+        },
+        {
+          "id": "scheme_custom",
+          "name": "自定义 Scheme",
+          "val": "",
+          "type": "text",
+          "desc": "如：nplayer-http:// 或 myplayer://x-callback-url/play?url= 记得点旁边的保存按钮",
+          "show": {
+            "scheme_select": "自定义"
+          }
+        }
+      ],
+      "author": "@baby",
+      "script": "https://raw.githubusercontent.com/ios151/Rewrite/refs/heads/main/kdf.js",
+      "icons": [
+        "https://raw.githubusercontent.com/ios151/-/main/dingdangmao.jpg",
+        "https://raw.githubusercontent.com/ios151/-/main/dingdangmao.jpg"
+      ]
+    }
+  ]
+}
