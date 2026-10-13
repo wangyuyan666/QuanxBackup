@@ -203,6 +203,10 @@ jobs:
             "Qx(ZenmoFeiShi)" \
             "main"
 
+          backup_repo "https://github.com/ios151/Rewrite" \
+            "Rewrite(ios151)" \
+            "main"
+
           echo
           echo "============================================================"
           echo "Backup summary"
