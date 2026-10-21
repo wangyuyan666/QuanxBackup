@@ -36,6 +36,7 @@ jobs:
             local temp_dir
             local stage_dir
             local old_dir
+            local rsync_excludes=(--exclude='.git')
 
             repo_name="${repo_url#https://github.com/}"
             repo_name="${repo_name%.git}"
@@ -77,7 +78,16 @@ jobs:
             # Build the replacement copy separately first.
             mkdir -p "${stage_dir}"
 
-            if ! rsync -a --delete --exclude='.git' "${temp_dir}/repo/" "${stage_dir}/"; then
+            # 仅在备份 fmz200/wool_scripts 时排除指定文件。
+            if [[ "${repo_name}" == "fmz200/wool_scripts" ]]; then
+              rsync_excludes+=(
+                --exclude='/Surge/module/split/partT/TianFuBankMiniProgram.sgmodule'
+                --exclude='/Loon/plugin/split/partT/TianFuBankMiniProgram.lpx'
+                --exclude='/QuantumultX/rewrite/split/partT/TianFuBankMiniProgram.snippet'
+              )
+            fi
+
+            if ! rsync -a --delete "${rsync_excludes[@]}" "${temp_dir}/repo/" "${stage_dir}/"; then
               echo "::warning title=Backup failed::Failed to prepare files for ${repo_name}. Keeping the previous backup."
               FAILED_REPOS+=("${repo_name} (copy failed)")
               FAILED_COUNT=$((FAILED_COUNT + 1))
