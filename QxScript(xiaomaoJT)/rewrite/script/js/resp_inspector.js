@@ -24,6 +24,7 @@ const CONFIG = {
   saveBody: false, // 是否保存原始响应到 $prefs（key: respInspectorBody）
   maxDepth: 8, // 递归深度上限
   notify: true, // 是否弹通知
+  discoveryMode: false, // 未配置态是否把捕获到的 host/path + 可复制配置打到 QX 日志（不弹窗）
   // 可疑字段关键词，命中即标注。大小写不敏感
   keywords: [
     'vip', 'member', 'expire', 'expiry', 'unlock', 'pro', 'privilege',
@@ -34,6 +35,48 @@ const CONFIG = {
   // 这些值本身就很可疑（布尔 true/时间戳/权益文案）
   valueHints: ['vip', '会员', 'svip', 'premium', '已购', '永久', 'forever', 'pro'],
 };
+
+//==================== BoxJS 实时配置（覆盖内置默认值）====================
+// 配合 BoxJS 订阅 rewrite/boxJS/XiaoMaoReverseTools.json 使用
+function readBox(key, def, type) {
+  let raw = null;
+  try { if (typeof $prefs !== 'undefined' && $prefs) raw = $prefs.valueForKey(key); } catch (e) {}
+  const empty = raw === null || raw === undefined || String(raw).trim() === '';
+  const s = empty ? '' : String(raw).trim();
+  try {
+    switch (type) {
+      case 'bool': return empty ? def : /^(1|true|yes|on)$/i.test(s);
+      case 'int': { if (empty) return def; const n = parseInt(s, 10); return isNaN(n) ? def : n; }
+      case 'list': {
+        const src = empty ? (Array.isArray(def) ? def.join('\n') : String(def == null ? '' : def)) : s;
+        return src.split(/[,\n]/).map((x) => x.trim()).filter(Boolean);
+      }
+      case 'regex': {
+        if (empty) return def;
+        if (s.charAt(0) === '/') {
+          const m = s.match(/^\/(.*)\/([gimsuy]*)$/);
+          return m ? new RegExp(m[1], m[2] || 'i') : new RegExp(s, 'i');
+        }
+        return new RegExp(s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+      }
+      default: return empty ? def : s;
+    }
+  } catch (e) { return def; }
+}
+
+CONFIG.hosts = readBox('inspHosts', CONFIG.hosts, 'list');
+CONFIG.pathFilter = readBox('inspPathFilter', CONFIG.pathFilter, 'regex');
+CONFIG.saveBody = readBox('inspSaveBody', CONFIG.saveBody, 'bool');
+CONFIG.maxDepth = readBox('inspMaxDepth', CONFIG.maxDepth, 'int');
+CONFIG.notify = readBox('inspNotify', CONFIG.notify, 'bool');
+CONFIG.discoveryMode = readBox('inspDiscovery', CONFIG.discoveryMode, 'bool');
+CONFIG.keywords = readBox('inspKeywords', CONFIG.keywords, 'list');
+CONFIG.valueHints = readBox('inspValueHints', CONFIG.valueHints, 'list');
+const INSP_ONLYVIP = readBox('inspOnlyVip', false, 'bool');
+const INSP_MAXFIELDS = readBox('inspMaxFields', 40, 'int');
+const INSP_SHOWPATH = readBox('inspShowPath', true, 'bool');
+const INSP_EXPORT = (readBox('inspExport', 'text', 'str') || 'text').toLowerCase();
+const VIP_KW = /vip|member|pro|pay|subscribe|subscription|privilege|unlock|expire|deadline|trial|forever|ismember|ispro|ispay|vipend|viptype|membertype|usertype/i;
 
 //==================== 引擎 ====================
 
@@ -99,17 +142,31 @@ const _path = (url.match(/^https?:\/\/[^\/?#]+([^?#]*)/) || [,'/'])[1] || '/';
 const hitHost = CONFIG.hosts.length > 0 && CONFIG.hosts.some((h) => matchHost(h, host));
 const hitPath = !CONFIG.pathFilter || CONFIG.pathFilter.test(url);
 
-// 没锁定到任何 host 时，捕获真实 host/path 输出可复制配置，引导你自己配
+// 未锁定到任何 host 时：
+// - discoveryMode=false（默认）→ 静默放行，不弹通知、不刷日志
+// - discoveryMode=true → 仅把捕获到的 host/path + 可复制配置打到 QX 日志（不弹窗），供你之后锁定目标
+const _setupKey = 'respInspector_setup_hint';
 if (!hitHost) {
-  const gk = 'respInspector_guide_' + host;
-  if (!$prefs.valueForKey(gk)) {
-    $prefs.setValueForKey('1', gk);
-    const g = buildConfigGuide(
-      host, _path, 'https://raw.githubusercontent.com/xiaomaoJT/QxScript/main/rewrite/script/js/resp_inspector.js', 'script-response-body',
-      "hosts: ['" + host + "'],\n  pathFilter: " + buildPathRegex(_path) + ','
-    );
-    console.log('[inspector] ' + g);
-    if (CONFIG.notify) $notify('响应分析 · 配置引导', host, g.slice(0, 900));
+  // 首次进入未配置态：弹一次提醒（告知当前状态 + 用完及时关掉 MITM），避免只在日志里没人看到
+  if (!$prefs.valueForKey(_setupKey)) {
+    $prefs.setValueForKey('1', _setupKey);
+    const modeTxt = CONFIG.discoveryMode
+      ? '发现模式已开启：会在 QX 日志打印捕获到的 host/path（不弹窗）。拿到目标后请在 BoxJS 关掉『发现模式』并填『目标域名』；研究完毕请及时关闭 MITM / 本工具，勿长期用 * 抓全量流量。'
+      : '未配置目标域名，当前静默放行（不处理任何请求）。请到 BoxJS『响应分析』卡片的『目标域名』填入你的目标 host 锁定目标；研究完毕请及时关闭 MITM / 本工具，勿长期用 * 抓全量流量。';
+    $notify('逆向工具箱 · 未配置提醒（仅提示一次）', host, modeTxt.slice(0, 900));
+  }
+  if (CONFIG.discoveryMode) {
+    const _gk = 'respInspector_cap_' + host;
+    if (!$prefs.valueForKey(_gk)) {
+      $prefs.setValueForKey('1', _gk);
+      const g = buildConfigGuide(
+        host, _path, 'https://raw.githubusercontent.com/xiaomaoJT/QxScript/main/rewrite/script/js/resp_inspector.js', 'script-response-body',
+        "hosts: ['" + host + "'],\n  pathFilter: " + buildPathRegex(_path) + ','
+      );
+      console.log('[inspector · 发现] ' + g);
+    }
+  } else {
+    console.log('[inspector] 未配置目标域名，已静默放行。到 BoxJS『响应分析』卡片填『目标域名』后生效；开启『发现模式』可在 QX 日志查看捕获到的 host/path。');
   }
 }
 
@@ -142,7 +199,10 @@ function main() {
 
   function kwIn(key) {
     const k = String(key).toLowerCase().replace(/[_\-\s]/g, '');
-    return CONFIG.keywords.some((w) => k.indexOf(w.toLowerCase().replace(/[_\-\s]/g, '')) >= 0);
+    for (const w of CONFIG.keywords) {
+      if (k.indexOf(w.toLowerCase().replace(/[_\-\s]/g, '')) >= 0) return w;
+    }
+    return null;
   }
 
   function valHint(v) {
@@ -174,6 +234,8 @@ function main() {
       const vh = valHint(v);
 
       if ((keyHit || vh) && !seen.has(p)) {
+        // 只看会员类：仅保留「会员相关关键字命中」或「值本身可疑（布尔/权益文案/时间戳）」
+        if (INSP_ONLYVIP && !(keyHit && VIP_KW.test(keyHit)) && !vh) continue;
         seen.add(p);
         found.push({
           path: p,
@@ -194,16 +256,20 @@ function main() {
 
   const lines = [];
   lines.push('URL: ' + url.slice(0, 120));
-  lines.push('命中字段：' + found.length + ' 个');
-  lines.push('');
-  found.slice(0, 40).forEach((f, i) => {
-    lines.push(
-      (i + 1) + '. ' + f.path +
-      '\n     值 = ' + JSON.stringify(f.value) +
-      '  [' + f.reason + ']'
-    );
-  });
-  if (found.length > 40) lines.push('... 其余 ' + (found.length - 40) + ' 个见日志');
+  if (INSP_EXPORT === 'json') {
+    lines.push(JSON.stringify(found.slice(0, INSP_MAXFIELDS), null, 2));
+  } else {
+    lines.push('命中字段：' + found.length + ' 个');
+    lines.push('');
+    found.slice(0, INSP_MAXFIELDS).forEach((f, i) => {
+      lines.push(
+        (i + 1) + '. ' + (INSP_SHOWPATH ? f.path : f.key) +
+        '\n     值 = ' + JSON.stringify(f.value) +
+        '  [' + f.reason + ']'
+      );
+    });
+    if (found.length > INSP_MAXFIELDS) lines.push('... 其余 ' + (found.length - INSP_MAXFIELDS) + ' 个见日志');
+  }
 
   const out = lines.join('\n');
   console.log('[inspector]\n' + out);

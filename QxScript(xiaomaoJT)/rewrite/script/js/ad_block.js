@@ -16,6 +16,42 @@
  *
  */
 
+//==================== 运行配置 ====================
+const CONFIG = {
+  discoveryMode: false, // 未配置规则时：false=静默放行（默认）；true=把捕获到的 host/path + 可复制配置打到 QX 日志（不弹窗）
+};
+
+//==================== BoxJS 实时配置（覆盖式单条规则，免改代码）====================
+// 配合 BoxJS 订阅 rewrite/boxJS/XiaoMaoReverseTools.json 使用
+function readBox(key, def, type) {
+  let raw = null;
+  try { if (typeof $prefs !== 'undefined' && $prefs) raw = $prefs.valueForKey(key); } catch (e) {}
+  const empty = raw === null || raw === undefined || String(raw).trim() === '';
+  const s = empty ? '' : String(raw).trim();
+  try {
+    switch (type) {
+      case 'bool': return empty ? def : /^(1|true|yes|on)$/i.test(s);
+      case 'int': { if (empty) return def; const n = parseInt(s, 10); return isNaN(n) ? def : n; }
+      case 'list': {
+        const src = empty ? (Array.isArray(def) ? def.join('\n') : String(def == null ? '' : def)) : s;
+        return src.split(/[,\n]/).map((x) => x.trim()).filter(Boolean);
+      }
+      case 'regex': {
+        if (empty) return def;
+        if (s.charAt(0) === '/') {
+          const m = s.match(/^\/(.*)\/([gimsuy]*)$/);
+          return m ? new RegExp(m[1], m[2] || 'i') : new RegExp(s, 'i');
+        }
+        return new RegExp(s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+      }
+      default: return empty ? def : s;
+    }
+  } catch (e) { return def; }
+}
+
+CONFIG.discoveryMode = readBox('adDiscovery', CONFIG.discoveryMode, 'bool');
+CONFIG.notify = readBox('adNotify', true, 'bool');
+
 //==================== 规则配置区 ====================
 
 const RULES = [
@@ -59,6 +95,31 @@ const RULES = [
     replacement: '',
   },
 ];
+
+//==================== BoxJS 一键规则（免改代码，由订阅参数生成，插入到 RULES 最前）====================
+(function applyBoxRule() {
+  const h = readBox('adHost', '', 'str');
+  if (!h) return; // 未填域名则不启用本卡片规则，仍可用内联 RULES
+  const rule = {
+    name: 'BoxJS一键配置',
+    host: h,
+    path: readBox('adPath', '', 'regex') || /\/.*/i,
+    action: readBox('adAction', 'remove_ads', 'str'),
+    listPath: readBox('adListPath', 'data.list', 'str'),
+    adFlag: readBox('adAdFlag', 'is_ad', 'str'),
+    fieldPath: readBox('adFieldPath', 'data.ad_duration', 'str'),
+    value: readBox('adValue', '0', 'str'),
+    pattern: readBox('adPattern', '', 'str'),
+    replacement: readBox('adReplacement', '', 'str'),
+    flags: 'g',
+  };
+  const adTypeRaw = readBox('adAdType', '', 'str');
+  if (adTypeRaw !== '') {
+    const n = Number(adTypeRaw);
+    if (!isNaN(n)) rule.adType = n; else rule.adTypeStr = adTypeRaw;
+  }
+  RULES.unshift(rule);
+})();
 
 //==================== 引擎（一般不用改）=====================
 
@@ -164,25 +225,39 @@ for (const r of RULES) {
   break;
 }
 
-// 没命中任何已配置规则时，捕获真实 host/path 输出可复制配置，引导你自己配
+// 没命中任何已配置规则时：
+// - discoveryMode=false（默认）→ 静默放行，不弹通知、不刷日志
+// - discoveryMode=true → 仅把捕获到的 host/path + 可复制配置打到 QX 日志（不弹窗），供你之后锁定目标
+const _setupKey = 'adBlock_setup_hint';
 if (!hit) {
-  const gk = 'adblock_guide_' + host;
-  if (!$prefs.valueForKey(gk)) {
-    $prefs.setValueForKey('1', gk);
-    const scriptCfg =
-      "RULES: [\n" +
-      "  {\n" +
-      "    name: '我的去广告',\n" +
-      "    host: '" + host + "',\n" +
-      "    path: " + buildPathRegex(_path) + ",\n" +
-      "    action: 'remove_ads',\n" +
-      "    listPath: 'data.list',\n" +
-      "    adFlag: 'is_ad',\n" +
-      "  },\n" +
-      "]";
-    const g = buildConfigGuide(host, _path, 'https://raw.githubusercontent.com/xiaomaoJT/QxScript/main/rewrite/script/js/ad_block.js', 'script-response-body', scriptCfg);
-    console.log('[ad_block] ' + g);
-    if (typeof $notify === 'function') $notify('ad_block · 配置引导', host, g.slice(0, 900));
+  // 首次进入未配置态：弹一次提醒（告知当前状态 + 用完及时关掉 MITM），避免只在日志里没人看到
+  if (!$prefs.valueForKey(_setupKey)) {
+    $prefs.setValueForKey('1', _setupKey);
+    const modeTxt = CONFIG.discoveryMode
+      ? '发现模式已开启：会在 QX 日志打印捕获到的 host/path（不弹窗）。拿到目标后请在 BoxJS 关掉『发现模式』并填『目标域名』；研究完毕请及时关闭 MITM / 本工具，勿长期用 * 抓全量流量。'
+      : '未配置规则（目标域名为空），当前静默放行（不处理任何响应）。请到 BoxJS『广告拦截』卡片的『目标域名』填入你的目标 host 锁定目标；研究完毕请及时关闭 MITM / 本工具，勿长期用 * 抓全量流量。';
+    $notify('逆向工具箱 · 未配置提醒（仅提示一次）', host, modeTxt.slice(0, 900));
+  }
+  if (CONFIG.discoveryMode) {
+    const _gk = 'adBlock_cap_' + host;
+    if (!$prefs.valueForKey(_gk)) {
+      $prefs.setValueForKey('1', _gk);
+      const scriptCfg =
+        "RULES: [\n" +
+        "  {\n" +
+        "    name: '我的去广告',\n" +
+        "    host: '" + host + "',\n" +
+        "    path: " + buildPathRegex(_path) + ",\n" +
+        "    action: 'remove_ads',\n" +
+        "    listPath: 'data.list',\n" +
+        "    adFlag: 'is_ad',\n" +
+        "  },\n" +
+        "]";
+      const g = buildConfigGuide(host, _path, 'https://raw.githubusercontent.com/xiaomaoJT/QxScript/main/rewrite/script/js/ad_block.js', 'script-response-body', scriptCfg);
+      console.log('[ad_block · 发现] ' + g);
+    }
+  } else {
+    console.log('[ad_block] 未配置规则，已静默放行。到 BoxJS『广告拦截』卡片填『目标域名』后生效；开启『发现模式』可在 QX 日志查看捕获到的 host/path。');
   }
 }
 

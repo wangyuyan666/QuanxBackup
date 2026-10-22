@@ -20,6 +20,43 @@
  *
  */
 
+//==================== 运行配置 ====================
+const CONFIG = {
+  discoveryMode: false, // 未配置规则时：false=静默放行（默认）；true=把捕获到的 host/path + 可复制配置打到 QX 日志（不弹窗）
+};
+
+//==================== BoxJS 实时配置（覆盖式单条规则，免改代码）====================
+// 配合 BoxJS 订阅 rewrite/boxJS/XiaoMaoReverseTools.json 使用
+function readBox(key, def, type) {
+  let raw = null;
+  try { if (typeof $prefs !== 'undefined' && $prefs) raw = $prefs.valueForKey(key); } catch (e) {}
+  const empty = raw === null || raw === undefined || String(raw).trim() === '';
+  const s = empty ? '' : String(raw).trim();
+  try {
+    switch (type) {
+      case 'bool': return empty ? def : /^(1|true|yes|on)$/i.test(s);
+      case 'int': { if (empty) return def; const n = parseInt(s, 10); return isNaN(n) ? def : n; }
+      case 'list': {
+        const src = empty ? (Array.isArray(def) ? def.join('\n') : String(def == null ? '' : def)) : s;
+        return src.split(/[,\n]/).map((x) => x.trim()).filter(Boolean);
+      }
+      case 'regex': {
+        if (empty) return def;
+        if (s.charAt(0) === '/') {
+          const m = s.match(/^\/(.*)\/([gimsuy]*)$/);
+          return m ? new RegExp(m[1], m[2] || 'i') : new RegExp(s, 'i');
+        }
+        return new RegExp(s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+      }
+      case 'json': { if (empty) return def; try { return JSON.parse(s); } catch (e) { return def; } }
+      default: return empty ? def : s;
+    }
+  } catch (e) { return def; }
+}
+
+CONFIG.discoveryMode = readBox('vipDiscovery', CONFIG.discoveryMode, 'bool');
+CONFIG.notify = readBox('vipNotify', true, 'bool');
+
 //==================== 规则配置区 ====================
 
 const RULES = [
@@ -77,6 +114,29 @@ const RULES = [
   //   },
   // },
 ];
+
+//==================== BoxJS 一键规则（免改代码，由订阅参数生成，插入到 RULES 最前）====================
+(function applyBoxRule() {
+  const h = readBox('vipHost', '', 'str');
+  if (!h) return; // 未填域名则不启用本卡片规则，仍可用内联 RULES
+  const rule = {
+    name: 'BoxJS一键配置',
+    host: h,
+    path: readBox('vipPath', '', 'regex') || /\/.*/i,
+    vipFields: readBox('vipVipFields', ['is_vip', 'isVip', 'vip', 'is_member', 'isMember', 'is_pro', 'isPro', 'isPay', 'is_pay'], 'list'),
+    timeFields: readBox('vipTimeFields', [], 'list'),
+    timeValue: readBox('vipTimeValue', '2099-12-31', 'str'),
+    typeFields: {},
+    patches: [],
+    deletes: readBox('vipDeleteFields', [], 'list'),
+  };
+  const lvl = readBox('vipLevelFields', [], 'list');
+  const lvlVal = readBox('vipLevelValue', 9, 'int');
+  lvl.forEach((f) => { rule.typeFields[f] = lvlVal; });
+  const whole = readBox('vipWholeJson', null, 'json');
+  if (whole && typeof whole === 'object') rule.whole = whole;
+  RULES.unshift(rule);
+})();
 
 //==================== 引擎（一般不用改）=====================
 
@@ -245,24 +305,38 @@ for (const r of RULES) {
   break;
 }
 
-// 没命中任何已配置规则时，捕获真实 host/path 输出可复制配置，引导你自己配
+// 没命中任何已配置规则时：
+// - discoveryMode=false（默认）→ 静默放行，不弹通知、不刷日志
+// - discoveryMode=true → 仅把捕获到的 host/path + 可复制配置打到 QX 日志（不弹窗），供你之后锁定目标
+const _setupKey = 'vipPatch_setup_hint';
 if (!hit) {
-  const gk = 'vippatch_guide_' + host;
-  if (!$prefs.valueForKey(gk)) {
-    $prefs.setValueForKey('1', gk);
-    const scriptCfg =
-      "RULES: [\n" +
-      "  {\n" +
-      "    name: '我的解锁',\n" +
-      "    host: '" + host + "',\n" +
-      "    path: " + buildPathRegex(_path) + ",\n" +
-      "    vipFields: ['is_vip', 'vip', 'is_member'],\n" +
-      "    timeFields: ['expire_time', 'vip_expire_time'],\n" +
-      "  },\n" +
-      "]";
-    const g = buildConfigGuide(host, _path, 'https://raw.githubusercontent.com/xiaomaoJT/QxScript/main/rewrite/script/js/vip_patch.js', 'script-response-body', scriptCfg);
-    console.log('[vip_patch] ' + g);
-    if (typeof $notify === 'function') $notify('vip_patch · 配置引导', host, g.slice(0, 900));
+  // 首次进入未配置态：弹一次提醒（告知当前状态 + 用完及时关掉 MITM），避免只在日志里没人看到
+  if (!$prefs.valueForKey(_setupKey)) {
+    $prefs.setValueForKey('1', _setupKey);
+    const modeTxt = CONFIG.discoveryMode
+      ? '发现模式已开启：会在 QX 日志打印捕获到的 host/path（不弹窗）。拿到目标后请在 BoxJS 关掉『发现模式』并填『目标域名』；研究完毕请及时关闭 MITM / 本工具，勿长期用 * 抓全量流量。'
+      : '未配置规则（目标域名为空），当前静默放行（不处理任何响应）。请到 BoxJS『会员解锁』卡片的『目标域名』填入你的目标 host 锁定目标；研究完毕请及时关闭 MITM / 本工具，勿长期用 * 抓全量流量。';
+    $notify('逆向工具箱 · 未配置提醒（仅提示一次）', host, modeTxt.slice(0, 900));
+  }
+  if (CONFIG.discoveryMode) {
+    const _gk = 'vipPatch_cap_' + host;
+    if (!$prefs.valueForKey(_gk)) {
+      $prefs.setValueForKey('1', _gk);
+      const scriptCfg =
+        "RULES: [\n" +
+        "  {\n" +
+        "    name: '我的解锁',\n" +
+        "    host: '" + host + "',\n" +
+        "    path: " + buildPathRegex(_path) + ",\n" +
+        "    vipFields: ['is_vip', 'vip', 'is_member'],\n" +
+        "    timeFields: ['expire_time', 'vip_expire_time'],\n" +
+        "  },\n" +
+        "]";
+      const g = buildConfigGuide(host, _path, 'https://raw.githubusercontent.com/xiaomaoJT/QxScript/main/rewrite/script/js/vip_patch.js', 'script-response-body', scriptCfg);
+      console.log('[vip_patch · 发现] ' + g);
+    }
+  } else {
+    console.log('[vip_patch] 未配置规则，已静默放行。到 BoxJS『会员解锁』卡片填『目标域名』后生效；开启『发现模式』可在 QX 日志查看捕获到的 host/path。');
   }
 }
 
