@@ -1,28 +1,34 @@
-const NOW = "2024-01-01T00:00:00.000Z";
-
+const BUNDLE_URL = "https://moshi-ota.insav2.workers.dev/bundle-f0e1d2c3b4a59687.hbc";
+const BUNDLE_SHA256_B64URL = "LiEYF8XD9slLqDw1buVgEsEeCQ8nkxsL11jE9Dk4pYw";
+const FORGED_UPDATE_ID = "e971c9c9-01d7-43ce-8fad-1163f5facce2";
+const nowMs = Date.now();
+const nowSec = Math.floor(nowMs / 1000);
+const OTA_MANIFEST = {"id":"03643603-883c-0729-b2da-ee2ff3bc17e9","createdAt":"2026-10-26T12:38:35.000Z","runtimeVersion":"4.2.0","launchAsset":{"key":"f0e1d2c3b4a59687f0e1d2c3b4a59687","hash":"LiEYF8XD9slLqDw1buVgEsEeCQ8nkxsL11jE9Dk4pYw","contentType":"application/javascript","fileExtension":".bundle","url":"https://moshi-ota.insav2.workers.dev/bundle-f0e1d2c3b4a59687.hbc"},"assets":[{"key":"9adb8c5efca932e2b732b293da813bd2","hash":"mtuMXvypMuK3MrKT2oE70uMZUiYwVrzp4lF_7A8LanY","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/0a328cd9c1afd0afe8e3b1ec5165b1b4"},{"key":"2cdfeb8e5ccde7976f7012fb8cce73af","hash":"LN_rjlzN55dvcBL7jM5zryIpAp7iHU8VCf7RFIccbNg","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/7d40544b395c5949f4646f5e150fe020"},{"key":"2b7443a9a58e92ca11a575bdc1159861","hash":"K3RDqaWOksoRpXW9wRWYYVpX3eMFzYznDWAmBrMCzZg","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/a132ecc4ba5c1517ff83c0fb321bc7fc"},{"key":"3ddd0773ed27e23d25789f301731b3ac","hash":"Pd0Hc-0n4j0leJ8wFzGzrEVa2L5aonoKG4OPicbSciU","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/0ea69b5077e7c4696db85dbcba75b0e1"},{"key":"92ed8176ac8cb44362a5fc6a3703626a","hash":"ku2BdqyMtENipfxqNwNiagAGrGt8snLumfWFAmLsBw4","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/2d0a9133e39524f138be6d4db9f4851f"},{"key":"c86bb485eee687e06c500fc4234f51a6","hash":"yGu0he7mh-BsUA_EI09RpnhLRTDCrhHQx2SBEQvOMQU","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/3cd68ccdb8938e3711da2e8831b85493"},{"key":"d03a5cd7a66ef10c5147916f9d5878b2","hash":"0Dpc16Zu8QxRR5FvnVh4stCgpa1G9AWjHNmWfvqlWv0","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/61ca7e64b7d605716c57706cef640b9a"},{"key":"ab5613d2ce70fa67c5926e8313536649","hash":"q1YT0s5w-mfFkm6DE1NmSUUZn8GV-m_nbF_jzsRS4xo","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/aff2c65b39a296d4f7e96d0f58169170"},{"key":"c4e54e6a0a7de636aa153378fbc62ea4","hash":"xOVOagp95jaqFTN4-8YupKQWlb_t-Af5Dfexj_1zP2c","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/d8e7601e3df962f83c62371ac14964d8"},{"key":"2325c53a73e54c438cbbc60dffdd8b51","hash":"IyXFOnPlTEOMu8YN_92LUT1HG6QuL1ZxPvQEuV4Mofw","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/0747a1317bbe9c6fc340b889ef8ab3ae"},{"key":"b1bc1810ca23e2c38cd76971c43591d7","hash":"sbwYEMoj4sOM12lxxDWR1yYWEGEkDYt5KwV1cZbdtSg","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/d84e297c3b3e49a614248143d53e40ca"},{"key":"cbdf9213e55f65c48d076acd8423b7c9","hash":"y9-SE-VfZcSNB2rNhCO3ya7k8bgRAf9slaOMTNioZGE","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/1190ab078c57159f4245a328118fcd9a"},{"key":"d05c9d30d79f45a78e5585a2e7ec67c6","hash":"0FydMNefRaeOVYWi5-xnxqBqiD3ZE34dUFnoyHszznY","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/78c625386b4d0690b421eb0fc78f7b9c"},{"key":"dc56b976bd45638e1125f6689743525e","hash":"3Fa5dr1FY44RJfZol0NSXmiGrgvvLI9GUZlIM2hagx8","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/dad2fa9f4394a630f0f9a0d6dabd44bc"},{"key":"ef13fc0dfc52ec23817585fd7e109fbd","hash":"7xP8DfxS7COBdYX9fhCfvfWTo7JUnEDOcaybDtoSzCw","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/f3a81967828232c893d547162e922764"},{"key":"b434a7cf18c2d4ce747c70942ea2fee2","hash":"tDSnzxjC1M50fHCULqL-4tRBLZOWftkrNy-BC7kmHqU","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/d62ddc38b69aff346c20a28774933d6a"},{"key":"c15ec72a74d13957211808313d5c35de","hash":"wV7HKnTROVchGAgxPVw13rf3YGxtItvdzrAADU4FR60","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/d1ea1496f9057eb392d5bbf3732a61b7"},{"key":"a69a2edb5b6c60b8433d5b6d23c69f52","hash":"ppou21tsYLhDPVttI8afUgzNimAvP2DnmW5Ilxi8F1w","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/19eeb73b9593a38f8e9f418337fc7d10"},{"key":"27f4d229d440925bf7212d5dfffa45d5","hash":"J_TSKdRAklv3IS1d__pF1Zayx7O7KQXJa4ObIIGh2-s","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/ab19f4cbc543357183a20571f68380a3"},{"key":"708a79cf561b8a2a4850ce0254584d3a","hash":"cIp5z1YbiipIUM4CVFhNOlIxBGvgj7f630tu39sxF4s","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/d8b800c443b8972542883e0b9de2bdc6"},{"key":"acf691957a3bcce7d195856dce98a5cf","hash":"rPaRlXo7zOfRlYVtzpilzxTc4QvqKKpcELNVDAeOI7U","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/412dd9275b6b48ad28f5e3d81bb1f626"},{"key":"6deca32b56b97fa1fa87facd6996b46c","hash":"beyjK1a5f6H6h_rNaZa0bMRRkKVTQA5_698dIJMJm1c","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/017bc6ba3fc25503e5eb5e53826d48a8"},{"key":"efc79da3c4c97dfb1571bff6202958ab","hash":"78edo8TJffsVcb_2IClYqwUpxaox6DkmAFeLPjWdFEc","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/20e71bdf79e3a97bf55fd9e164041578"},{"key":"b3be4ddc960fd91e9ed01b6c810948ef","hash":"s75N3JYP2R6e0BtsgQlI75E1yQTBjkt0k_2XSUT3dCk","contentType":"font/ttf","fileExtension":".ttf","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/f36795cd9aab1b75367e1327bd811fbf"},{"key":"915721f57088b974b4f99e5a689da4d1","hash":"kVch9XCIuXS0-Z5aaJ2k0RWqsdK53KbEgs0G3c7jmTQ","contentType":"font/ttf","fileExtension":".ttf","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/acf5d7714375ecffa07de2ebc24f927f"},{"key":"1f32d373d7f7dbb7b90a5a763a463610","hash":"HzLTc9f327e5Clp2OkY2EM72d7a6-r9VpQ7bBCrnhuc","contentType":"font/ttf","fileExtension":".ttf","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/9c3c72b7f8255001d641be420924fc94"},{"key":"d3c6bc975145cf33ff65b0ed73e5626d","hash":"08a8l1FFzzP_ZbDtc-VibZaCmjR2GMQM3ExXV_K899o","contentType":"font/ttf","fileExtension":".ttf","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/b5f6978239df75887234dd7f79117193"},{"key":"2a7f8a3a20fc78930c240f996ba3ca73","hash":"Kn-KOiD8eJMMJA-Za6PKc8pFY2f6sJRfbBnyhQLpol0","contentType":"font/ttf","fileExtension":".ttf","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/4e741683d0106c54d715573797725cb2"},{"key":"e0cc7e27f59319237df3db6732c1714a","hash":"4Mx-J_WTGSN989tnMsFxSmVaXD-U2971JGgMbtPpx94","contentType":"font/ttf","fileExtension":".ttf","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/7399d8d3019002d0e3d8d84aa80d6ca0"},{"key":"16ebb602bab4660506bfcaf20fd9dad5","hash":"Fuu2Arq0ZgUGv8ryD9na1dopSQ8g1hbt4pKbj-Z-CC0","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/5e3b06da836c24c6f68bb20af4740ac2"},{"key":"7abb00309a468dee639699ceddbc2d43","hash":"ersAMJpGje5jlpnO3bwtQ_2cQIjAmKqB_dXAL9-4EJ0","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/f0a0fa0be3f2b8f0e9399fd707824fbb"},{"key":"1d3454206ea6a11160121fa10b1c98ce","hash":"HTRUIG6moRFgEh-hCxyYztAtwJgGNnN-X2DYqgv2Duo","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/1a7f13649fda16579abe3e66948de99c"},{"key":"990c63c19e706c246e45ac8b99923d70","hash":"mQxjwZ5wbCRuRayLmZI9cM_EmnIJ7os1dqHCAT2DAqI","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/2ad1859d667ac81cbc65652251a6bb00"},{"key":"25d39dd8c6f1528556b7996c6e1aae2f","hash":"JdOd2MbxUoVWt5lsbhquL8zHJ0ZDPb97_0g42obq7eQ","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/841ce7ae2988b5df582faf3adec7d110"},{"key":"468e22ba77b710ad6ead33ae0b3daf36","hash":"Ro4iune3EK1urTOuCz2vNh54ZSTyPyU4S4Vjv3ZCOFg","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/cce20fff26ef71c8e7e1428dd4ee40d2"},{"key":"94087dbb5c712ee596f1a33debe493d5","hash":"lAh9u1xxLuWW8aM96-ST1Ta01-e7RBDZ3YEeWEtVHZI","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/cda3f3f3b1d8ac400344b82b59c55ab9"},{"key":"46488cae41a8fc1d101d428203ad8c64","hash":"RkiMrkGo_B0QHUKCA62MZIHVHMI5vHUsC2nEJc4Q_Fs","contentType":"application/octet-stream","fileExtension":".html","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/96f63f61279a48f0e827b35a70c3d7df"},{"key":"389b5ce7b405a635870b2036d4d89585","hash":"OJtc57QFpjWHCyA21NiVhcGeuhiemDuGqgT77h9UA40","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/c8ea511b9aaefc313c1b177b0a00a909"},{"key":"88a4dac918a345e1aba785aabf63de46","hash":"iKTayRijReGrp4Wqv2PeRooKEHCLkxt1qYhG-To1EF8","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/206468d74c86411b98d84a052c709f2f"},{"key":"bd5ae015a421163adb80d6021465f825","hash":"vVrgFaQhFjrbgNYCFGX4JRx9Ikq8T60DUy4u3CrxOqY","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/a6d93c0e66e4d5ca82f275ad79c488ec"},{"key":"457f93df1f5a8f42c5b45c13ad88842b","hash":"RX-T3x9aj0LFtFwTrYiEK2xmeKbuRBkiqE1LsqrbnjI","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/695ebd3fb9ef69c8df883d13025f6dfe"},{"key":"de2f3263c13fb55df05bac7c00555616","hash":"3i8yY8E_tV3wW6x8AFVWFnTyRTIo8T-7wtFLWieQPU4","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/dd27eb10b4743b8036c8def51b929762"},{"key":"79eb48cdf4d13824a023e2385b9bf444","hash":"eetIzfTROCSgI-I4W5v0RFogUaFNpRWv4W9hA34tMT8","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/a75327edb1f697d55c1d0db42529b3e7"},{"key":"3f4f37845e84736b50cf5887b1f77a2a","hash":"P083hF6Ec2tQz1iHsfd6KnJ5tTaoWe47jBPoICsmat4","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/556284eb0a3c0ca52761dc3046e3e83f"},{"key":"15f15591ac837860eb1049e71b0e4553","hash":"FfFVkayDeGDrEEnnGw5FU2WQel7WeuP-Yy9CyaxXepk","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/6bfaeac31387c4c677083eaf4330ab32"},{"key":"8d751d60bf17a3dfecc07bc65c246006","hash":"jXUdYL8Xo9_swHvGXCRgBs61SsIi4QDC2zefOR2vbIg","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/b48d9fc7b162fdd5b9f9914eac987962"},{"key":"c1810dfbfb75120e0e9c01c3d62f101a","hash":"wYEN-_t1Eg4OnAHD1i8QGmS7Pd1IJGgyaKP9jWm1AIw","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/8e2c4c0b016f4267af6b8f5178273f5c"},{"key":"1ed3973d9d0906202c202f865df288d3","hash":"HtOXPZ0JBiAsIC-GXfKI0_Vfz3yZG2qlXnhs6DcKmz0","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/e4da49b14d5e8a89b3653edf6e4492cc"},{"key":"db93c600f64351cfbf68526510ef4749","hash":"25PGAPZDUc-_aFJlEO9HSUQoRkG3RhTse2U-PQzDJEM","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/ecc707ad68de122f9ca4c9fbfe19d2a3"},{"key":"e5f6706ddf1430a2f53ac0071247bc13","hash":"5fZwbd8UMKL1OsAHEke8E5LCqxBpf06ma88v66x9Pws","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/c497a8baf6132e42c4b712ca78f2f23a"},{"key":"21661da29b78cde9b5d03b424353df57","hash":"IWYdopt4zem10DtCQ1PfV38sdDOturxpeCvJUABv2ZI","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/ae56dcb7b4ec9cdf5f83fe1934163e73"},{"key":"18526c7e4cdbe62532d9a957141a0086","hash":"GFJsfkzb5iUy2alXFBoAhuQkfCQSHSkIwOVAIeyRdHo","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/c532763fedb8ccb1e909b4889a0a3f16"},{"key":"fa779db826d786356b7cb7c7ba99dd3f","hash":"-neduCbXhjVrfLfHupndPwn-8NHx2AhkkcWFrbkdyW0","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/c84bc8b5b543b375c8b22635f7eebcc4"},{"key":"5200df1213f275b6b34623e4ec9908e4","hash":"UgDfEhPydbazRiPk7JkI5Dzv8LQlF7n6NjWBWXKYWPE","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/91f61b2b4e82f8ee3e91f39bc18cfc62"},{"key":"5e07c8b1b441cfe8a377511e0e81dbba","hash":"XgfIsbRBz-ijd1EeDoHbukuAVhuuoIuqsmRgdwERqT0","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/7a3d608afb36d361940cc8c39079b089"},{"key":"bac10ff3a3bdd09fb0f41f85ac234939","hash":"usEP86O90J-w9B-FrCNJOfKwwlTQKg6P2kmmaey7AEM","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/df09c43d64f17829764b75573cd1de9e"},{"key":"072ab32e94f20dbb9496ffae9b35da8b","hash":"ByqzLpTyDbuUlv-umzXai7fnjCnN4Y5KILv8OU8ExKc","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/a534138880fa883f92043401515370d3"},{"key":"b4ee4a98765ac8db408e4202ebdac6ab","hash":"tO5KmHZayNtAjkIC69rGqyxTyP_uM_Sz9FXwOyOduQU","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/1d71db28da20eaf30a868cc33c27b394"},{"key":"2cbcd89f6d6547df8c5897c1114f0fe3","hash":"LLzYn21lR9-MWJfBEU8P4xmlGlDYtegsrk-mavCAZPE","contentType":"image/png","fileExtension":".png","url":"https://api.getmoshi.app/api/ota/assets/production/4.2.0/20261026-123835/assets/f8d8199ee416042b1cd638c37b7b18c2"}],"metadata":{},"extra":{"expoClient":{"name":"Moshi","slug":"MoshClient","version":"4.2.0","runtimeVersion":"4.2.0","scheme":"moshi","ios":{"bundleIdentifier":"app.getmoshi.ios"},"extra":{"router":{},"eas":{"projectId":"0039d7f5-f1f4-4e11-8bff-4f657ffff74c"},"apiUrl":"https://api.getmoshi.app","imageUrl":"https://i.getmoshi.app"}}}};
 const entitlement = {
-  id: "crack-ent",
   productKey: "pro_lifetime",
-  status: "ACTIVE",
+  status: "active",
+  effectiveStatus: "active",
   type: "lifetime",
   expiresAt: null,
+  autoRenew: false,
   isActive: true,
-  verifiedAt: NOW
+  verifiedAt: nowMs
 };
-
 const license = {
-  id: "crack-lifetime",
+  licenseId: "forge-lifetime-1",
+  id: "forge-lifetime-1",
   licenseKey: "MOSHI-PRO0-LIFE-TIME",
-  status: "ACTIVE",
+  ownActivationId: "forge-act-1",
+  activationId: "forge-act-1",
+  status: "active",
+  effectiveStatus: "active",
   productKey: "pro_lifetime",
   expiresAt: null,
-  startsAt: NOW,
+  startsAt: nowSec - 86400,
   autoRenew: false,
-  activationId: "crack-act",
-  verifiedAt: NOW,
+  verifiedAt: nowMs,
   entitlement: entitlement
 };
-
 const BODIES = {
   me: {
     licensePushFanoutEnabled: true,
@@ -30,31 +36,40 @@ const BODIES = {
     entitlements: [entitlement]
   },
   activate: {
-    status: "ACTIVE",
-    success: true,
     license: license,
-    entitlement: entitlement,
-    licenses: [license],
-    entitlements: [entitlement]
+    activationId: license.ownActivationId,
+    status: "active",
+    success: true,
+    lifetimeUpgrade: true
   },
   devices: {
     devices: [],
     activeDevices: 0
   }
 };
-
 const url = $request.url;
-const data = url.indexOf("/devices") !== -1 ? BODIES.devices
-           : url.indexOf("/licenses/activate") !== -1 ? BODIES.activate
-           : url.indexOf("/licenses/me") !== -1 ? BODIES.me
-           : null;
-
-if (!data) {
+let body = null;
+let headers = { "Content-Type": "application/json" };
+if (url.indexOf("/api/ota/manifest") !== -1) {
+  OTA_MANIFEST.id = FORGED_UPDATE_ID;
+  OTA_MANIFEST.createdAt = new Date().toISOString().replace(/\.\d{3}Z$/, ".000Z");
+  OTA_MANIFEST.launchAsset.url = BUNDLE_URL;
+  OTA_MANIFEST.launchAsset.hash = BUNDLE_SHA256_B64URL;
+  body = JSON.stringify(OTA_MANIFEST);
+  headers = {
+    "Content-Type": "application/expo+json; charset=utf-8",
+    "expo-protocol-version": "1"
+  };
+} else {
+  const data = url.indexOf("/devices") !== -1 ? BODIES.devices
+             : url.indexOf("/licenses/activate") !== -1 ? BODIES.activate
+             : url.indexOf("/licenses/me") !== -1 ? BODIES.me
+             : null;
+  if (data) body = JSON.stringify(data);
+}
+if (body === null) {
   $done({});
 } else {
-  const body = JSON.stringify(data);
-  const headers = { "Content-Type": "application/json" };
-
   if (typeof $task !== "undefined") {
     $done({ status: "HTTP/1.1 200 OK", headers: headers, body: body });
   } else {
