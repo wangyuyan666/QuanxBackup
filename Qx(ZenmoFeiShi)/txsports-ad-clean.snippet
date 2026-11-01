@@ -1,0 +1,14 @@
+#!name = 腾讯体育净化
+#!author = TG@ZenMoFiShi
+#!update = 2026-11-1
+#!desc = 去除开屏广告、优化我的页面、去除底部会员tap、优化首页展示、去除搜索热词
+^https:\/\/config\.ab\.qq\.com\/tab\/GetTabRemoteConfig(?:\?.*)?$ (?i)\r\nUser-Agent:\s*QQSportsV3\/ url-and-header script-response-body https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/txsports-ad-clean.js
+^https:\/\/k\.ssp\.qq\.com\/getsdkconfig(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/txsports-ad-clean.js
+^https:\/\/app\.sports\.qq\.com\/init\/config(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/txsports-ad-clean.js
+^https:\/\/app\.sports\.qq\.com\/user\/homePageV2(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/txsports-ad-clean.js
+^https:\/\/app\.sports\.qq\.com\/m\/match\/liveSum(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/txsports-ad-clean.js
+^https:\/\/app\.sports\.qq\.com\/match\/multiUpdate(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/txsports-ad-clean.js
+^https:\/\/app\.sports\.qq\.com\/feeds\/(?:home|list)(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/txsports-ad-clean.js
+^https:\/\/sports\.ssp\.qq\.com\/app(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/txsports-ad-clean.js
+
+hostname =  config.ab.qq.com, k.ssp.qq.com, app.sports.qq.com, sports.ssp.qq.com
