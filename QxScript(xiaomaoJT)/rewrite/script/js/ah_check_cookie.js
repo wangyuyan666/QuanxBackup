@@ -1,18 +1,18 @@
 /**************************
  * @Author: XiaoMao
- * @Name  : apphunt_check_cookie.js
- * @Desc  : AppHunt 登录状态监听 / 多登录态 Cookie 抓取
+ * @Name  : ah_check_cookie.js
+ * @Desc  : 登录状态监听 / 多登录态 Cookie 抓取
  * @Enc   : 关键字符串已做异或混淆(运行时 dec() 解码)，属轻量混淆非强加密
  *
  * 使用方法：
  * 1、QX > 重写 > 规则资源 > 引用本脚本并开启资源解析器；[mitm] 打开对应域名
- * 2、在 AppHunt 登录，脚本捕获 apphunt_session 登录态 Cookie
- *    真实登录 Cookie 一般在 https://apphunt.app/zh-hans 的请求头里
- * 3、规则匹配 apphunt.app 全部路径（实测收窄到 /zh-hans 会匹配不稳定、不触发，故用通配）
+ * 2、在应用登录，脚本捕获登录态 session Cookie
+ *    真实登录 Cookie 一般在对应站点的请求头里
+ * 3、规则匹配目标域名全部路径（实测收窄到 /zh-hans 会匹配不稳定、不触发，故用通配）
  * 4、★ 脚本内三重去重保证不重复骚扰：完全相同 Cookie 静默放行、相同 session 静默刷新不弹通知、同源提示去重
  * 5、脚本同时会跳过 .jpg/.png/.css/.js 等静态资源，双保险
  * 6、多登录态：换账号重新登录即可再抓一条，按 session 自动去重、可设上限
- * 7、捕获结果写入 BoxJS 订阅 XiaoMao.json 的「AppHunt」卡片：
+ * 7、捕获结果写入 BoxJS 订阅 XiaoMao.json 的「AH」卡片：
  *      AppHuntCookies  = 全部 Cookie（JSON 数组，可复制）
  *      AppHuntLatest   = 最近一条完整 Cookie（方便直接复制）
  *      AppHuntCount    = 已捕获数量
@@ -22,7 +22,7 @@
 hostname = apphunt.app
 
  [rewrite_local]
-^https?:\/\/[^/]*apphunt\.app url script-request-header https://raw.githubusercontent.com/xiaomaoJT/QxScript/main/rewrite/script/js/apphunt_check_cookie.js
+^https?:\/\/[^/]*apphunt\.app url script-request-header https://raw.githubusercontent.com/xiaomaoJT/QxScript/main/rewrite/script/js/ah_check_cookie.js
 
  ********************************/
 
@@ -76,8 +76,8 @@ function dec(h) {
     write(ZERO, K_COUNT);
     write(ZERO, K_CLEAR);
     write("", K_TIP);
-    notify(dec('d864dda3007a001b002a002a0012002f0034002e007a00190035003500310033003f007a5da86e5f7a20'), dec('001b002a002a0012002f0034002e'), dec('5da86e5f7a20513290b276215f0f605b007a00190035003500310033003fff5653b5919765ea62c9538c3058'));
-    console.log("[apphunt] 已清空全部 Cookie");
+    notify("🧹 Cookie 已清空", dec('00190035003500310033003f'), dec('5da86e5f7a20513290b276215f0f605b007a00190035003500310033003fff5653b5919765ea62c9538c3058'));
+    console.log("[ah] 已清空全部 Cookie");
     $done({});
     return;
   }
@@ -89,7 +89,7 @@ function dec(h) {
 
   // ---- ★ 静态资源直接放行：图片/css/js/字体/图标 等请求带的 Cookie 常不完整，抓它没意义还会误报 ----
   if (RE_STATIC.test(url)) {
-    console.log("[apphunt] 跳过静态资源: " + url);
+    console.log("[ah] 跳过静态资源: " + url);
     $done({});
     return;
   }
@@ -111,18 +111,18 @@ function dec(h) {
     return;
   }
 
-  console.log("[apphunt] " + url + " | Cookie长度=" + cookie.length + " Session长度=" + sess.length);
+  console.log("[ah] " + url + " | Cookie长度=" + cookie.length + " Session长度=" + sess.length);
 
   // ---- 未检测到登录态 session ----
   if (!sess) {
-    if (notifyOn) tip("nologin", dec('2716007a001b002a002a0012002f0034002e007a6770689a6d11526a76215f0f605b'), dec('677076215f0f'), dec('6770538b73ea007a003b002a002a0032002f0034002e00050029003f00290029003300350034ff568bad51125772007a001b002a002a0012002f0034002e007a76215f0f5e2c526d65ea982f9738545491978b8f3058'));
+    if (notifyOn) tip("nologin", "❌ 未检测到登录态", dec('677076215f0f'), "未发现登录态 session，请先登录并刷新页面后重试。");
     $done({});
     return;
   }
 
   // ---- session 值过短（真正可能只抓到一半）：低阈值，不再用 500 误伤正常 Cookie ----
   if (sess.length < MIN_SESS) {
-    if (notifyOn) tip("short", dec('26fafe55007a001b002a002a0012002f0034002e007a0009003f00290029003300350034007a5066501577b7'), dec('53b580a753b062c9526a4e5a5310'), dec('62c9538c526a76de007a003b002a002a0032002f0034002e00050029003f00290029003300350034007a50664e9f007a002100140027007a5b0d7b7cff5653b580a74e575bd6652eff5667704f875b0230588bad919765ea76215f0f007a001b002a002a0012002f0034002e007a545451d78b8f3058').replace("{N}", String(sess.length)));
+    if (notifyOn) tip("short", "⚠️ Session 值偏短", dec('53b580a753b062c9526a4e5a5310'), "抓取到的 session 值仅 {N} 字符，可能不完整，未保存。请重新登录后再试。".replace("{N}", String(sess.length)));
     $done({});
     return;
   }
@@ -147,13 +147,13 @@ function dec(h) {
 
   // ---- 通知：只有真正新增登录态才弹；相同 session 只静默刷新存储，不弹通知 ----
   if (notifyOn && !dup) {
-    notify(dec('275f007a001b002a002a0012002f0034002e007a76215f0f605b5da8630f83ed'), dec('5da85b02513f007a00180035002200100009007a00ed007a001b002a002a0012002f0034002e007a533b721d'),
-      dec('65ea76215f0f605b007a00190035003500310033003f007a5da84f875b02ff520009003f002900290033003500340060007a002100090027007400740074ff533058005053b552175fda007a00180035002200100009007a533b721d007a001b002a002a0012002f0034002e00190035003500310033003f0029007a5957526c3058').replace("{S}", sess.substring(0, 12)) + "\n" + dec('5f0952175da84f875b02007a') + arr.length);
+    notify("✅ 登录态已捕获", "已存入 BoxJS",
+      "新登录态 Cookie 已保存（Session: {S}...）。\n可前往 BoxJS 卡片复制。".replace("{S}", sess.substring(0, 12)) + "\n" + dec('5f0952175da84f875b02007a') + arr.length);
   } else if (dup) {
-    console.log("[apphunt] 相同 session 已静默刷新: " + sess.substring(0, 12));
+    console.log("[ah] 相同 session 已静默刷新: " + sess.substring(0, 12));
   }
 
-  console.log(dec('0067006700670067006700670067006700670067007a001b002a002a0012002f0034002e007a76215f0f605b007a00190035003500310033003f007a0067006700670067006700670067006700670067'));
+  console.log("========== 登录态 Cookie ==========");
   console.log(cookie);
   console.log(dec('0067006700670067006700670067006700670067006700670067006700670067006700670067006700670067006700670067006700670067006700670067006700670067006700670067006700670067006700670067'));
   $done({});
